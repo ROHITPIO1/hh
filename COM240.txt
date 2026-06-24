@@ -1,0 +1,2006 @@
+      *   D0169        08/15/06   09:37:01   PIGGOTT      V4.4M11
+      *   N45616       07/31/06   10:07:45   ROTH         V4.4M11
+      *   N44169       04/05/06   09:03:11   ROTH         V4.4M11
+      *   N43952       03/22/06   13:49:25   ROTH         V4.4M11
+      *   C39962       12/22/04   10:32:33   VOGEL        V4.4M09
+      *   C38878       09/21/04   12:54:23   ROTH         V4.4M08
+      *   C28916       02/24/04   08:30:00   ATLRC        V4.4M08
+      *   D0144        12/15/03   15:55:56   VANNATTA     V4.4M07
+      *   R0010        12/12/03   10:48:42   VANNATTA     V4.4M07
+      *   D0128R       08/27/03   16:31:14   MINTON       V4.4M07
+      *   C28070       04/23/03   10:59:24   EICHER       V4.4M06
+      *   C28613       04/23/03   07:56:22   ROTH         V4.4M06
+      *   C28443       03/18/03   13:27:25   EICHER       V4.4M06
+      *   C28442       02/25/03   08:40:13   LATSCH       V4.4M06
+      *   C28070       01/17/03   12:40:29   EICHER       V4.4M06
+      *   S27836       01/14/03   16:44:26   ROBERTS      V4.4M05
+      *   S27836       01/14/03   09:21:48   ROBERTS      V4.4M05
+      *   S27836       01/06/03   10:17:28   ROBERTS      V4.4M05
+      *   C24206       09/30/02   10:50:18   LATSCH       V4.4M05
+      *   C25662       09/18/02   09:37:41   LATSCH       V4.4M05
+      *   D0068        08/29/02   08:18:20   DARNELL      V4.4M05
+      *   S22935       03/28/02   14:32:31   PROPST       V4.4M03
+      *   D0046   01/21/02   15:06:48   MINTON       V4.4M03
+      *   S0060   01/14/02   19:36:39   CRANDAL      V4.4M02A
+      *   D0034   01/10/02   11:57:35   ROBERTS      V4.4M02A
+      *   D0034   01/09/02   20:10:27   ROBERTS      V4.4M02A
+      *   D0034   12/17/01   10:30:25   ROBERTS      V4.4M02A
+      *   D0037   11/26/01   12:57:34   ATLDP        V4.4M02A
+      *   M3893   01/10/01   14:32:05   LATSCH       V4.4M00
+M3928 *   3928   07/27/93  SCHERRER
+M4368 *   4368   11/17/93  MARGHERI
+M4794 *   4794   03/31/94  EICHER
+M4970 *   4970   06/13/94  TRIGG
+M5502 *   5502   11/08/94  SMINCHAK
+M5502 *   5502   11/08/94  FRIEDEL
+M6454 *   6454   09/15/95  VOGEL                                     V042M000
+M6468 *   6468   10/12/95  KELLEY                                    V042M000
+M6486 *   6486   11/30/95  SEAVERS                                   V042M000
+M6825 *   6825   04/30/96  STUKEN                                    V043M000
+M6918 *   6918   07/08/96  EICHER                                    V043M000
+M8399 *   8399   12/19/97  EICHER                                    V043M030
+M8559 *   8559   06/02/98  RANCILIO                                  V142M010
+M8559 *   8559   09/11/98  SWAFFORD                                  V142M010
+M8559 *   8559   06/09/99  DARNELL                                   V142M010
+M8559 *   8559   05/25/00  PASLEY                                    V143M010
+M3717 *   3717   10/03/00  EICHER                                    V143M010
+     F*   0470   12/12/88  PGMR002
+     F*   0929   01/22/90  MARGHERI
+     F*   1074   09/04/90  BRASEL
+     F*   1803   10/01/91  FRIEDEL
+     F*   2145   03/06/92  REBEC
+     F*****************************************************************
+     F**  PROPRIETARY RIGHTS NOTICE: ALL RIGHTS RESERVED. THIS       **
+     F**  MATERIAL CONTAINS THE VALUABLE PROPERTIES AND TRADE        **
+     F**  SECRETS OF GENELCO, INC. OF ST. LOUIS, MO. EMBODYING       **
+     F**  SUBSTANTIAL CREATIVE EFFORTS AND CONFIDENTIAL INFORMATION, **
+     F**  IDEAS, AND EXPRESSIONS, NO PART OF WHICH MAY BE REPRODUCED **
+     F**  OR TRANSMITTED IN ANY FORM OR BY ANY MEANS, ELECTRONIC,    **
+     F**  MECHANICAL, OR OTHERWISE, INCLUDING PHOTOCOPYING AND       **
+     F**  RECORDING OR IN CONNECTION WITH ANY INFORMATION STORAGE    **
+     F**  OR RETRIEVAL SYSTEM WITHOUT THE PERMISSION IN WRITING OF   **
+     F**  GENELCO, INC.                                              **
+     F**                                                             **
+     F**  COPYRIGHT NOTICE: COPYRIGHT 1982    GENELCO, INC.          **
+     F*****************************************************************
+     F** C R E A T I O N        **                                   **
+     F****************************                                   **
+     F**                                                             **
+     F**  PROGRAM NAME:   COM240                                     **
+     F**  CREATED BY:     D.HEIZER                                   **
+     F**                                                             **
+     F**  NARRATIVE: PART OF THE "LIFE SUPPORT PLUS" SYSTEM -        **
+     F**     THIS ROUTINE MERGES THE PAY AMOUNT RECORDS CREATED IN   **
+     F**     THE STATEMENT RUN AND WRITES THE MERGED RECORD TO THE   **
+     F**     CORRECT FILE TO SEND CHAECK REQUEST ON TO THE DISBUR.   **
+     F**     SUBSYSTEM OR TO PAYROLL.                                **
+     F**                                                             **
+     F*****************************************************************
+     F**                                                             **
+     F**      CHANGED BY:  PAMELA KELLER                             **
+     F**      DATE:        01/11/2000                                **
+     F**      NARRATIVE:   ADDED MODIFICATIONS FROM 4.2 TO 4.3       **
+     F**                   PK1/D5477                                 **
+     F**                                                             **
+     F**      CHANGED BY:  BKL                                       **
+     F**      DATE:        06/11/2002                                **
+     F**      PROJECT #:   65590                                     **
+     F**      NARRATIVE:   POPULATE LONG DESCRIPTION #1 AND SEQUENCE **
+     F**                   NUMBERS IN CHECK REQUEST FILE - AHLACHGC  **
+     F**                   M03                                       **
+     F**                                                             **
+     F**  CHANGED BY:   DFB                                          **
+     F**  DATE:         10/17/2002                                   **
+     F**  NARRATIVE:    adjust name field for output to dir deposit  **
+     F**                file    dfb1                                 **
+     **                                                              ***
+     **  AFL - BKL 04/30/04 Mod's for 4.4.5 / 4.4.6 upgrade          ***
+     **                                                              ***
+     F**      CHANGED BY:  KRISTI NEIGHBARGER                        **
+     F**      DATE:        08/01/2005                                **
+     F**      PROJECT #:   AS050205  M04                             **
+     F**      NARRATIVE:   CHANGED CODE TO CORRECT WORDING IN LONG   **
+     F**                   DESCRIPTION.                              **
+     F**                                                             **
+     F**  CHANGED BY:   Rick Roasa                                   **
+     F**  DATE:         07/17/2008                                   **
+     F**  NARRATIVE:    Added AFL mod's for 4.4.7 - 4.4.11 upgrade   **
+     F**                                                             **
+     F**      CHANGED BY:  dfb                                       **
+     F**      DATE:        07/22/2008                                **
+     F**      PROJECT #:   AS08-0456 dfb2                            **
+     F**      NARRATIVE:   do not create a payroll entry if this     **
+     F**                   agent is a MTAXCD = W and Muser4 = Blanks **
+`    F**                                                             **
+     **                                                             **
+     **  Changed By:   Bart Garlotte                                **
+     **  Date:         07/06/09                                     **
+     **  Project # :   AS09-0266                                    **
+     **  Mod Marker:   bmg01                                        **
+     **  Narrative :   Changed date formats that are printed on Cks **
+     **                from MM/DD/YYYY to MM/DD/YY.  Changed        **
+     **                constant 'Agnt#' to 'Agt#'                   **
+     **                                                             **
+     **  CHANGED BY..:    Michael Stricker                          **
+     **  PROJECT.....:    AS10-0096                                 **
+     **  DATE........:    04/05/2010                                **
+     **  MOD LEVEL...:    ms1                                       **
+     **  NARRATIVE...:    Added a month end file to hold the payment**
+     **            transactions to the agents to show at the end of *
+     **            the month.
+     **                                                             **
+     **                                                             **
+     **  CHANGED BY..:    Michael Stricker                          **
+     **  PROJECT.....:    AS10-0147                                 **
+     **  DATE........:    06/08/2010                                **
+     **  MOD LEVEL...:    ms2                                       **
+     **  NARRATIVE...:    Added additional general ledger entries   **
+     **            for payroll transactions generated.              *
+     **                                                             **
+     **                                                             **
+     **  CHANGED BY..:    Michael Stricker                          **
+     **  PROJECT.....:    AS10-0096                                 **
+     **  DATE........:    07/01/2010                                **
+     **  MOD LEVEL...:    ms3                                       **
+     **  NARRATIVE...:    If payto agent has a debit balance then
+     **            we need to apply the payment amount to debit
+     **            balance first before paying out.
+     **                                                             **
+     **  CHANGED BY..:    Rick Roasa                                **
+     **  PROJECT.....:    AS10-0159                                 **
+     **  DATE........:    01/18/2011                                **
+     **  MOD LEVEL...:    rr01                                      **
+     **  NARRATIVE...:    modified to fix a bug where the agents    **
+     **            commission balance amount is doubled in COMAGTBL **
+     **                                                             **
+     **  CHANGED BY..:    Rick Roasa                                **
+     **  PROJECT.....:    AS11-0048                                 **
+     **  DATE........:    08/08/2011                                **
+     **  MOD LEVEL...:    rr02                                      **
+     **  NARRATIVE...:    modified to fix a bug where the debit     **
+     **                   balances for agents are not being         **
+     **                   processed - change made in subr CHKDBAL   **
+     **                                                             **
+      *****************************************************************
+      ** M A I N T E N A N C E  **                                   **
+      ****************************                                   **
+RJ01 **                                                             **
+RJ01 **  CHANGED BY:   Rahul Jain(RJ01)                             **
+RJ01 **  DATE......:   18-Sep-2025                                  **
+RJ01 **  PROJECT...:   AS25-0003 LSP-395/LSP-408/LSP-422/LSP-426    **
+RJ01 **  NARRATIVE.:   Taxable income calculation to be based on    **
+RJ01 **                commission paid.                             **
+     F*****************************************************************
+     F/EJECT
+     FCOMPAYAM  IF   E           K DISK
+     FLSPCOMST  IF   E           K DISK
+     FLSPSVMSC  IF   E           K DISK
+     FCOMAGTM   UF   E           K DISK    COMMIT
+     FLTCOM240  IF   E           K DISK
+     FCOMAGTBL  IF   E           K DISK
+     FAPPEFTRQ  IF   E           K DISK
+     FAPPBANK   IF   E           K DISK
+ ms1 FCOMMTDDC  IF A E           K DISK
+     FAPPDPST   O    E             DISK    COMMIT
+     FCOMPAYRL  O    E             DISK    COMMIT
+     FGLSCHKRQ  O    E             DISK    COMMIT
+     FGLSDLYTR  O    E             DISK    COMMIT
+     FCOM240P   O    E             PRINTER OFLIND(*IN30)
+     F                                     USROPN
+     F/EJECT
+     F*****************************************************************
+     F* TABLES AND ARRAYS
+     F*****************************************************************
+     D ADD3            S              1    DIM(30)
+     D NAME            S              1    DIM(30)
+      *
+      *   COCR IS THE CONTROLLING INDEX FOR MULT OCUR DATA STRUCTURE
+      *    CMPTTL.  THE ELEMENT NUMBER OF COCR CONTAINING THE DESIRED
+      *    CURRENCY CODE CORRESPONDS TO THE OCCURENCE OF CMPTTL
+      *
+     D COCR            S              4    DIM(100)
+      *
+      *   CNCR IS THE CONTROLLING INDEX FOR MULT OCUR DATA STRUCTURE
+      *    CNSTTL.  THE ELEMENT NUMBER OF CNCR CONTAINING THE DESIRED
+      *    CURRENCY CODE CORRESPONDS TO THE OCCURENCE OF CNSTTL
+      *
+     D CNCR            S              4    DIM(100)
+      *
+      *   CONTROLLING INDEX FOR CURBAL MULTIPLE OCCURANCE DATA STRUCTURE.
+      *   USE DS FTCRCD TO BREAKUP TO AND FROM CURRENCY FIELDS WITHIN
+      *   BLCR.
+      *
+     D BLCR            S              8    DIM(1000)
+      *
+     D/EJECT
+     D*****************************************************************
+     D** EXTERNAL DATA STRUCTURES
+     D*****************************************************************
+     D DESC            C                   CONST('COMMISSION CHECK    ')
+M03  D*              TEXT PART 1 & 2 OF DESCRIPTION
+bmg01D*** DSCP1           C                   CONST('AGNT#')
+bmg01D*** DSCP2           C                   CONST(' COM ')
+bmg01D DSCP1           C                   CONST('Agt#')
+bmg01D DSCP2           C                   CONST(' COM PD ')
+     D*
+     D PRM220        E DS                  EXTNAME(PCOM220)
+     D COMDTA        E DS                  EXTNAME(COMDTA)
+     D BLCDTA        E DS                  EXTNAME(BLCDTA)
+     D LSP200        E DS                  EXTNAME(PLSP200)
+     D LSPCO         E DS          1024    EXTNAME(LSPCOMST)
+     D PRM205        E DS                  EXTNAME(PLSP205)
+     D PRCDTA        E DS                  EXTNAME(PRCDTA)
+     D CMS205        E DS                  EXTNAME(PCMS205)
+     D CLTM          E DS                  EXTNAME(CMSCLNTM)
+     D CLTA          E DS                  EXTNAME(CMSCLNAD)
+     D PRMDAT        E DS                  EXTNAME(PDATEFMT)
+     D CUR105        E DS                  EXTNAME(PCUR105)
+     D LSP300        E DS                  EXTNAME(PLSP300)
+     D LSP220        E DS                  EXTNAME(PLSP220)
+     D  ZUSR01       E                     EXTFLD(XUSR01)
+     D  ZUSR02       E                     EXTFLD(XUSR02)
+     D  ZUSR03       E                     EXTFLD(XUSR03)
+     D  ZUSR04       E                     EXTFLD(XUSR04)
+     D  ZUSR05       E                     EXTFLD(XUSR05)
+     D COM990        E DS                  EXTNAME(PCOM990)
+     D COM991        E DS                  EXTNAME(PCOM991)
+     D PLSSEQ        E DS                  EXTNAME(PGETSEQ)
+     D*
+
+     D APPDTA        E DS                  EXTNAME(APPDTA)
+     D*
+     D                SDS
+     D  QPROG                  1     10
+     D  QTERM                244    253
+     D*
+     D/EJECT
+     D*****************************************************************
+     D** PROGRAM DESCRIBED DATA STRUCTURES
+     D*****************************************************************
+     D*
+     D FMT8            DS
+     D  FMT8P                  1      4
+     D  FMT8F                  5     24
+     D  FMT8M                 25     25
+     D  FMT8L                 26     54
+     D  FMT8S                 55     60
+      *
+     D CMPTTL          DS                  OCCURS(100)
+      *
+      *   CMPTTL IS USED TO HOLD TOTALS FOR THE COMPANY BY
+      *    CURRENCY CODE FOUND IN ARRAY COCR
+      *
+     D  COCKCT                 1      6  0
+     D  COCKAM                 7     17  2
+     D  COW2CT                18     23  0
+     D  COW2AM                24     34  2
+     D  COTLPO                35     45  2
+     D  COTLTI                46     56  2
+     D  CODDCT                57     62  0
+     D  CODDAM                63     73  2
+      *
+     D CNSTTL          DS                  OCCURS(100)
+      *
+      *   CNSTTL IS USED TO HOLD CONSOLIDATED TOTALS BY
+      *    CURRENCY CODE FOUND IN ARRAY CNCR
+      *
+     D  CNCKCT                 1      6  0
+     D  CNCKAM                 7     17  2
+     D  CNW2CT                18     23  0
+     D  CNW2AM                24     34  2
+     D  CNTLPO                35     45  2
+     D  CNTLTI                46     56  2
+     D  CNDDCT                57     62  0
+     D  CNDDAM                63     73  2
+      *
+      * BALANCES IN FROM/TO CURRENCY. USED TO UPDATE PAYTO AGENT
+      * BALANCES WHEN NO CHECK IS PRODUCED AND TO CREATE JOURNAL
+      * ENTRIES WHEN A CHECK IS PRODUCED.
+      *
+     D CURBAL          DS                  OCCURS(1000)
+     D  FRAMT                  1     15  2
+     D  TOAMT                 16     30  2
+      *
+     D FTCRCD          DS
+     D  FRCRCD                 1      4
+     D  TOCRCD                 5      8
+      *
+     D PROCDT          DS
+     D  DPRMM                  1      2  0
+     D  DPRDD                  3      4  0
+     D  DPRYY                  5      6  0
+     D                 DS
+     D  PRCDAT                 1      8  0
+     D  PRCYY                  1      4  0
+     D  PRCMM                  5      6  0
+     D  PRCDD                  7      8  0
+      *
+M03  D*           MONTH/END CHECK DATE FORMATTED FOR DESCRIPTION LINE
+M03  D                 DS
+M03  D*bmg01 MECKDT                 1     10
+bmg01D  MECKDT                 1      8
+M03  D  CURRM1                 1      2  0
+M03  D  SLASH                  3      3
+M03  D  CURRD1                 4      5  0
+M03  D  SLASH1                 6      6
+M03  D*bmg01 CURRY1                 7     10  0
+     D  curry1                 7      8  0
+M03  D                 DS
+bmg01D  curry2                 1      4  0
+     D  cn2                    1      2  0
+bmg01D  yr2                    3      4  0
+     D*
+     D WrkSubsidy      S                   Like(PPADRS)
+     D WrkDraw         S                   Like(PPADRW)
+     D WrkABal         S                   Like(PPABAL)
+     D SavePay         S                   Like(PAYAMT)
+ ms1 D HldAmt          S                   Like(MCKAMT)
+ RJ01D SVAGTNO         S                   Like(PAGTNO)
+      *
+     I/EJECT
+     I*****************************************************************
+     I*
+      *
+     C     *ENTRY        PLIST
+     C                   PARM                    PROCDT
+     C                   PARM                    PRM220
+      *
+      * Note - Series is not used in this pgm.
+      *
+     C     KMAGTM        KLIST
+     C                   KFLD                    CMCO
+     C                   KFLD                    PPAYTO
+      *
+ ms1 C     Kpayam        KLIST
+ ms1 C                   KFLD                    CMCO
+ ms1 C                   KFLD                    svagt1
+     C*                                                    INSERT
+     C     KMAGT2        KLIST
+     C                   KFLD                    CMCO
+     C                   KFLD                    PAGTNO
+      *
+     C     MSCKEY        KLIST
+     C                   KFLD                    CMCO
+     C                   KFLD                    PPCRCD
+     C*                                                    INSERT
+     C     KMAGT3        KLIST
+     C                   KFLD                    CMCO
+     C                   KFLD                    PPAYTO
+     C                   KFLD                    PPCRCD
+     C                   KFLD                    MBTYPE
+      *
+     C     KMAGT4        KLIST
+     C                   KFLD                    CMCO
+     C                   KFLD                    PAGTNO
+     C                   KFLD                    PPCRCD
+     C                   KFLD                    MBTYPE
+     C*                                                    INSERT
+ ms3 C     KMAGT5        KLIST
+ ms3 C                   KFLD                    CMCO
+ ms3 C                   KFLD                    PPAYTO
+ ms3 C                   KFLD                    PPCRCD
+ ms3 C                   KFLD                    TYPE2
+      *
+     C     KEFTR         KLIST
+     C                   KFLD                    EFTTYP
+     C                   KFLD                    CMCO
+     C                   KFLD                    EFTKEY
+      *
+     C     BKKEY         KLIST
+     C                   KFLD                    DDBRN
+     C                   KFLD                    DDBBN
+      *
+     C                   EXSR      INIT
+     C*
+     C                   READ      LSPCOMST                               95
+     C     *IN95         DOWEQ     *OFF
+     C*
+     C* If a company is passed into program then process that company,
+     C* Else process all companies (company passed is blank).
+     C*
+     C     CO220         IFNE      *BLANKS
+     C     CO220         ANDEQ     CMCO
+     C     CO220         OREQ      *BLANKS
+     C                   EXSR      CMPCHG
+     C                   EXSR      PRCCMP
+     C                   ENDIF
+     C*
+     C                   READ      LSPCOMST                               95
+     C*
+     C                   ENDDO
+     C*
+     C     XIMULT        IFEQ      'Y'
+     C*
+     C                   MOVE      *ON           *IN96
+     C                   EXSR      CMPCHG
+     C                   MOVE      'T'           RPTTYP
+     C                   EXSR      CNSTOT
+     C*
+     C                   ELSE
+     C*
+     C     SVCO          IFNE      *BLANKS
+     C                   MOVE      'N'           OPNFLG            1
+     C                   EXSR      CMPCHG
+     C                   ENDIF
+     C*
+     C                   ENDIF
+     C*
+     C                   SETON                                        LR
+     C                   CALL      'RCLRSC'
+     C/EJECT
+     C     PRCCMP        BEGSR
+     C*****************************************************************
+     C* PRCCMP - PROCESS COMPANY
+     C*****************************************************************
+     C*
+     C     CMCO          CHAIN     COMPAYAM                           98
+     C*
+     C                   CLEAR                   CMS205
+     C*
+     C     *IN98         DOWEQ     '0'
+     C     MSCKEY        CHAIN     LSPSVMSC                           91
+      *
+     C     PPAYTO        IFNE      *BLANKS
+     C     KMAGTM        CHAIN     COMAGTM                            99
+     C                   MOVEL     PPAYTO        CT1205
+     C                   ELSE
+     C     KMAGT2        CHAIN     COMAGTM                            99
+     C                   MOVEL     PAGTNO        CT1205
+     C                   END
+     C*
+     C                   MOVE      PCO           XCO
+     C                   MOVE      MDCRCD        XCRCD
+      *
+     C                   CALL      'LSP220'
+     C                   PARM                    LSP220
+      *
+     C     *IN99         IFEQ      *OFF
+     C                   MOVE      CMCO          CMP205
+     C                   MOVE      MACOR         TYP205
+     C                   MOVE      '8'           NFM205
+     C                   MOVE      '1'           AFM205
+     C*
+     C                   CALL      'CMS205'
+     C                   PARM                    CMS205
+     C                   PARM                    CLTM
+     C                   PARM                    CLTA
+     C*
+     C                   SETOFF                                       35
+     C                   MOVE      *ON           *IN30
+     C*
+     C     CMNCIN        IFEQ      'N'
+     C                   MOVEL(P)  FNM205        FMT8
+     C*
+     C                   MOVEL     FMT8F         MAFIRI            1
+     C                   MOVEL     FMT8M         MAMIDI            1
+     C                   ELSE
+     C                   SETON                                        35
+DB01 C                   MOVEL(P)  CMNAME        CORP             33
+DB01 C*** INSERTED SOURCE FOR DOUBLE BYTE CHARACTER SET CONVERSION
+DB01 C*
+DB01 C*    ##DBS         IFEQ      '1'
+DB01 C                   MOVEL     CORP          IGCP1
+DB01 C                   Z-ADD     033           IGCP2
+DB01 C                   EXSR      IGCSR
+DB01 C                   MOVEL     IGCP3         CORP
+DB01 C*                  END
+DB01 C*
+DB01 C*** END OF INSERTED SOURCE
+     C                   ENDIF
+     C*
+M03  *                    GET NEXT SEQUENCE NUMBER
+M03  C                   EXSR      NXTSEQ
+     C*
+     C                   EXSR      ACCAMT
+     C                   EXSR      PAYOUT
+     C*
+     C                   UPDATE    RAGTM
+     C*
+      *   ACCUMULATE TOTALS FOR COMAPNY BY THE AGENT'S CURRENCY CODE
+      *
+     C                   MOVE      *OFF          *IN72
+     C                   Z-ADD     1             B
+     C     MDCRCD        LOOKUP    COCR(B)                                72
+      *
+     C     *IN72         IFEQ      *OFF
+     C                   z-add     B             C
+     C*****              ADD       1             C
+     C                   MOVEL     MDCRCD        COCR(C)
+     C     C             OCCUR     CMPTTL
+     C                   ELSE
+     C     B             OCCUR     CMPTTL
+     C                   ENDIF
+      *
+     C                   ADD       PAYAMT        COTLPO
+     C                   ADD       TAXAMT        COTLTI
+      *
+     C                   ELSE
+     C     CMCO          READE     COMPAYAM                               98
+     C                   ENDIF
+
+     C                   COMMIT
+
+     C                   ENDDO
+     C*
+     C                   EXSR      CMPTOT
+     C*
+     C                   ENDSR
+     C/EJECT
+     C*****************************************************************
+     C*  ACCUMULATE ALL THE PAY AMOUNTS FOR A PAYTO AGENT
+     C*****************************************************************
+     C     ACCAMT        BEGSR
+     C*
+     C                   MOVEL     PPAYTO        SVAGT
+ RJ01C                   Eval      SVAGTNO=PAGTNO
+     C                   Z-ADD     0             TAXAMT
+     C                   Z-ADD     0             BALAMT
+     C                   Z-ADD     0             PAYMNT
+     C                   Z-ADD     0             BALTOT
+     C                   Z-ADD     0             PAYAMT
+     C                   Eval      WrkSubsidy = *Zeros
+     C                   Eval      WrkDraw = *Zeros
+     C                   Eval      WrkABal = *Zeros
+     C                   EXSR      CLRBAL
+     C                   SETOFF                                       50
+     C*
+     C     *IN98         DOUEQ     '1'
+     C     SVAGT         ORNE      PPAYTO
+     C     SVAGT         OREQ      *BLANKS
+      *
+      * CONVERT TO PAY AGENT DISBURSEMENT CURRENCY
+      *
+     C     PPCRCD        IFNE      MDCRCD
+      *
+     C     PPYAMT        IFNE      *ZEROS
+     C                   CLEAR                   LSP300
+     C                   MOVE      PPCRCD        EINCUR
+     C                   MOVE      MDCRCD        EOTCUR
+     C                   Z-ADD     PPYAMT        EINAMT
+     C                   EXSR      CNVCUR
+     C                   Z-ADD     EOTAMT        DPYAMT
+     C                   ELSE
+     C                   Z-ADD     *ZEROS        DPYAMT
+     C                   ENDIF
+      *
+     C     PTXAMT        IFNE      *ZEROS
+     C                   CLEAR                   LSP300
+     C                   MOVE      PPCRCD        EINCUR
+     C                   MOVE      MDCRCD        EOTCUR
+     C                   Z-ADD     PTXAMT        EINAMT
+     C                   EXSR      CNVCUR
+     C                   Z-ADD     EOTAMT        DTXAMT
+     C                   ELSE
+     C                   Z-ADD     *ZEROS        DTXAMT
+     C                   ENDIF
+      *
+      * POPULATE DISBURSEMENT FIELDS EVEN IF THE CURRENCY CODES ARE
+      * THE SAME FOR CONSISTENCY.
+      *
+     C                   ELSE
+     C                   Z-ADD     PPYAMT        DPYAMT
+     C                   Z-ADD     PTXAMT        DTXAMT
+     C                   ENDIF
+      *
+      * LOAD CURBAL DATA STRUCTURE
+      *
+     C                   MOVEL     PPCRCD        FRCRCD
+     C                   MOVEL     MDCRCD        TOCRCD
+     C                   Z-ADD     1             P
+     C     FTCRCD        LOOKUP    BLCR(P)                                72
+     C     *IN72         IFEQ      *OFF
+     C                   ADD       1             Q
+     C                   MOVEL     FTCRCD        BLCR(Q)
+     C     Q             OCCUR     CURBAL
+     C                   ELSE
+     C     P             OCCUR     CURBAL
+     C                   ENDIF
+      *
+     C                   ADD       PPYAMT        FRAMT
+     C                   ADD       DPYAMT        TOAMT
+     C*
+     C     PANMTY        IFEQ      'C'
+     C                   MOVEA     PACORP        NAME(1)
+     C                   ELSE
+     C                   MOVEA     *BLANKS       NAME(1)
+     C                   MOVEA     PAFRST        NAME(1)
+     C                   MOVEA     ' '           NAME(2)
+     C                   MOVEA     PAMID         NAME(3)
+     C                   MOVEA     ' '           NAME(4)
+     C                   MOVEA     PALAST        NAME(5)
+     C                   END
+     C*
+     C                   ADD       DPYAMT        PAYMNT
+     C*
+     C                   Eval      WrkSubsidy = WrkSubsidy + PPADRS
+     C                   Eval      WrkDraw = WrkDraw + PPADRW
+     C                   Eval      WrkABal = WrkABal + PPABAL
+     C*
+     C     PPAYTO        IFNE      *BLANKS
+     C     PAGTNO        ANDNE     PPAYTO
+     C*
+     C* DETERMINE PAY-TO OR BASE AGENT FOR TAX LIABILITY
+     C     KMAGT2        CHAIN     LTCOM240                           98
+     C     TPAYTX        IFEQ      'Y'
+     C                   ADD       DTXAMT        TAXAMT
+     C     KMAGT3        CHAIN     COMAGTBL                           98
+     C                   Z-ADD     MBBAL         MIBAL
+     C                   SETOFF                                       50
+     C                   ELSE
+     C     KMAGT4        CHAIN     COMAGTBL                           98
+     C                   Z-ADD     MBBAL         MIBAL
+     C                   Z-ADD     *ZEROS        TTXAMT
+     C     MDCRCD        IFEQ      TDCRCD
+     C                   Z-ADD     DTXAMT        TTXAMT
+     C                   ELSE
+     C     PPCRCD        IFEQ      TDCRCD
+     C                   Z-ADD     PTXAMT        TTXAMT
+     C                   ELSE
+     C     PTXAMT        IFNE      *ZEROS
+     C                   CLEAR                   LSP300
+     C                   MOVE      PPCRCD        EINCUR
+     C                   MOVE      TDCRCD        EOTCUR
+     C                   Z-ADD     PTXAMT        EINAMT
+     C                   EXSR      CNVCUR
+     C                   Z-ADD     EOTAMT        TTXAMT
+     C                   ENDIF
+     C                   ENDIF
+     C                   ENDIF
+      *
+ RJ01* Checking flag Withhold Agent Check as 'N' or BLANK then increase Taxable income balance
+ RJ01* other wise Taxable amount would be same as previous.
+ RJ01 *
+ RJ01C     KMAGT2        CHAIN     COMAGTM
+ RJ01 *
+ RJ01C                   If        MNOCHK<>'Y' and TTXAMT >=0
+     C                   CLEAR                   COM990
+     C                   MOVEL     CMCO          CO990
+     C                   MOVEL     PAGTNO        AGT990
+     C                   MOVEL     PPCRCD        CRC990
+     C                   MOVEL     'INC'         TYP990
+ rr01C                   eval      us3990        = ss220
+     C                   CALL      'COM990'
+     C                   PARM                    COM990
+     C                   ADD       TTXAMT        BAL990
+     C                   CLEAR                   COM991
+     C                   MOVEL     CO990         CO991
+     C                   MOVEL     AGT990        AGT991
+     C                   MOVEL     CRC990        CRC991
+     C                   MOVEL     TYP990        TYP991
+     C                   Z-ADD     BAL990        AMT991
+     C                   MOVEL     US1990        US1991
+     C                   MOVEL     US2990        US2991
+     C                   MOVEL     US3990        US3991
+     C                   MOVEL     US4990        US4991
+     C                   MOVEL     US5990        US5991
+     C                   MOVEL     US6990        US6991
+     C                   Z-ADD     US7990        US7991
+     C                   Z-ADD     US8990        US8991
+     C                   Z-ADD     US9990        US9991
+ rr01C                   eval      us3991        = ss220
+     C                   CALL      'COM991'
+     C                   PARM                    COM991
+     C                   SETON                                        50
+ RJ01C                   EndIf
+     C                   ENDIF
+      *
+     C                   ELSE
+     C     KMAGT4        CHAIN     COMAGTBL                           98
+     C                   Z-ADD     MBBAL         MIBAL
+     C                   ADD       DTXAMT        TAXAMT
+     C                   ENDIF
+     C*
+      * If this is a 1099 agent with a repayment processing,
+      * the agent has a debit balance and a payto agent,
+      * and debit balances should be passed to the payto agent,
+      * display both payment transferred and balance transferred.
+     C                   IF        MATXCD = 'I' AND
+     C                             PPYAMT < *Zero AND
+     C                             PAGTNO <> PPAYTO AND
+     C                             PPAYTO <> *Blanks AND
+     C                             XPASDB = 'Y'
+     C                   IF        PPADRP = 'D'
+     C                   EVAL      PAYMNT = PPADRW
+     C                   ELSE
+     C                   EVAL      PAYMNT = *ZERO
+     C                   ENDIF
+     C                   EVAL      BALAMT = PPYAMT - PPADRW
+     C                   ELSE
+     C                   EVAL      PAYMNT = PPYAMT
+     C                   EVAL      BALAMT = *Zero
+     C                   ENDIF
+     c*
+ms3  c*  Check to see if payment amount for a payto needs to
+ms3  c*   be applied to a debit balance before being paid out. 1
+ms3  c                   if        paymnt > 0 and ppayto <> *blanks
+ms3  c                             and pagtno <> ppayto
+ms3  c                   exsr      chkdbal
+ms3  c                   endif
+      *
+     C                   EVAL      BALTOT = BALTOT + BALAMT
+     C                   EVAL      PAYAMT = PAYAMT + PAYMNT
+      *
+     C     PANMTY        IFEQ      'C'
+     C                   MOVEA     PACORP        NAME(1)
+     C                   ELSE
+     C                   MOVEA     *BLANKS       NAME(1)
+     C                   MOVEA     PAFRST        NAME(1)
+     C                   MOVEA     ' '           NAME(2)
+     C                   MOVEA     PAMID         NAME(3)
+     C                   MOVEA     ' '           NAME(4)
+     C                   MOVEA     PALAST        NAME(5)
+     C                   ENDIF
+      *
+     C                   MOVEA     NAME          PFNAME
+      *
+     C                   EXSR      CVTDTL
+      *
+     C                   EXSR      PRTHDR
+     C                   WRITE     DETAIL
+     C*
+     C     CMCO          READE     COMPAYAM                               98
+     C*
+     C                   END
+     C*
+     C                   ENDSR
+     C/EJECT
+     C*****************************************************************
+      *  GET G/L ACCOUNTS
+     C*****************************************************************
+     C     PAYOUT        BEGSR
+      *
+     C                   MOVE      PCO           XCO
+     C                   MOVE      MDCRCD        XCRCD
+     C                   CALL      'LSP220'
+     C                   PARM                    LSP220
+      *
+     C*
+     C*   CHECK HOW TO PRODUCE AGENTS PAYMENT
+     C*
+     C     MATXCD        IFEQ      'W'
+     C                   SETOFF                                       70
+     C                   EXSR      PAYROL
+     C                   EXSR      PRTHDR
+     C                   WRITE     AGTTOT
+     C                   EXSR      PRTHDR
+     C                   WRITE     PAYRL
+     C*
+     C                   ELSE
+     C*
+      * UPDATE PAYTO AGENT INC BALANCE IN DISBURSEMENT CURRENCY.
+      *
+     C                   CLEAR                   COM990
+     C                   MOVEL     CMCO          CO990
+DB01 C                   MOVEL     CT1205        AGT990
+DB01 C*** INSERTED SOURCE FOR DOUBLE BYTE CHARACTER SET CONVERSION
+DB01 C*
+DB01 C*    ##DBS         IFEQ      '1'
+DB01 C                   MOVEL     AGT990        IGCP1
+DB01 C                   Z-ADD     009           IGCP2
+DB01 C                   EXSR      IGCSR
+DB01 C                   MOVEL     IGCP3         AGT990
+DB01 C*                  END
+DB01 C*
+DB01 C*** END OF INSERTED SOURCE
+     C                   MOVEL     MDCRCD        CRC990
+     C                   MOVEL     'INC'         TYP990
+ rr01C                   eval      us3990         = ss220
+     C                   CALL      'COM990'
+     C                   PARM                    COM990
+ rr01C                   if        cmco           = 'SLIC' and
+ rr01C                             ss220          = 'DLY'
+     C                   ADD       TAXAMT        BAL990
+ rr01C                   endif
+ rr01C                   if        cmco          <> 'SLIC'
+     C                   ADD       TAXAMT        BAL990
+ rr01C                   endif
+     C                   CLEAR                   COM991
+     C                   MOVEL     CO990         CO991
+     C                   MOVEL     AGT990        AGT991
+     C                   MOVEL     CRC990        CRC991
+     C                   MOVEL     TYP990        TYP991
+     C                   Z-ADD     BAL990        AMT991
+     C                   MOVEL     US1990        US1991
+     C                   MOVEL     US2990        US2991
+     C                   MOVEL     US3990        US3991
+     C                   MOVEL     US4990        US4991
+     C                   MOVEL     US5990        US5991
+     C                   MOVEL     US6990        US6991
+     C                   Z-ADD     US7990        US7991
+     C                   Z-ADD     US8990        US8991
+     C                   Z-ADD     US9990        US9991
+ rr01C                   eval      us3991         = ss220
+ RJ01*
+ RJ01* If Pay To Agent and Agent Number is not same then we'll update Taxable income balance.
+ RJ01C                   If        SVAGT  <> SVAGTNO
+     C                   CALL      'COM991'
+     C                   PARM                    COM991
+      *
+     C                   ADD       TAXAMT        MIBAL
+ RJ01C                   Else
+ RJ01C*                  Eval      MIBAL=0
+ RJ01C                   EndIf
+ RJ01*
+     C                   SETON                                        70
+     C                   EXSR      PRTHDR
+     C                   WRITE     AGTTOT
+     C*
+     C     XMINCK        IFEQ      *ZERO
+     C     PAYAMT        ANDGT     *ZERO
+     C*
+     C     XMINCK        ORGT      *ZERO
+     C     XMINCK        ANDLE     PAYAMT
+     C                   EXSR      DOACTG
+     C                   EXSR      UPDBAL
+     C                   EXSR      PRTHDR
+     C                   WRITE     NOCHK
+     C                   EXSR      PRTHDR
+     C                   WRITE     DISBURSED
+     C                   EXSR      DO1099
+     C                   EXSR      PRTHDR
+ RJ01* To calculate "YTD Taxable income" for COM240P report due to changes for agent commission.
+ RJ01C                   ADD       PTXAMT        MIBAL
+     C                   WRITE     AGTYTD
+     C                   EXSR      PRTHDR
+     C                   IF        %FOUND(APPEFTRQ)
+     C                   WRITE     DDEPOSIT
+     C                   ELSE
+     C                   WRITE     CHECK
+     C                   ENDIF
+     C*
+     C                   ELSE
+     C*
+      * If no payout made, move payment amt to balance remaining field
+     C                   Eval      SavePay = PayAmt
+     C                   EVAL      BALTOT = BALTOT + PAYAMT
+     C                   Z-ADD     *ZERO         PAYAMT
+     C*
+     C                   EXSR      UPDBAL
+     C                   EXSR      PRTHDR
+     C                   WRITE     NOCHK
+     C                   EXSR      PRTHDR
+     C                   WRITE     DISBURSED
+     C                   EXSR      PRTHDR
+     C                   WRITE     AGTYTD
+      *
+     C                   If        XMINCK > SavePay
+     C                   Exsr      PRTHDR
+     C                   Write     NoPay
+     C                   EndIf
+      *
+     C                   END
+     C*
+     C                   END
+     C*
+     C                   MOVE      *ON           *IN30
+     C*
+     C                   ENDSR
+     C/EJECT
+     C*****************************************************************
+     C*  PAYROL SUBROUTINE
+     C*****************************************************************
+     C     PAYROL        BEGSR
+     C*
+     C                   MOVEL     MAGTNO        YAGTNO
+     C                   MOVEL     CMTIDF        YATXID
+     C                   MOVEL     MEMPID        YEMPID
+     C*
+     C                   Z-ADD     *MONTH        YPENDM
+     C                   Z-ADD     *DAY          YPENDD
+     C                   Z-ADD     *YEAR         YPENDY
+     C*
+DB01 C                   MOVEL     FMT8F         YAFRST
+DB01 C*** INSERTED SOURCE FOR DOUBLE BYTE CHARACTER SET CONVERSION
+DB01 C*
+DB01 C*    ##DBS         IFEQ      '1'
+DB01 C                   MOVEL     YAFRST        IGCP1
+DB01 C                   Z-ADD     010           IGCP2
+DB01 C                   EXSR      IGCSR
+DB01 C                   MOVEL     IGCP3         YAFRST
+DB01 C*                  END
+DB01 C*
+DB01 C*** END OF INSERTED SOURCE
+     C                   MOVEL     FMT8M         YAMID
+DB01 C                   MOVEL     FMT8L         YALAST
+DB01 C*** INSERTED SOURCE FOR DOUBLE BYTE CHARACTER SET CONVERSION
+DB01 C*
+DB01 C*    ##DBS         IFEQ      '1'
+DB01 C                   MOVEL     YALAST        IGCP1
+DB01 C                   Z-ADD     025           IGCP2
+DB01 C                   EXSR      IGCSR
+DB01 C                   MOVEL     IGCP3         YALAST
+DB01 C*                  END
+DB01 C*
+DB01 C*** END OF INSERTED SOURCE
+     C*
+     C                   Z-ADD     PAYAMT        YPYAMT
+     C                   Z-ADD     TAXAMT        YTXAMT
+     C*
+     C                   Eval      YPADRS = WrkSubsidy
+     C                   Eval      YPADRW = WrkDraw
+     C                   Eval      YPABAL = WrkABal
+     C*
+     C                   MOVEL     CMCO          YCO
+     C                   EXSR      PRTHDR
+DFB2 C*******            WRITE     RPAYRL
+dfb2 c* determine if this payroll record should be written at this time
+dfb2 c                   if        muser4 <> *blanks
+     C                   WRITE     RPAYRL
+ ms2 c*
+ ms2 c*  Write accounting records for payroll transaction
+ ms2 c                   exsr      pyrlac
+dfb2 C
+dfb2 C                   ELSE
+dfb2 C*  UPDATE THE AGENTS BALANCE WITH THIS AMOUNT
+dfb2 c                   CLEAR                   COM990
+dfb2 c                   MOVEL     CMCO          CO990
+dfb2 c                   MOVEL     magtno        AGT990
+dfb2 c                   MOVEL     mdcrcd        CRC990
+dfb2 C                   MOVEL     'BAL'         TYP990
+ rr01C                   eval      us3990         = ss220
+ rr01C                   eval      us5990         = 'COM240'
+dfb2 C                   CALL      'COM990'
+dfb2 C                   PARM                    COM990
+dfb2 C                   ADD       PAYAMT        BAL990
+dfb2 C                   CLEAR                   COM991
+dfb2 C                   MOVEL     COM990        COM991
+ rr01C                   eval      us3991         = ss220
+dfb2 C                   CALL      'COM991'
+dfb2 C                   PARM                    COM991
+      *
+dfb2 C                   end
+      *
+      *   ACCUMULATE TOTALS FOR THE COMPANY BY THE AGENT'S CURRENCY
+      *    CODE
+      *
+     C                   MOVE      *OFF          *IN72
+     C                   Z-ADD     1             B
+     C     MDCRCD        LOOKUP    COCR(B)                                72
+      *
+     C     *IN72         IFEQ      *OFF
+     C                   ADD       1             C
+     C                   MOVEL     MDCRCD        COCR(C)
+     C     C             OCCUR     CMPTTL
+     C                   ELSE
+     C     B             OCCUR     CMPTTL
+     C                   ENDIF
+     C*
+     C                   ADD       1             COW2CT
+     C                   ADD       YPYAMT        COW2AM
+     C*
+     C                   ENDSR
+     C/EJECT
+     C*****************************************************************
+     C*  PRODUCE A CHECK REQUEST FOR AGENT'S COMMISSION
+     C*****************************************************************
+     C     DO1099        BEGSR
+     C*
+     C                   EXSR      GETSEQ
+     C*
+     C                   MOVE      'I'           MRECID
+     C                   MOVEL     QTERM         MTERM
+     C                   MOVEL     QPROG         MPROG
+     C                   MOVEL     USERID        MSECID
+     C                   TIME                    MTIME
+     C*
+     C                   Z-ADD     SEQTSQ        MTSEQ
+     C                   Z-ADD     SEQSSQ        MTSSQ
+DB01 C                   MOVEL     CT1205        MAGENT
+DB01 C*** INSERTED SOURCE FOR DOUBLE BYTE CHARACTER SET CONVERSION
+DB01 C*
+DB01 C*    ##DBS         IFEQ      '1'
+DB01 C                   MOVEL     MAGENT        IGCP1
+DB01 C                   Z-ADD     009           IGCP2
+DB01 C                   EXSR      IGCSR
+DB01 C                   MOVEL     IGCP3         MAGENT
+DB01 C*                  END
+DB01 C*
+DB01 C*** END OF INSERTED SOURCE
+     C                   MOVE      *BLANKS       MINAM
+     C*
+     C                   EXSR      GETNA
+     C*
+     C                   MOVE      UDATE         MCKDAT
+     C                   Z-ADD     CHKAMT        MCKAMT
+     C*
+ M03 *          COMBINE FIELDS TO MAKE UP DESCRIPTION FIELD
+ M03 C*****              MOVEL     MAGENT(P)     WAGENT            9
+ dfb C                   MOVEL     MAGENT        WAGENT            9
+
+ M03 C*****DSCP1         CAT       WAGENT:0      MDES01
+ M03 C*****              CAT       DSCP2:1       MDES01
+ M03 C*****              CAT       MECKDT:1      MDES01
+     C************************
+ M04 C                   EVAL      MDES01 = DSCP1 + WAGENT + DSCP2 + MECKDT
+     C************************
+ M03  *                  ADD SEQUENCE NUMBER TO RECORD
+ M03 C                   Z-ADD     SEQTSQ        MTSEQ
+ M03 C                   Z-ADD     SEQSSQ        MTSSQ
+     C                   MOVE      *BLANKS       MPOLCY
+     C                   MOVE      *BLANKS       MOWNST
+     C                   MOVE      *BLANKS       MTAXCD
+     C                   MOVE      MDCRCD        MCRCD
+     C*
+     C                   IF        %FOUND(APPEFTRQ)
+     C                   MOVE      MCO           ADCO
+     C                   MOVE      MDCRCD        ADCRCD
+     C                   Z-ADD     DDBRN         ADRTG
+     C                   Z-ADD     DDBBN         ADBRCH
+     C                   MOVE      DDBACT        ADACCT
+     C                   MOVE      DDBATY        ADBATY
+     C                   Z-ADD     MCKAMT        ADAMT
+     C                   EVAL      ADPAYR = %TRIML(MNAME)
+     C                   MOVE      EFTTYP        ADTYPE
+     C                   MOVE      EFTKEY        ADKEY
+     C                   Z-ADD     *MONTH        ADCRTM
+     C                   Z-ADD     *DAY          ADCRTD
+     C                   Z-ADD     *YEAR         ADCRTY
+     C                   TIME                    ADTIME
+     C                   MOVE      USERID        ADUSER
+     C                   Z-ADD     SEQTSQ        ADTSEQ
+     C                   Z-ADD     SEQSSQ        ADTSSQ
+     C*
+     C*  GET BANK CHECK DIGIT
+     C     BKKEY         CHAIN     APPBANK
+     C                   IF        %FOUND(APPBANK)
+     C                   Z-ADD     BCRTGC        ADCHK
+     C                   ENDIF
+
+     C* Get deposit bank info for company
+     C                   MOVEL     MCO           CO200
+     C                   MOVEL     'APPDTA'      DTA200
+     C                   MOVE      'R'           ACT200
+     C                   MOVE      'N'           LCK200
+     C*
+     C                   CALL      'LSP200'
+     C                   PARM                    LSP200
+     C                   PARM                    APPDTA
+     C     RC200         IFEQ      *ZEROS
+     C                   Z-ADD     XCBKTR        ADDPTR
+     C                   Z-ADD     XCBRCH        ADDPBN
+     C                   ENDIF
+     C*
+     C*
+     C                   WRITE     RDPST
+     C                   ELSE
+     C                   WRITE     RGLSCHKR
+     C                   ENDIF
+      *
+      *   ACCUMULATE TOTALS FOR THE COMPANY BY THE AGENT'S CURRENCY
+      *    CODE
+      *
+     C                   MOVE      *OFF          *IN72
+     C                   Z-ADD     1             B
+     C     MDCRCD        LOOKUP    COCR(B)                                72
+      *
+     C     *IN72         IFEQ      *OFF
+     C*****                   ADD       1             C
+     C                   z-add     B             C
+     C                   MOVEL     MDCRCD        COCR(C)
+     C     C             OCCUR     CMPTTL
+     C                   ELSE
+     C     B             OCCUR     CMPTTL
+     C                   ENDIF
+     C*
+     C                   IF        %FOUND(APPEFTRQ)
+     C                   ADD       PAYAMT        CODDAM
+     C                   ADD       1             CODDCT
+     C                   ELSE
+     C                   ADD       PAYAMT        COCKAM
+     C                   ADD       1             COCKCT
+     C                   ENDIF
+     c*
+ ms1 **  Update monthly file with payment transactions to show on
+ ms1 **  month end statement.
+ ms1 c                   exsr      updmtd
+     C*
+     C                   ENDSR
+      /EJECT
+     *****************************************************************
+ ms1 *updmtd - update monthly file to show payment transactions
+ ms1 *      on statements.
+     *****************************************************************
+ ms1 C     updmtd        BegSr
+     *
+     * Only process for Daily SLIC commissions.
+ ms1 c                   if        cmco = 'SLIC' and ss220 = 'DLY'
+ ms1 c*
+ ms1 c                   z-add     mckamt        hldamt
+ ms1 c                   movel     svagt         svagt1            9
+     * Create a separate record in file for every COMPAYAM record
+     *   related to the payto agent.
+ ms1 C     kpayam        CHAIN     COMPAYAM                           98
+ ms1 c     *in98         doueq     '1'
+ ms1 c     svagt         orne      ppayto
+ ms1 c*
+ ms1 c                   if        ppyamt > 0 and hldamt > 0
+ ms1 c*****              if        ppyamt > 0
+ ms1 c                   clear                   rmtddc
+ ms1 c                   move      cmco          xco
+ ms1 c                   move      pagtno        xagtno
+ ms1 c                   move      ppayto        xpayto
+ ms1 c                   move      ppcrcd        xocrcd
+ ms1 c                   move      'P'           xtrnst
+ ms1 c                   z-add     *month        xprocm
+ ms1 c                   z-add     *day          xprocd
+ ms1 c                   z-add     *year         xprocy
+ ms1 c                   time                    xproct
+ ms1 C                   EVAL      xdesc = DSCP1 + pagtno + DSCP2 + MECKDT
+ ms1 c                   move      'N'           xtaxcd
+ ms1 c                   move      'C'           xoadc
+ ms1 c*
+ ms1 c* Only write record up to the amount paid in the check.
+ ms1 c                   if        hldamt > ppyamt
+ ms1 c                   z-sub     ppyamt        xamt
+ ms1 c                   eval      hldamt = hldamt - ppyamt
+ ms1 c                   else
+ ms1 c                   z-sub     hldamt        xamt
+ ms1 c                   eval      hldamt = 0
+ ms1 c                   endif
+ ms1 c*
+ ms1 c****               z-sub     ppyamt        xamt
+ ms1 c*
+ ms1 c                   write     rmtddc
+ ms1 c                   endif
+ ms1 c*
+ ms1 C     CMCO          READE     COMPAYAM                               98
+ ms1 c                   enddo
+ ms1 c
+ ms1 c                   endif
+ ms1 c*
+ ms1 C                   endsr
+     c/eject
+     *****************************************************************
+ ms1 *chkdbal - Check if payto agent has a debit balance and apply
+ ms1 *   payment amount to that first before paying out.
+     *****************************************************************
+ ms1 C     chkdbal       BegSr
+     c*
+ ms1 c                   move      'BAL'         type2             3
+ ms1 *
+ ms1 * Retrieve agent balance, determine if debit and reduce by
+ ms1 *   payment amount.
+ ms1 c     kmagt5        chain     comagtbl                           98
+ ms1 c                   if        *in98 = *off and mbbal < 0  or
+ rr02c                             *in98 = *off and mbusr7 < *zero
+ rr02C* for a "Daily" run, apply debit balance from MBBAL
+ rr02C                   if        mbbal           < *zero and
+ rr02C                             ss220           = 'DLY'
+ ms1 c                   eval      paymnt = paymnt + mbbal
+ rr02C                   else
+ rr02C* for a "Monthly" run, apply debit balance from MBUSR7
+ rr02C                   if        mbusr7          < *zero and
+ rr02C                             ss220           = *blank
+ rr02c                   eval      paymnt = paymnt + mbusr7
+ rr02C                   endif
+ rr02C                   endif
+ ms1 c*
+ ms1 c                   clear                   com990
+ ms1 c                   movel     cmco          co990
+ ms1 c                   movel     ppayto        agt990
+ ms1 c                   movel     ppcrcd        crc990
+ ms1 c                   movel     'BAL'         typ990
+ rr01C                   eval      us3990          = ss220
+ rr01C                   eval      us5990          = 'COM240'
+ ms1 c                   call      'COM990'
+ ms1 c                   parm                    com990
+ ms1 c*
+ ms1 c                   if        paymnt >= 0
+ ms1 c                   z-add     0             bal990
+ ms1 c                   else
+ ms1 c                   z-add     paymnt        bal990
+ ms1 c                   z-add     0             paymnt
+ ms1 c                   endif
+ ms1 c*
+ ms1 *
+ ms1 * Call com991 to update balance after payment has been added.
+ ms1 C                   CLEAR                   COM991
+ ms1 C                   MOVEL     CO990         CO991
+ ms1 C                   MOVEL     AGT990        AGT991
+ ms1 C                   MOVEL     CRC990        CRC991
+ ms1 C                   MOVEL     TYP990        TYP991
+ ms1 C                   Z-ADD     BAL990        AMT991
+ ms1 C                   MOVEL     US1990        US1991
+ ms1 C                   MOVEL     US2990        US2991
+ ms1 C                   MOVEL     US3990        US3991
+ ms1 C                   MOVEL     US4990        US4991
+ ms1 C                   MOVEL     US5990        US5991
+ ms1 C                   MOVEL     US6990        US6991
+ ms1 C                   Z-ADD     US7990        US7991
+ ms1 C                   Z-ADD     US8990        US8991
+ ms1 C                   Z-ADD     US9990        US9991
+ rr01C                   eval      us3991        = ss220
+ ms1 C                   CALL      'COM991'
+ ms1 C                   PARM                    COM991
+ ms1 c*
+ ms1 c                   endif
+ ms1 c*
+ ms1 c*  reset the type back to 'INC'
+ ms1 c                   eval      mbtype = 'INC'
+ ms1 c*
+ ms1 c                   endsr
+ ms1  /EJECT
+     C*****************************************************************
+     C* DOACTG SUBROUTINE
+     C*****************************************************************
+     C     DOACTG        BEGSR
+      *
+     C                   EXSR      GETNA
+     C*
+     C                   MOVEL     CMCO          MCO
+     C                   MOVEL(P)  MAGTNO        EFTKEY
+     C     KEFTR         CHAIN     APPEFTRQ                           99
+     C** CLEAR RECORD
+     C                   CLEAR                   RDLYTR
+     C*
+     C** INITIALIZE COMMON FIELDS
+     C                   MOVEL     CMCO          GDCO
+     C                   MOVEL     'G'           GDRCID
+     C                   MOVE      PRCMM         AMONTH            2
+     C                   MOVE      PRCDD         ADAY              2
+     C                   MOVE      PRCYY         AYEAR             4
+     C     AMONTH        CAT       ADAY:0        ADATE8            8
+     C                   CAT       AYEAR:0       ADATE8
+     C                   MOVE      ADATE8        GDDATE
+     C*
+     C                   MOVEL     'COM240'      GDUSER
+PK1  C****               MOVEL     'CK'          GDTRCD
+D5477C                   MOVEL     'CM'          GDTRCD
+     C                   MOVEL     MNAME         GDDESC
+      *
+      * PROCESS CURBAL DATA STRUCTURE TO DEBIT WRITING AGENT CURRENCY
+      * BALANCE ACCOUNT AND CREDIT PAYTO AGENT CURRENCY BALANCE ACCOUNT.
+      *
+     C                   Z-ADD     1             P
+     C                   Z-ADD     *ZEROS        CHKAMT
+      *
+     C     P             OCCUR     CURBAL
+      *
+     C     BLCR(P)       DOUEQ     *BLANKS
+     C                   MOVEL     BLCR(P)       FTCRCD
+      *
+      *      RETRIEVE WRITING AGENT CURRENCY GL ACCOUNTS.
+      *
+     C                   MOVE      PCO           XCO
+     C                   MOVE      FRCRCD        XCRCD
+     C                   CALL      'LSP220'
+     C                   PARM                    LSP220
+      *
+      *      DEBIT AGENT BALANCE IN WRITING AGENT CURRENCY
+      *
+     C                   MOVEL     XAGTGL        GDACT
+     C                   MOVEL     FRCRCD        GDCRCD
+     C                   MOVEL     CT1205        GDREF1
+     C                   MOVE      *BLANKS       GDREF2
+     C                   Z-ADD     PAYAMT        GDAMT
+     C                   WRITE     RDLYTR
+      *
+      *      IF WRITING AGENT CURRENCY (FRCRCD) IS DIFFERENT FROM
+      *      PAYTO AGENT CURRENCY (TOCRCD), GET EXCHANGE RATE AND
+      *      DO CURRENCY TRANSFER.
+      *
+     C     FRCRCD        IFNE      TOCRCD
+     C                   MOVE      FRCRCD        EINCUR
+     C                   MOVE      TOCRCD        EOTCUR
+     C                   Z-ADD     PAYAMT        EINAMT
+     C                   EXSR      CNVCUR
+      *
+     C                   MOVE      EINCUR        TFC105
+     C                   MOVE      EOTCUR        TTC105
+     C                   MOVE      ECNVYR        TTY105
+     C                   MOVE      ECNVMM        TTM105
+     C                   MOVE      ECNVDD        TTD105
+     C                   MOVE      XTRNFR        TEA105
+     C                   MOVE      EINAMT        TIA105
+     C                   MOVE      EOTAMT        TOA105
+     C                   MOVE      EOEXRT        TXR105
+     C                   MOVEL     CT1205        TRF105
+      *
+     C                   CALL      'CUR105'
+     C                   PARM                    CUR105
+      *
+     C                   Z-SUB     EOTAMT        GDAMT
+     C*
+     C* move the currency used from check amount to check request file
+     C                   MOVE      EOTCUR        MCRCD
+     C                   ADD       EOTAMT        CHKAMT
+      *
+     C                   ELSE
+      *
+     C* move the currency used from check amount to check request file
+     C                   MOVE      FRCRCD        MCRCD
+     C                   Z-SUB     PAYAMT        GDAMT
+     C                   ADD       PAYAMT        CHKAMT
+      *
+     C                   ENDIF
+      *
+      *      RETRIEVE PAYTO AGENT CURRENCY GL ACCOUNTS.
+      *
+     C                   MOVE      PCO           XCO
+     C                   MOVE      TOCRCD        XCRCD
+     C                   CALL      'LSP220'
+     C                   PARM                    LSP220
+      *
+      *      CREDIT AGENT BALANCE IN PAYTO AGENT CURRENCY
+     C     PPAYTO        IFNE      *BLANKS
+     C     PAGTNO        ANDNE     PPAYTO
+      *
+     C                   MOVEL     XAGTGL        GDACT
+     C                   MOVEL     TOCRCD        GDCRCD
+     C                   MOVEL     CT1205        GDREF1
+     C                   MOVEL     CT1205        GDREF2
+     C                   WRITE     RDLYTR
+     C                   ENDIF
+      *
+     C                   ADD       1             P
+     C     P             OCCUR     CURBAL
+      *
+     C                   ENDDO
+      *
+      * DEBIT AGENT BALANCE USING PAYTO AGENT CURRENCY
+      *
+     C     PPAYTO        IFNE      *BLANKS
+     C     PAGTNO        ANDNE     PPAYTO
+      *
+     C                   MOVEL     XAGTGL        GDACT
+     C                   MOVEL     TOCRCD        GDCRCD
+     C                   MOVEL     CT1205        GDREF1
+     C                   MOVE      *BLANKS       GDREF2
+     C                   Z-ADD     CHKAMT        GDAMT
+     C                   WRITE     RDLYTR
+     C                   ENDIF
+      *
+      * CREDIT DISBURSEMENT ACCOUNT USING PAYTO AGENT CURRENCY
+      *
+     C                   IF        %FOUND(APPEFTRQ)
+     C                   MOVEL     XDDSUS        GDACT
+     C                   ELSE
+     C                   MOVEL     XCDSUS        GDACT
+     C                   ENDIF
+     C                   MOVEL     CT1205        GDREF1
+     C                   MOVEL     CT1205        GDREF2
+     C                   Z-SUB     CHKAMT        GDAMT
+     C                   WRITE     RDLYTR
+     C*
+     C                   ENDSR
+      /EJECT
+ ms2 C*****************************************************************
+ ms2 C* PYRLAC - Do Payroll Accounting
+ ms2 C*****************************************************************
+ ms2 C     PYRLAC        BEGSR
+ ms2  *
+ ms2 C                   EXSR      GETNA
+ ms2 C*
+ ms2 C** CLEAR RECORD
+ ms2 C                   CLEAR                   RDLYTR
+ ms2 C*
+ ms2 C** INITIALIZE COMMON FIELDS
+ ms2 C                   MOVEL     CMCO          GDCO
+ ms2 C                   MOVEL     'G'           GDRCID
+ ms2 C                   MOVE      PRCMM         AMONTH            2
+ ms2 C                   MOVE      PRCDD         ADAY              2
+ ms2 C                   MOVE      PRCYY         AYEAR             4
+ ms2 C     AMONTH        CAT       ADAY:0        ADATE8            8
+ ms2 C                   CAT       AYEAR:0       ADATE8
+ ms2 C                   MOVE      ADATE8        GDDATE
+ ms2 C*
+ ms2 C                   MOVEL     'COM240'      GDUSER
+ ms2 C                   MOVEL     'CM'          GDTRCD
+ ms2 C                   MOVEL     MNAME         GDDESC
+ ms2  *
+ ms2  * PROCESS CURBAL DATA STRUCTURE TO DEBIT WRITING AGENT CURRENCY
+ ms2  * BALANCE ACCOUNT AND CREDIT PAYTO AGENT CURRENCY BALANCE ACCOUNT.
+ ms2  *
+ ms2 C                   Z-ADD     1             P
+ ms2  *
+ ms2 C     P             OCCUR     CURBAL
+ ms2  *
+ ms2 C     BLCR(P)       DOUEQ     *BLANKS
+ ms2 C                   MOVEL     BLCR(P)       FTCRCD
+ ms2  *
+ ms2  *      RETRIEVE WRITING AGENT CURRENCY GL ACCOUNTS.
+ ms2  *
+ ms2 C                   MOVE      PCO           XCO
+ ms2 C                   MOVE      FRCRCD        XCRCD
+ ms2 C                   CALL      'LSP220'
+ ms2 C                   PARM                    LSP220
+ ms2  *
+ ms2  *      DEBIT AGENT BALANCE IN WRITING AGENT CURRENCY
+ ms2  *
+ ms2 C                   MOVEL     XAGTGL        GDACT
+ ms2 C                   MOVEL     FRCRCD        GDCRCD
+ ms2 C                   MOVEL     CT1205        GDREF1
+ ms2 C                   MOVE      *BLANKS       GDREF2
+ ms2 C                   Z-ADD     YPYAMT        GDAMT
+ ms2 C                   WRITE     RDLYTR
+ ms2 c*
+ ms2 c                   add       1             p
+ ms2 c     p             occur     curbal
+ ms2 c                   enddo
+ ms2  *
+ ms2  * CREDIT DISBURSEMENT ACCOUNT USING PAYTO AGENT CURRENCY
+ ms2  *
+ ms2 C                   MOVEL     zusr03        GDACT
+ ms2 C                   MOVEL     CT1205        GDREF1
+ ms2 C                   MOVEL     CT1205        GDREF2
+ ms2 C                   Z-SUB     YPYAMT        GDAMT
+ ms2 C                   WRITE     RDLYTR
+ ms2 C*
+ ms2 C                   ENDSR
+ ms2  /EJECT
+     C*****************************************************************
+     C*   GET AGENTS NAME AND ADDR FOR CHECK REQUEST RECORD
+     C*****************************************************************
+     C     GETNA         BEGSR
+     C*
+     C                   MOVE      *BLANKS       MADD1
+     C                   MOVE      *BLANKS       MADD2
+     C                   MOVE      *BLANKS       MADD3
+     C                   MOVE      *BLANKS       MADD4
+     C*
+DB01 C                   MOVEL     FMT8F         WKFRST           10
+DB01 C*** INSERTED SOURCE FOR DOUBLE BYTE CHARACTER SET CONVERSION
+DB01 C*
+DB01 C*    ##DBS         IFEQ      '1'
+DB01 C                   MOVEL     WKFRST        IGCP1
+DB01 C                   Z-ADD     010           IGCP2
+DB01 C                   EXSR      IGCSR
+DB01 C                   MOVEL     IGCP3         WKFRST
+DB01 C*                  END
+DB01 C*
+DB01 C*** END OF INSERTED SOURCE
+     C                   MOVEL     FMT8M         WKMID             1
+DB01 C                   MOVEL     FMT8L         WKLAST           25
+DB01 C*** INSERTED SOURCE FOR DOUBLE BYTE CHARACTER SET CONVERSION
+DB01 C*
+DB01 C*    ##DBS         IFEQ      '1'
+DB01 C                   MOVEL     WKLAST        IGCP1
+DB01 C                   Z-ADD     025           IGCP2
+DB01 C                   EXSR      IGCSR
+DB01 C                   MOVEL     IGCP3         WKLAST
+DB01 C*                  END
+DB01 C*
+DB01 C*** END OF INSERTED SOURCE
+     C                   MOVEL     CYCAD1        MADD1
+     C                   MOVEL     CYCAD2        MADD2
+     C                   MOVEL     CYCAD3        MADD3
+     C                   MOVE      CYCCIT        WKCITY           20
+     C                   MOVE      CYCSTA        WKSTCD            2
+DB01 C                   MOVE      CYCZIP        WKZIP            10
+DB01 C*** INSERTED SOURCE FOR DOUBLE BYTE CHARACTER SET CONVERSION
+DB01 C*
+DB01 C*    ##DBS         IFEQ      '1'
+DB01 C                   MOVEL     WKZIP         IGCP1
+DB01 C                   Z-ADD     010           IGCP2
+DB01 C                   EXSR      IGCSR
+DB01 C                   MOVEL     IGCP3         WKZIP
+DB01 C*                  END
+DB01 C*
+DB01 C*** END OF INSERTED SOURCE
+     C*
+     C*      COMPRESS PAYEE'S NAME FOR CHECK
+     C*
+     C                   MOVEA     *ALL' '       NAME
+     C                   Z-ADD     30            X                 2 0
+     C                   MOVEA     FMT8F         NAME(1)
+     C*
+     C     X             DOWNE     0
+     C     NAME(X)       ANDEQ     ' '
+     C                   SUB       1             X
+     C                   END
+     C*
+     C                   ADD       2             X
+     C*
+     C     FMT8M         IFNE      ' '
+     C                   MOVEA     FMT8M         NAME(X)
+     C                   ADD       2             X
+     C                   END
+     C*
+     C                   MOVEA     FMT8L         NAME(X)
+     C*
+     C                   MOVEA     NAME(1)       MNAME
+     C*
+     C*      COMPRESS PAYEE'S ADDRES FOR LAST ADDRESS LINE
+     C*
+     C                   MOVEA     *ALL' '       ADD3
+     C                   MOVEA     CYCCIT        ADD3(1)
+     C                   Z-ADD     30            X                 2 0
+     C*
+     C     X             DOWNE     0
+     C     ADD3(X)       ANDEQ     ' '
+     C                   SUB       1             X
+     C                   END
+     C*
+     C                   ADD       2             X
+     C                   MOVEA     CYCSTA        ADD3(X)
+     C*
+     C                   ADD       4             X
+     C                   MOVEA     CYCZIP        ADD3(X)
+     C*
+     C     MADD2         IFEQ      *BLANKS
+     C                   MOVEA     ADD3          MADD2
+     C                   MOVE      *BLANKS       MADD3
+     C                   MOVE      *BLANKS       MADD4
+     C                   ELSE
+     C     MADD3         IFEQ      *BLANKS
+     C                   MOVEA     ADD3          MADD3
+     C                   MOVE      *BLANKS       MADD4
+     C                   ELSE
+     C                   MOVEA     ADD3          MADD4
+     C                   END
+     C                   END
+     C*
+     C     CMNCIN        IFEQ      'C'
+DB01 C                   MOVEL     CMNAME        MNAME
+DB01 C*** INSERTED SOURCE FOR DOUBLE BYTE CHARACTER SET CONVERSION
+DB01 C*
+DB01 C*    ##DBS         IFEQ      '1'
+DB01 C                   MOVEL     MNAME         IGCP1
+DB01 C                   Z-ADD     030           IGCP2
+DB01 C                   EXSR      IGCSR
+DB01 C                   MOVEL     IGCP3         MNAME
+DB01 C*                  END
+DB01 C*
+DB01 C*** END OF INSERTED SOURCE
+     C                   END
+     C*
+     C                   ENDSR
+     C/EJECT
+     C     CMPCHG        BEGSR
+     C*****************************************************************
+     C* CMPCHG - CHANGE COMPANY DATA AREA
+     C*****************************************************************
+     C*
+     C     XCREPT        IFEQ      'N'
+     C     OPNFLG        ANDEQ     '*'
+     C     OPNFLG        OREQ      'Y'
+     C                   OPEN      COM240P
+     C                   MOVE      '*'           OPNFLG
+     C                   ENDIF
+     C*
+     C     *IN95         IFEQ      *OFF
+     C                   MOVEL     CMCO          CO205
+     C                   ELSE
+     C                   MOVEL     SVCO          CO205
+     C                   ENDIF
+     C*
+     C                   MOVE      'Y'           UPD205
+     C                   MOVE      'N'           TST205
+     C                   CALL      'LSP205'
+     C                   PARM                    PRM205
+     C*
+     C                   MOVE      'N'           DUP205
+     C                   IN        LSPCO
+     C*
+     C                   MOVEL     CMCO          CO200
+     C                   MOVEL     'COMDTA'      DTA200
+     C                   MOVE      'R'           ACT200
+     C                   MOVE      'N'           LCK200
+     C                   CALL      'LSP200'
+     C                   PARM                    LSP200
+     C                   PARM                    COMDTA
+     C*
+     C                   MOVEL     CMCO          CO200
+     C                   MOVEL     'BLCDTA'      DTA200
+     C                   MOVE      'R'           ACT200
+     C                   MOVE      'N'           LCK200
+     C                   CALL      'LSP200'
+     C                   PARM                    LSP200
+     C                   PARM                    BLCDTA
+     C*
+      *  CONVERT SCREEN DATE TO USER'S FORMAT :
+      *
+     C                   CLEAR                   PRMDAT
+     C                   MOVE      *MONTH        INMON
+     C                   MOVE      *DAY          INDAY
+     C                   MOVE      *YEAR         INYR
+     C                   MOVE      '*'           FMTC01
+     C                   CALL      'DATEFMT'
+     C                   PARM                    PRMDAT
+      *
+     C     RTNCD         IFEQ      '00'
+     C                   MOVE      OUTDTE        SDATE
+     C                   ENDIF
+      *
+     C                   ENDSR
+     C/EJECT
+     C     CMPTOT        BEGSR
+     C*****************************************************************
+     C* CMPTOT - COMPANY TOTALS
+     C*****************************************************************
+     C*
+     C                   SETON                                        51
+     C                   MOVE      *ON           *IN96
+     C                   MOVE      *ON           *IN30
+      *
+      *   FOR EVERY CURRENCY ENTRY IN ARRAY COCR
+      *
+     C                   Z-ADD     1             B
+     C     B             OCCUR     CMPTTL
+      *
+     C     COCR(B)       DOWNE     *BLANKS
+      *
+      *   THE TOTAL RECORD, BY CURRENCY, IS WRITTEN TO THE REPORT
+      *
+     C                   MOVEL     COCR(B)       RPCRCD
+     C                   Z-ADD     COCKCT        RPCKCT
+     C                   Z-ADD     COCKAM        RPCKAM
+     C                   Z-ADD     COW2CT        RPW2CT
+     C                   Z-ADD     COW2AM        RPW2AM
+     C                   Z-ADD     COTLPO        RPTLPO
+     C                   Z-ADD     CODDAM        RPDDAM
+     C                   Z-ADD     CODDCT        RPDDCT
+     C                   EXSR      PRTHDR
+     C                   WRITE     TOTALS
+      *
+      *   COMPANY TOTALS ARE ADDED TO THE CONSOLIDATED TOTAL FOR ALL
+      *    COMPANIES BY CURRENCY
+      *
+     C                   Z-ADD     1             Y
+     C                   MOVE      *OFF          *IN72
+     C     COCR(B)       LOOKUP    CNCR(Y)                                72
+      *
+     C     *IN72         IFEQ      *OFF
+     C                   ADD       1             N
+     C                   MOVEL     COCR(B)       CNCR(N)
+     C     N             OCCUR     CNSTTL
+     C                   ELSE
+     C     Y             OCCUR     CNSTTL
+     C                   ENDIF
+      *
+     C                   ADD       COCKCT        CNCKCT
+     C                   ADD       COCKAM        CNCKAM
+     C                   ADD       COW2CT        CNW2CT
+     C                   ADD       COW2AM        CNW2AM
+     C                   ADD       COTLPO        CNTLPO
+     C                   ADD       COTLTI        CNTLTI
+     C                   ADD       CODDAM        CNDDAM
+     C                   ADD       CODDCT        CNDDCT
+     C                   ADD       1             B
+     C     B             OCCUR     CMPTTL
+     C                   ENDDO
+      *
+      *   IF NO TOTALS WERE PRINTED, WRITE THE
+      *    NO RECORDS LINE.
+      *
+     C     B             IFEQ      1
+     C     COCR(B)       ANDEQ     *BLANKS
+     C                   EXSR      PRTHDR
+     C                   WRITE     NORECS
+     C                   ENDIF
+      *
+      *   WRITE THE END OF REPORT MESSAGE
+      *
+     C                   EXSR      PRTHDR
+     C                   WRITE     EOR
+      *
+     C                   MOVEA     *BLANKS       COCR
+      *
+     C     1             DO        100           B
+     C     B             OCCUR     CMPTTL
+     C                   CLEAR                   CMPTTL
+     C                   ENDDO
+      *
+     C                   MOVE      *OFF          *IN96
+     C                   Z-ADD     *ZEROS        C
+      *
+     C     XCREPT        IFEQ      'N'
+     C                   CLOSE     COM240P
+     C                   Z-ADD     *ZEROS        PAGE
+     C                   CALL      'LSPSPLFA'
+     C                   PARM      'COM240P'     FILE             10
+     C                   PARM                    CMCO
+     C                   PARM      'COM240'      PGM              10
+     C                   PARM                    RPTTYP
+     C                   ENDIF
+     C*
+     C                   ENDSR
+      /EJECT
+      *****************************************************************
+      * SUBROUTINE CNSTOT
+      *  CONSOLIDATED TOTALS
+      *****************************************************************
+     C     CNSTOT        BEGSR
+      *
+     C                   MOVE      *ON           *IN96
+     C                   MOVE      *ON           *IN30
+      *
+      *   FOR EVERY CURRENCY ENTRY IN ARRAY CNCR
+      *
+     C                   Z-ADD     1             Y
+     C     Y             OCCUR     CNSTTL
+      *
+     C     CNCR(Y)       DOWNE     *BLANKS
+      *
+      *   THE TOTAL RECORD, BY CURRENCY, IS WRITTEN TO THE REPORT
+      *
+     C                   MOVEL     CNCR(Y)       RPCRCD
+     C                   Z-ADD     CNCKCT        RPCKCT
+     C                   Z-ADD     CNCKAM        RPCKAM
+     C                   Z-ADD     CNW2CT        RPW2CT
+     C                   Z-ADD     CNW2AM        RPW2AM
+     C                   Z-ADD     CNTLPO        RPTLPO
+     C                   Z-ADD     CNDDAM        RPDDAM
+     C                   Z-ADD     CNDDCT        RPDDCT
+     C*                    Z-ADDCNTLTI    RPTLTI
+     C                   EXSR      PRTHDR
+     C                   WRITE     TOTALS
+     C                   ADD       1             Y
+     C     Y             OCCUR     CNSTTL
+     C                   ENDDO
+      *
+      *   IF NO TOTALS WERE PRINTED, WRITE THE
+      *    NO RECORDS LINE.
+      *
+     C     Y             IFEQ      1
+     C     CNCR(Y)       ANDEQ     *BLANKS
+     C                   EXSR      PRTHDR
+     C                   WRITE     NORECS
+     C                   ENDIF
+      *
+      *   WRITE THE END OF REPORT MESSAGE
+      *
+     C                   EXSR      PRTHDR
+     C                   WRITE     EOR
+      *
+     C                   MOVE      *OFF          *IN96
+      *
+     C     XCREPT        IFEQ      'N'
+     C                   CLOSE     COM240P
+     C                   Z-ADD     *ZEROS        PAGE
+     C                   CALL      'LSPSPLFA'
+     C                   PARM      'COM240P'     FILE             10
+     C                   PARM                    CMCO
+     C                   PARM      'COM240'      PGM              10
+     C                   PARM                    RPTTYP
+     C                   ENDIF
+      *
+     C                   ENDSR
+      /EJECT
+      *****************************************************************
+      * SUBROUTINE PRTHDR
+      *  CHECK FOR PRINTER OVERFLOW
+      *****************************************************************
+     C     PRTHDR        BEGSR
+      *
+     C     *IN30         IFEQ      *ON
+     C                   WRITE     HEADER
+     C                   MOVE      *OFF          *IN30
+     C                   ENDIF
+      *
+     C                   ENDSR
+      /EJECT
+      *****************************************************************
+      * CNVCUR - CONVERT CURRENCY SUBROUTINE
+      *****************************************************************
+     C     CNVCUR        BEGSR
+      *
+     C                   MOVE      'TRN'         ERATE1
+     C                   MOVE      'S'           ERATE2
+     C                   MOVE      PRCYY         ECNVYR
+     C                   MOVE      PRCMM         ECNVMM
+     C                   MOVE      PRCDD         ECNVDD
+     C                   CALL      'LSP300'
+     C                   PARM                    LSP300
+      *
+     C                   Z-ADD     EOEXRT        EXRAT
+      *
+     C                   ENDSR
+      /EJECT
+      *****************************************************************
+      * CLRBAL - CLEARS CURBAL DS AND RELATED FIELDS
+      *****************************************************************
+     C     CLRBAL        BEGSR
+      *
+     C                   MOVEA     *BLANKS       BLCR
+     C                   Z-ADD     *ZEROS        Q
+      *
+     C     1             DO        1000          P
+     C     P             OCCUR     CURBAL
+     C                   CLEAR                   CURBAL
+     C                   ENDDO
+      *
+     C                   ENDSR
+      /EJECT
+      *****************************************************************
+      * UPDBAL - UPDATES PAYTO AGENT WITH BALANCES BY CURRENCY CODE
+      *          WHEN A CHECK IS NOT WRITTEN.
+      *****************************************************************
+     C     UPDBAL        BEGSR
+      *
+     C                   Z-ADD     1             P
+      *
+     C     P             OCCUR     CURBAL
+      *
+     C     BLCR(P)       DOWNE     *BLANKS
+     C                   MOVEL     BLCR(P)       FTCRCD
+     C                   CLEAR                   COM990
+     C                   MOVEL     CMCO          CO990
+DB01 C                   MOVEL     CT1205        AGT990
+DB01 C*** INSERTED SOURCE FOR DOUBLE BYTE CHARACTER SET CONVERSION
+DB01 C*
+DB01 C*    ##DBS         IFEQ      '1'
+DB01 C                   MOVEL     AGT990        IGCP1
+DB01 C                   Z-ADD     009           IGCP2
+DB01 C                   EXSR      IGCSR
+DB01 C                   MOVEL     IGCP3         AGT990
+DB01 C*                  END
+DB01 C*
+DB01 C*** END OF INSERTED SOURCE
+     C                   MOVEL     FRCRCD        CRC990
+     C                   MOVEL     'BAL'         TYP990
+ rr01C                   eval      us3990          = ss220
+ rr01C                   eval      us5990          = 'COM240'
+     C                   CALL      'COM990'
+     C                   PARM                    COM990
+ rr01C                   if        cmco          = 'SLIC' and
+ rr01C                             ss220         = 'DLY'
+     C                   ADD       BALTOT        BAL990
+ rr01C                   endif
+ rr01C                   if        cmco         <> 'SLIC'
+     C                   ADD       BALTOT        BAL990
+ rr01C                   endif
+     C                   CLEAR                   COM991
+     C                   MOVEL     CO990         CO991
+     C                   MOVEL     AGT990        AGT991
+     C                   MOVEL     CRC990        CRC991
+     C                   MOVEL     TYP990        TYP991
+     C                   Z-ADD     BAL990        AMT991
+     C                   MOVEL     US1990        US1991
+     C                   MOVEL     US2990        US2991
+     C                   MOVEL     US3990        US3991
+     C                   MOVEL     US4990        US4991
+     C                   MOVEL     US5990        US5991
+     C                   MOVEL     US6990        US6991
+     C                   Z-ADD     US7990        US7991
+     C                   Z-ADD     US8990        US8991
+     C                   Z-ADD     US9990        US9991
+ rr01C                   eval      us3991        = ss220
+     C                   CALL      'COM991'
+     C                   PARM                    COM991
+      *
+     C                   ADD       1             P
+     C     P             OCCUR     CURBAL
+     C                   ENDDO
+      *
+     C                   ENDSR
+     C/EJECT
+     C     GETSEQ        BEGSR
+
+     C                   MOVE      'T'           SEQFLG
+     C                   CALL      'GETSEQ'
+     C                   PARM                    PLSSEQ
+
+     C                   ENDSR
+     C/EJECT
+M03  *****************************************************************
+M03  * NXTSEQ - GET NEXT SEQUENCE NUMBER
+M03  *****************************************************************
+M03  C     NXTSEQ        BEGSR
+M03  C                   MOVE      'T'           SEQFLG
+M03  C                   CALL      'GETSEQ'
+M03  C                   PARM                    PLSSEQ
+M03  C                   ENDSR
+      *
+     C/EJECT
+     C     INIT          BEGSR
+     C*****************************************************************
+     C* INIT - INITIALIZATION
+     C*****************************************************************
+     C*
+     C                   MOVE      '1'           ON                1
+     C                   MOVE      '0'           OFF               1
+     C*
+M03  *                    SETUP FIELDS FOR DESCRIPTION DATE.
+M03  C                   MOVE      '/'           SLASH
+M03  C                   MOVE      '/'           SLASH1
+M03  C                   Z-ADD     *MONTH        CURRM1
+M03  C                   Z-ADD     *DAY          CURRD1
+M03  C                   Z-ADD     *YEAR         CURRY2
+bmg01C                   z-add     yr2           curry1
+     C                   TIME                    TIME              6 0
+     C*
+     C     *DTAARA       DEFINE                  LSPCO
+     C     *DTAARA       DEFINE                  PRCDTA
+     C                   IN        *DTAARA
+     C*
+     C     *LIKE         DEFINE    CT1205        SVAGT
+     C     *LIKE         DEFINE    BAL990        MBAL
+     C     *LIKE         DEFINE    MCKAMT        CHKAMT
+     C     *LIKE         DEFINE    CMCO          SVCO
+     C     *LIKE         DEFINE    PTXAMT        DTXAMT
+     C     *LIKE         DEFINE    PPYAMT        DPYAMT
+     C     *LIKE         DEFINE    PPYAMT        TTXAMT
+     C     *LIKE         DEFINE    DDKEY         EFTKEY
+     C     *LIKE         DEFINE    DDTYPE        EFTTYP
+     C                   MOVE      'A'           EFTTYP
+     C*
+     C                   MOVE      CMCO          SVCO
+     C*
+     C                   MOVE      'Y'           DUP205
+     C                   MOVE      'Y'           OPNFLG
+     C                   MOVEL     'D'           RPTTYP            2
+     C                   Z-ADD     0             C                 3 0
+     C                   Z-ADD     0             N                 3 0
+     C                   Z-ADD     0             B                 3 0
+     C                   Z-ADD     0             Y                 3 0
+     C                   Z-ADD     0             P                 4 0
+     C                   Z-ADD     0             Q                 4 0
+     C                   MOVEL     'INC'         MBTYPE
+      *
+      *  CONVERT SCREEN DATE TO USER'S FORMAT :
+      *
+     C                   MOVE      *MONTH        INMON
+     C                   MOVE      *DAY          INDAY
+     C                   MOVE      *YEAR         INYR
+     C                   MOVE      '*'           FMTC01
+     C                   CALL      'DATEFMT'
+     C                   PARM                    PRMDAT
+      *
+     C     RTNCD         IFEQ      '00'
+     C                   MOVE      OUTDTE        SDATE
+     C                   ENDIF
+      *
+     C     1             DO        100           B
+     C     B             OCCUR     CMPTTL
+     C                   CLEAR                   CMPTTL
+     C                   ENDDO
+      *
+     C     1             DO        100           B
+     C     B             OCCUR     CNSTTL
+     C                   CLEAR                   CNSTTL
+     C                   ENDDO
+      *
+      * FORMAT 6 DIGIT PROCESS DATE TO 8 DIGITS
+      *
+     C                   CLEAR                   PRMDAT
+     C                   MOVE      DPRMM         INMON
+     C                   MOVE      DPRDD         INDAY
+     C                   MOVE      DPRYY         INYR
+     C                   CALL      'DATEFMT'
+     C                   PARM                    PRMDAT
+      *
+     C     RTNCD         IFEQ      '00'
+     C                   MOVE      OUTMON        PRCMM
+     C                   MOVE      OUTDAY        PRCDD
+     C                   MOVE      OUTYR         PRCYY
+     C                   ENDIF
+
+     C                   CALL      'GETID'
+     C                   PARM                    USERID           10
+     C*
+     C                   ENDSR
+      /EJECT
+      *****************************************************************
+      * SUBROUTINE CVTDTL
+      *  CONVERT DATES FOR REPORT DETAIL
+      *****************************************************************
+     C     CVTDTL        BEGSR
+      *
+      *  CONVERT PERIOD ENDING DATE
+      *
+     C                   CLEAR                   PRMDAT
+     C                   MOVE      PPENDM        INMON
+     C                   MOVE      PPENDD        INDAY
+     C                   MOVE      PPENDY        INYR
+     C                   MOVE      ' '           FMTC01
+     C                   CALL      'DATEFMT'
+     C                   PARM                    PRMDAT
+      *
+     C     RTNCD         IFEQ      '00'
+     C                   MOVE      OUTDTE        PENDDT
+     C                   ENDIF
+      *
+     C                   ENDSR
+      /EJECT
+DB01 C**************************************************************
+DB01 C*** INSERTED SOURCE FOR DOUBLE BYTE CHARACTER SET CONVERSION *
+DB01 C**************************************************************
+DB01 C*
+DB01 C     IGCSR         BEGSR
+DB01 C                   MOVEL     *BLANKS       IGCP3
+DB01 C                   CALL      'DCU799'
+DB01 C                   PARM                    IGCP1           256
+DB01 C                   PARM                    IGCP2             3 0
+DB01 C                   PARM                    IGCP3           256
+DB01 C                   ENDSR
