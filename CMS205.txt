@@ -1,0 +1,423 @@
+      *   M3893   02/08/01   17:21:22   ATLPD        V4.4M00
+M4970 *   4970   06/23/94  MARGHERI
+M4970 *   4970   06/29/94  FRIEDEL
+M4970 *   4970   06/30/94  VANNATTA
+M4970 *   4970   09/07/94  PAULH
+M8559 *   8559   05/08/98  DARNELL                                   V142M010
+     F*****************************************************************
+     F*   PROPRIETARY RIGHTS NOTICE: ALL RIGHTS RESERVED. THIS       **
+     F*   MATERIAL CONTAINS THE VALUABLE PROPERTIES AND TRADE        **
+     F*   SECRETS OF GENELCO, INC. OF ST. LOUIS, MO. EMBODYING       **
+     F*   SUBSTANTIAL CREATIVE EFFORTS AND CONFIDENTIAL INFORMATION, **
+     F*   IDEAS, AND EXPRESSIONS, NO PART OF WHICH MAY BE REPRODUCED **
+     F*   OR TRANSMITTED IN ANY FORM OR BY ANY MEANS, ELECTRONIC,    **
+     F*   MECHANICAL, OR OTHERWISE, INCLUDING PHOTOCOPYING AND       **
+     F*   RECORDING OR IN CONNECTION WITH ANY INFORMATION STORAGE    **
+     F*   OR RETRIEVAL SYSTEM WITHOUT THE PERMISSION IN WRITING OF   **
+     F*   GENELCO, INC.                                              **
+     F*                                                              **
+     F*   COPYRIGHT NOTICE: COPYRIGHT 1982    GENELCO, INC.          **
+     F*****************************************************************
+     F** C R E A T I O N        **                                   **
+     F****************************                                   **
+     F**                                                             **
+     F**  PROGRAM NAME:         CMS205                               **
+     F**  CREATED BY:           MARK A. FRIEDEL                      **
+     F**  DATE:                 05/24/1994                           **
+     F**                                                             **
+     F*****************************************************************
+     FCMSUSREL  IF   E           K DISK
+     FCMSCLNTM  IF   E           K DISK
+     FCMSCLNAD  IF   E           K DISK
+     FCMSUSRTP  IF   E           K DISK
+     D/EJECT
+     D*****************************************************************
+     D** EXTERNALLY DESCRIBED DATA STRUCTURES
+     D*****************************************************************
+     D PRM200        E DS                  EXTNAME(PCMS200)
+     D PRM205        E DS                  EXTNAME(PCMS205)
+     D CLTA          E DS                  EXTNAME(CMSCLNAD)
+     D CLTM          E DS                  EXTNAME(CMSCLNTM)
+     D CMSDTA        E DS                  EXTNAME(CMSDTA)
+     D LSP200        E DS                  EXTNAME(PLSP200)
+     D  XRC200       E                     EXTFLD(RC200)
+     D/EJECT
+     D*****************************************************************
+     D** PROGRAM DESCRIBED DATA STRUCTURES
+     D*****************************************************************
+     D NAMPRM          DS
+     D  NAMFMT                 1      1
+     D  NAME                   2     61
+     D SAVCLT          DS
+     D  CLT1                   1    256
+     D  CLT2                 257    512
+     D SAVADD          DS
+     D  ADD1                   1    256
+     D  ADD2                 257    512
+     D                 DS
+     D  ADRDAT                 1      8  0
+     D  ADRYY                  1      4  0
+     D  ADRMM                  5      6  0
+     D  ADRDD                  7      8  0
+     I/EJECT
+     I*****************************************************************
+     I*                    MAIN ROUTINE
+     I*****************************************************************
+     C     *ENTRY        PLIST
+     C                   PARM                    PRM205
+     C                   PARM                    CLTM
+     C                   PARM                    CLTA
+     C*
+     C     KUSREL        KLIST
+     C                   KFLD                    CMP205
+     C                   KFLD                    CT1205
+     C                   KFLD                    CT2205
+     C                   KFLD                    WRKTYP
+     C*
+     C     KUSRE1        KLIST
+     C                   KFLD                    WRKCO
+     C                   KFLD                    CT1205
+     C                   KFLD                    CT2205
+     C                   KFLD                    CPRTYP
+     C*
+     C     KCLNAD        KLIST
+     C                   KFLD                    CMCLTN
+     C                   KFLD                    WRKSEQ
+     C                   KFLD                    FRM205
+     C                   KFLD                    FRD205
+     C*
+     C     KCLNA1        KLIST
+     C                   KFLD                    CMCLTN
+     C                   KFLD                    WRKSEQ
+     C*
+     C                   EXSR      INIT
+     C*
+     C                   SELECT
+     C*
+     C     WRKTYP        WHENEQ    'AH1'
+     C     WRKTYP        OREQ      'AH2'
+     C     WRKTYP        OREQ      'AGT'
+     C     WRKTYP        OREQ      'BEN'
+     C     WRKTYP        OREQ      'BNK'
+     C     WRKTYP        OREQ      'GRP'
+     C     WRKTYP        OREQ      'INS'
+     C     WRKTYP        OREQ      'JNT'
+     C     WRKTYP        OREQ      'OW1'
+     C     WRKTYP        OREQ      'OW2'
+     C     WRKTYP        OREQ      'PAY'
+     C                   EXSR      GETREL
+     C*
+     C     WRKTYP        WHENEQ    'CLT'
+     C                   MOVE      CT1205        CRCLTN
+     C                   MOVE      *BLANKS       WRKTYP
+     C                   EXSR      GETCLN
+     C*
+     C                   OTHER
+     C                   EXSR      GETREL
+     C*
+     C                   ENDSL
+     C*
+     C     RTN205        IFEQ      *ZEROS
+     C     AFM205        ANDNE     '*'
+     C     CRCLTP        ANDNE     'T'
+     C                   EXSR      GETADR
+     C                   ELSE
+     C                   CLEAR                   CLTA
+     C                   ENDIF
+     C*
+     C                   EXSR      FORMAT
+     C*
+     C     RTN205        IFNE      *ZEROS
+     C*
+     C     RTN205        IFEQ      '36'
+     C                   CLEAR                   CLTA
+     C                   MOVE      *BLANKS       FAD205
+     C                   ELSE
+     C                   CLEAR                   CLTM
+     C                   MOVE      *BLANKS       FNM205
+     C                   CLEAR                   CLTA
+     C                   MOVE      *BLANKS       FAD205
+     C                   ENDIF
+     C*
+     C                   ENDIF
+     C*
+     C                   RETURN
+     C/EJECT
+     C     GETREL        BEGSR
+     C*****************************************************************
+     C** GETREL - GET CLIENT RELATIONSHIP
+     C*****************************************************************
+     C*
+     C     KUSREL        CHAIN     CMSUSREL                           99
+     C     *IN99         IFEQ      *ON
+     C                   SELECT
+     C     WRKTYP        WHENEQ    'AH2'
+     C                   MOVE      'AH1'         WRKTYP
+     C     WRKTYP        WHENEQ    'OW2'
+     C                   MOVE      'OW1'         WRKTYP
+     C     WRKTYP        WHENEQ    'JNT'
+     C                   MOVE      'INS'         WRKTYP
+     C                   ENDSL
+     C     KUSREL        CHAIN     CMSUSREL                           99
+     C                   ENDIF
+     C*
+     C     *IN99         IFEQ      *OFF
+     C*
+     C     CRCLTP        IFEQ      'C'
+     C     CRCLTP        OREQ      'B'
+     C                   EXSR      GETCLN
+     C                   ELSE
+     C                   CLEAR                   CLTM
+     C                   ENDIF
+     C*
+     C                   ELSE
+     C*
+     C                   MOVE      '34'          RTN205
+     C*
+     C                   ENDIF
+     C*
+     C                   ENDSR
+     C/EJECT
+     C     GETCLN        BEGSR
+     C*****************************************************************
+     C** GETCLN - GET CLIENT RECORD
+     C*****************************************************************
+     C*
+     C                   CLEAR                   CLTM
+     C     CRCLTN        CHAIN     CMSCLNTM                           99
+     C*
+     C     *IN99         IFEQ      *ON
+     C                   SELECT
+     C     WRKTYP        WHENEQ    'INS'
+     C                   MOVE      '75'          RTN205
+     C     WRKTYP        WHENEQ    'OW1'
+     C     WRKTYP        OREQ      'OW2'
+     C                   MOVE      '76'          RTN205
+     C     WRKTYP        WHENEQ    'PAY'
+     C                   MOVE      '77'          RTN205
+     C                   OTHER
+     C                   MOVE      '33'          RTN205
+     C                   ENDSL
+     C                   ENDIF
+     C*
+     C                   ENDSR
+     C/EJECT
+     C     GETADR        BEGSR
+     C*****************************************************************
+     C** GETADR - GET CLIENT ADDRESS RECORD
+     C*****************************************************************
+     C*
+     C                   EXSR      SETDFT
+     C*
+     C     KCLNAD        SETGT     CMSCLNAD
+     C     KCLNA1        READPE    CMSCLNAD                               99
+     C     *IN99         IFEQ      *ON
+     C                   ADD       12            FRM205
+     C     KCLNAD        SETGT     CMSCLNAD
+     C     KCLNA1        READPE    CMSCLNAD                               99
+     C                   ENDIF
+     C*
+     C* IF ALL ELSE FAILS, LOOK FOR A DEFAULT ADDRESS
+     C     *IN99         IFEQ      *ON
+     C     CMCLTN        SETLL     CMSCLNAD                           99
+     C     *IN99         DOUEQ     *ON
+     C     CYDADD        OREQ      'Y'
+     C     CMCLTN        READE     CMSCLNAD                               99
+     C                   ENDDO
+     C                   ENDIF
+     C*
+     C* NO ADDRESS FOUND
+     C     *IN99         IFEQ      *ON
+     C                   MOVE      '36'          RTN205
+     C                   ENDIF
+     C*
+     C                   ENDSR
+     C/EJECT
+     C     SETDFT        BEGSR
+     C*****************************************************************
+     C** SETDFT - SET DEFAULTS FOR SEQUENCE AND DATE LOOKUPS
+     C*****************************************************************
+     C*
+     C                   SETOFF                                       99
+     C*
+     C                   SELECT
+     C*
+     C     SEQ205        WHENNE    *ZEROS
+     C                   Z-ADD     SEQ205        WRKSEQ
+     C*
+     C     CRASEQ        WHENNE    *ZEROS
+     C                   Z-ADD     CRASEQ        WRKSEQ
+     C*
+     C                   OTHER
+     C     CMCLTN        SETLL     CMSCLNAD                           99
+     C     *IN99         DOUEQ     *ON
+     C     CYDADD        OREQ      'Y'
+     C     CMCLTN        READE     CMSCLNAD                               99
+     C                   ENDDO
+     C                   Z-ADD     *ZEROS        WRKSEQ
+     C     *IN99         IFEQ      *OFF
+     C                   Z-ADD     CYASEQ        WRKSEQ
+     C                   ENDIF
+     C*
+     C                   ENDSL
+     C*
+     C     FRM205        IFEQ      *ZEROS
+     C                   Z-ADD     *MONTH        FRM205
+     C                   ENDIF
+     C*
+     C     FRD205        IFEQ      *ZEROS
+     C                   Z-ADD     *DAY          FRD205
+     C                   ENDIF
+     C*
+     C     XCORLD        IFNE      *ZEROS
+     C                   Z-ADD     FRM205        ADRMM
+     C                   Z-ADD     FRD205        ADRDD
+     C                   Z-ADD     *YEAR         ADRYY
+     C                   Z-ADD     ADRDAT        FROMDT
+     C                   Z-ADD     XCORLD        NBRDAY
+     C*
+     C                   CALL      'ADDDAYS'
+     C                   PARM                    FROMDT            8 0
+     C                   PARM                    NBRDAY            3 0
+     C                   PARM                    TODT              8 0
+     C                   PARM                    RC                2 0
+     C*
+     C     RC            IFEQ      *ZEROS
+     C                   Z-ADD     TODT          ADRDAT
+     C                   Z-ADD     ADRMM         FRM205
+     C                   Z-ADD     ADRDD         FRD205
+     C                   ENDIF
+     C*
+     C                   ENDIF
+     C*
+     C                   ENDSR
+     C/EJECT
+     C     FORMAT        BEGSR
+     C*****************************************************************
+     C** FORMAT - FORMAT NAME AND ADDRESS
+     C*****************************************************************
+     C*
+     C* FORMAT CLIENT ADDRESS
+     C     AFM205        IFNE      *BLANKS
+     C     AFM205        ANDNE     '*'
+     C     RTN205        ANDNE     '34'
+     C                   CLEAR                   PRM200
+     C                   MOVE      AFM205        CMA200
+     C                   MOVE      CYCNRY        CNR200
+     C                   MOVEL     CYCCIT        CTY200
+     C                   MOVE      CYCSTA        STA200
+     C                   MOVEL     CYCZIP        ZIP200
+     C                   CALL      'CMS200'
+     C                   PARM                    PRM200
+     C                   MOVEL(P)  ADR200        FAD205
+     C                   ENDIF
+     C*
+     C* FORMAT CLIENT NAME
+     C     NFM205        IFNE      *BLANKS
+     C     CMNAME        ANDNE     *BLANKS
+     C*
+     C                   MOVEL(P)  CMNAME        NAME
+     C     CMNCIN        IFEQ      'N'
+     C                   MOVE      NFM205        NAMFMT
+     C                   CALL      'NAMEFMT'
+     C                   PARM                    NAMPRM
+     C                   ENDIF
+     C*
+     C                   MOVEL(P)  NAME          FNM205
+     C*
+     C                   ENDIF
+     C*
+     C                   ENDSR
+     C/EJECT
+     C     INIT          BEGSR
+     C*****************************************************************
+     C** INIT - INITIALIZE ROUTINE...
+     C*****************************************************************
+     C*
+     C     *LIKE         DEFINE    CMP205        WRKCO
+     C     *LIKE         DEFINE    TYP205        WRKTYP
+     C     *LIKE         DEFINE    SEQ205        WRKSEQ
+     C*
+     C                   MOVE      *ZEROS        RTN205
+     C                   MOVE      TYP205        WRKTYP
+     C*
+     C* USE COMPANY CODE TO GET RELATIONSHIP RECORD??
+     C                   SELECT
+     C     TYP205        WHENEQ    'BNK'
+     C                   MOVE      *BLANKS       CMP205
+     C*
+     C     TYP205        WHENNE    'INS'
+     C     TYP205        ANDNE     'JNT'
+     C     TYP205        ANDNE     'OW1'
+     C     TYP205        ANDNE     'OW2'
+     C     TYP205        ANDNE     'PAY'
+     C     TYP205        ANDNE     'GRP'
+     C     TYP205        ANDNE     'AGT'
+     C     TYP205        ANDNE     'AH1'
+     C     TYP205        ANDNE     'AH2'
+     C     TYP205        ANDNE     'BEN'
+     C*
+     C     TYP205        CHAIN     CMSUSRTP                           90
+     C     *IN90         IFEQ      *OFF
+     C     CPCDEP        ANDEQ     'N'
+     C                   MOVE      *BLANKS       CMP205
+     C                   ENDIF
+     C*
+     C                   ENDSL
+     C*
+     C     AFM205        IFNE      '*'
+     C     CO200         ANDNE     '*ALL'
+     C                   MOVEL     '*ALL'        CO200
+     C                   MOVEL     'CMSDTA'      DTA200
+     C                   MOVE      'R'           ACT200
+     C                   MOVE      'N'           LCK200
+     C                   CALL      'LSP200'
+     C                   PARM                    LSP200
+     C                   PARM                    CMSDTA
+     C                   ENDIF
+     C*
+     C* FIND THE FIRST TYPE SPECIFIED TO BE A BENEFICIARY
+     C     TYP205        IFEQ      'BEN'
+     C                   EXSR      GETBEN
+     C                   ENDIF
+     C*
+     C                   ENDSR
+     C/EJECT
+     C     GETBEN        BEGSR
+     C*****************************************************************
+     C** GETGEN -  FIND THE FIRST BENEFICIARY DEFINED ON THE POLICY
+     C*****************************************************************
+     C*
+     C                   MOVE      'N'           SELECT            1
+     C*
+     C     *LOVAL        SETLL     CMSUSRTP
+     C                   READ      CMSUSRTP                               90
+     C*
+     C     *IN90         DOUEQ     *ON
+     C     SELECT        OREQ      'Y'
+     C*
+     C     CPUBEN        IFEQ      'Y'
+     C*
+     C* IF THIS RELATIONSHIP COMPANY DEPENDANT
+     C                   MOVE      CMP205        WRKCO
+     C     CPCDEP        IFEQ      'N'
+     C                   MOVE      *BLANKS       WRKCO
+     C                   ENDIF
+     C*
+     C     KUSRE1        CHAIN     CMSUSREL                           99
+     C     *IN99         IFEQ      *OFF
+     C                   MOVE      'Y'           SELECT
+     C                   ENDIF
+     C                   ENDIF
+     C*
+     C     SELECT        IFEQ      'Y'
+     C                   MOVE      CPRTYP        WRKTYP
+     C                   MOVE      CPRTYP        TYP205
+     C                   MOVE      WRKCO         CMP205
+     C                   ELSE
+     C                   READ      CMSUSRTP                               90
+     C                   ENDIF
+     C*
+     C                   ENDDO
+     C*
+     C                   ENDSR
