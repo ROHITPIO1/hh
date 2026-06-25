@@ -1,0 +1,2016 @@
+      *   N44169       04/04/06   15:13:43   ROTH         V4.4M11
+      *   C43335       12/28/05   09:00:00   DARNELL      V4.4M10
+      *   C42453       09/27/05   09:52:48   ROTH         V4.4M10
+      *   C41481       04/29/05   11:20:08   DARNELL      V4.4M10
+     F*****************************************************************
+     F*   PROPRIETARY RIGHTS NOTICE: ALL RIGHTS RESERVED. THIS       **
+     F*   MATERIAL CONTAINS THE VALUABLE PROPERTIES AND TRADE        **
+     F*   SECRETS OF GENELCO, INC. OF ST. LOUIS, MO. EMBODYING       **
+     F*   SUBSTANTIAL CREATIVE EFFORTS AND CONFIDENTIAL INFORMATION, **
+     F*   IDEAS, AND EXPRESSIONS, NO PART OF WHICH MAY BE REPRODUCED **
+     F*   OR TRANSMITTED IN ANY FORM OR BY ANY MEANS, ELECTRONIC,    **
+     F*   MECHANICAL, OR OTHERWISE, INCLUDING PHOTOCOPYING AND       **
+     F*   RECORDING OR IN CONNECTION WITH ANY INFORMATION STORAGE    **
+     F*   OR RETRIEVAL SYSTEM WITHOUT THE PERMISSION IN WRITING OF   **
+     F*   GENELCO, INC.                                              **
+     F*                                                              **
+     F*   COPYRIGHT NOTICE: COPYRIGHT 1982    GENELCO, INC.          **
+     F*****************************************************************
+     F** C R E A T I O N        **                                   **
+     F****************************                                   **
+     F**                                                             **
+     F**  PROGRAM NAME: COM504                                       **
+     F**                                                             **
+     F**  NARRATIVE: AGENT MASTER MAINTENANCE - FORMALLY COM500      **
+     F**                                                             **
+     F**                                                             **
+     F*****************************************************************
+     F** M A I N T E N A N C E  **                                   **
+     F****************************                                   **
+     F**                                                             **
+     F**  CHANGED BY:                                                **
+     F**  DATE:                                                      **
+     F**  NARRATIVE:                                                 **
+     F**                                                             **
+     *****************************************************************
+     ** M A I N T E N A N C E  **                                   **
+     ****************************                                   **
+     **                                                             **
+     **  Changed by: Mike Stricker                                  **
+     **  Date:       07/02/98                                       **
+     **  Narrative:  Add additional prompt F4 to Display Agent      **
+     **              messages for maintenance.    M01               **
+     **                                                             **
+     **              Above change was replaced with upgrade 4.4.11  **
+     **                                                             **
+     **  Changed by: Mike Stricker                                  **
+     **  Date:       08/13/03                                       **
+     **  Narrative:  Change the size to load from 900 to 100 to     **
+     **              reduce the time to load the subfile.   M02     **
+     **                                                             **
+     **              Above change was replaced with upgrade 4.4.11  **
+     **                                                             **
+     **  AFL - BKL 04/21/04 Mod's for 4.4.5 / 4.4.6 upgrade         **
+     **                                                             **
+     ***  CHANGED BY:  Brian Loghry                                   *
+     ***  DATE:        08/19/2004                                     *
+     ***  MOD MARKER:  M03                                            *
+     ***  NARRATIVE:   Load currency code for Agent Advance Limits.   *
+     ***               Load currency code for Agent Master.           *
+     **                                                             **
+     **              Above change was replaced with upgrade 4.4.11  **
+     **                                                             **
+     ***  CHANGED BY:  Kristi Neighbarger                             *
+     ***  DATE:        11/16/2005                                     *
+     ***  MOD MARKER:  M04    AS050276                                *
+     ***  NARRATIVE:   Added F6 function key to add Agent Number.     *
+     ***               Number will be automatically loaded from the   *
+     ***               DYFNDATA file.                                 *
+     **                                                             **
+     **              Above change was replaced with upgrade 4.4.11  **
+     **              DYF350 should support agent number.             **
+     **                                                             **
+     ***  CHANGED BY:  Kristi Neighbarger                             *
+     ***  DATE:        05/26/2006                                     *
+     ***  MOD MARKER:  M05    AS050110                                *
+     ***  NARRATIVE:   Made changes to the tracking system. Comments  *
+     ***               will now be in the MTRK sytem.                 *
+     **                                                             **
+     ***  CHANGED BY:  Kristi Neighbarger                             *
+     ***  DATE:        07/13/2006                                     *
+     ***  MOD MARKER:  M06    AS060176                                *
+     ***  NARRATIVE:   Added F22 function key to go to ViewStar.      *
+     ***                                                              *
+     **               Above change applied - rs01 for 4.4.11 upgrade *
+     **                                                              *
+     ***  CHANGED BY:  GB Evans                                       *
+     ***  DATE:        12/15/2006                                     *
+     ***  MOD MARKER:  M07    AS060369                                *
+     ***  NARRATIVE:   Added Contact Name to Scrn 500B.               *
+     **                                                             **
+     **              Above change was replaced with upgrade 4.4.11  **
+     **                                                             **
+    ***  CHANGED BY:  R. Gulbransen                                  *
+    ***  DATE......:  10/01/2007                                     *
+    ***  MOD MARKER:  bg01   AS07-0538                               *
+    ***  NARRATIVE.:  Changed to update agent counter immediately    *
+    ***               Changed verbage on display screen              *
+     **                                                             **
+     **              Above change was replaced with upgrade 4.4.11  **
+     **              Reference to DYFNDATA controlled by DYF350.    **
+     **              Further testing to be made.                    **
+     **                                                             **
+    ***  CHANGED BY:  R. Gulbransen                                  *
+    ***  DATE......:  11/16/2007                                     *
+    ***  MOD MARKER:  bg02   AS07-0245                               *
+    ***  NARRATIVE.:  Provide an additional user field on the        *
+    ***               Agent Master                                   *
+     **                                                             **
+     **              Parts of the above change was replaced with    **
+     **              adds to COMCOHST in the  ew COM502/506 - part  **
+     **              of upgrade 4.4.11. RS01                        **
+     **                                                             **
+    ***  CHANGED BY:  Rick Roasa                                     *
+    ***  DATE......:  09/04/2008                                     *
+    ***  MOD MARKER:  rr01   AS08-0566                               *
+    ***  NARRATIVE.:  modify to add security for the 'Advance        *
+    ***               Commission', 'Percent of Advance' and the      *
+    ***               'Advance Transaction Status' fields in         *
+    ***               COM500C3 and to MMXADV in COM500S3             *
+    ***                                                              *
+    ***               Above chang moved to COM507 - new upgrade with *
+    ***               4.4.11.                                        *
+    ***                                                              *
+    **  PROJECT #.....:  AS08-0466                                  *
+    **  CHANGED BY....:  bg03                                       *
+    **  CHANGED DATE..:  09/24/2008                                 *
+    **  NARRATIVE.....:  Add a fix for display screen               *
+    **                                                              *
+    ***                  ABOVE BG03 WAS PUT IN COM506                *
+    **                                                              *
+    ***  Changed by:    Brian Loghry                                 *
+    ***  Date Changed:  12/19/2008                                   *
+    ***  Modification:  AS080693 M08                                 *
+    ***  Description:   Add processing to create Agent PAL Letter,   *
+    ***                 Pending Approval.                            *
+    ***                                                              *
+    **                                                              *
+    **  PROJECT #.....:  AS07-0664                                  *
+    **  CHANGED BY....:  rr02                                       *
+    **  CHANGED DATE..:  01/09/2009
+    **  NARRATIVE.....:  Add the agent level to the dspf
+    **                                                              *
+    **  PROJECT #.....:  AS07-0664                                  *
+    **  CHANGED BY....:  Robert Szoke                               *
+    **  CHANGED DATE..:  01/27/2009 M09                             *
+    **  NARRATIVE.....:  Agent number on add used from AGTN504 to   *
+    **                   MAGTNO and agent retrieval with level      *
+    **                   after name/addr (CMS510) and add'l fields  *
+    **                   (DYF200)                                   *
+     **                   Added F6 AGT MSG Option for agent tracking *
+    **                   *INKK was changed to *INKL for proper      *
+     **                   cancel F12.                                *
+    **
+     ***  Changed by:    Brian Loghry
+     ***  Date Changed:  12/19/2008
+     ***  Modification:  AS080693 M08
+     ***  Description:   Add processing to create Agent PAL Letter,
+     ***                 Pending Approval.
+     ***  Date Changed:  01/21/2009
+     ***  Modification:  AS080693 (Part 2)  M10
+     ***  Description:   Add processing to create Agent Welcome Letter.
+    ***
+    **  PROJECT #.....:  AS08-0460
+    **  CHANGED BY....:  bg04
+    **  CHANGED DATE..:  12/31/2008
+    **  NARRATIVE.....:  Change date comparison for Agent Guarantor
+    ***
+    **  PROJECT #.....:  AS07-0664                                  *
+    **  CHANGED BY....:  Robert Szoke                               *
+    **  CHANGED DATE..:  02/23/2009 M11                             *
+    **  NARRATIVE.....:  AGT Query / path for LFTRKMST * out        *
+     **                   Agent number allowed on user add           *
+    ***
+    **  PROJECT #.....:  AS07-0664                                  *
+    **  CHANGED BY....:  Rick Roasa                                 *
+    **  CHANGED DATE..:  03/11/2009 M12                             *
+    **  NARRATIVE.....:  modified to pass COM500 in place of COM504 *
+     **                   for the application name                   *
+    ***
+    **  PROJECT #.....:  AS07-0664                                  *
+    **  CHANGED BY....:  Robert Szoke                               *
+    **  CHANGED DATE..:  03/17/2009 M13                             *
+    **  NARRATIVE.....:  modified to use COM500A to access CMD 16   *
+     **                   Name / Address. Agent number is required   *
+     **                   on COM504A to cmd key forward. adjusted    *
+    **                   initial agent number display due to M11    *
+    ***
+    **  PROJECT #.....:  AS09-0335                                  *
+    **  CHANGED BY....:  Bob Gulbransen                             *
+    **  CHANGED DATE..:  03/03/2010 bg05                            *
+    **  NARRATIVE.....:  Added update to PWF001 to support Agent    *
+     **                   Licensing through Sircon.                  *
+     **                                                              *
+     *****************************************************************
+     F*****************************************************************
+     F/EJECT
+     FCOMAGTM   UF A E           K DISK    COMMIT
+     FLFCOMADV  IF   E           K DISK    COMMIT
+ m05 FAFTRKCMM  IF   E           K DISK
+  |  FAFTRKCOD  IF   E           K DISK
+ m05 FAFTRKMST  IF   E           K DISK
+     FLFCOMEDT  IF   E           K DISK    COMMIT
+     FLFCURNC   IF   E           K DISK    COMMIT
+     FLFCMSAAGT UF   E           K DISK    COMMIT
+     FLFCMSTAGT UF   E           K DISK    COMMIT
+     FLFAPRAGT  IF   E           K DISK    COMMIT
+     FCOMCOHST  UF   E           K DISK    COMMIT
+     FCOMAGTBL  UF   E           K DISK    COMMIT
+     FCOMALIC   UF   E           K DISK    COMMIT
+     FCOMAGTL   UF   E           K DISK    COMMIT
+     FCMSUSREL  IF   E           K DISK    COMMIT
+     F                                     RENAME(RUSREL:RUSRLX)
+     FLFCMSREL  IF   E           K DISK    COMMIT
+M04  FDYFNDATA  UF A E           K DISK
+     FCOM504    CF   E             WORKSTN INFDS(DATA)
+bg05 *  Sircon file by Co and Agent
+bg05 FPWF001L02 UF   E           K Disk    Prefix(S_)
+     F/EJECT
+     F*****************************************************************
+     F*                      ARRAYS AND TABLES
+     F*****************************************************************
+     D NAME            S              1    DIM(30)
+     D RLT1            S              3    DIM(10)
+     D CLT1            S             10    DIM(10)
+m05  D TRKMSG          S              1
+     D/EJECT
+     D*****************************************************************
+     D*                       DATA STRUCTURES
+     D*****************************************************************
+     D PRM504        E DS                  EXTNAME(PCOM504)
+     D COM985        E DS                  EXTNAME(PCOM985)
+     D SECPRM        E DS                  EXTNAME(PLSPCHKSC)
+     D COMDTA        E DS                  EXTNAME(COMDTA)
+     D USRDTA        E DS                  EXTNAME(USRDTA)
+     D WEBDTA        E DS                  EXTNAME(WEBDTA)
+     D PRM530        E DS                  EXTNAME(PCMS530)
+     D AGTDS         E DS                  EXTNAME(COMAGTM)
+     D U1500         E DS                  EXTNAME(PCOM500U1)
+     D STAPRM        E DS                  EXTNAME(PSTATECHK)
+     D PDF186        E DS                  EXTNAME(PPDF186)
+     D PRM205        E DS                  EXTNAME(PCMS205)
+     D PRM510        E DS                  EXTNAME(PCMS510)
+     D CLTA          E DS                  EXTNAME(CMSCLNAD)
+     D CLTM          E DS                  EXTNAME(CMSCLNTM)
+     D PRM910        E DS                  EXTNAME(PLSP910)
+     D PRM100        E DS                  EXTNAME(PCMS100)
+     D PAPR550       E DS                  EXTNAME(PAPR550)
+     D LSP200        E DS                  EXTNAME(PLSP200)
+     D LSPCO         E DS          1024    EXTNAME(LSPCOMST)
+     D PRMDAT        E DS                  EXTNAME(PDATEFMT)
+     D PRM001        E DS                  EXTNAME(PCUR001)
+     D PDYF200       E DS                  EXTNAME(PDYF200)
+     D DYF350        E DS                  EXTNAME(PDYF350)
+     D DYF360        E DS                  EXTNAME(PDYF360)
+     D PRM101        E DS                  EXTNAME(PWEB101)
+bg02 D DYF300        E DS                  ExtName(PDYF300)
+bg02 D DSUSER        E DS                  ExtName(dyffldds)
+bg05 D                                     Occurs(99)
+bg05 D OldRecord       DS
+bg05 D OldAMLDte                           Like(S_AMLEXDATE)
+bg05 D OldRole                             Like(S_PRODROL)
+bg05 D OldAgreemn                          Like(S_AGREEMNT)
+bg05 D OldParAgmt                          Like(S_ParentAgmt)
+bg05 D NewRecord       DS
+bg05 D AMLDte                              Like(S_AMLEXDATE)
+bg05 D Role                                Like(S_PRODROL)
+bg05 D Agreemn                             Like(S_AGREEMNT)
+bg05 D ParAgmt                             Like(S_ParentAgmt)
+ rr02D agtnum          S             11a   Inz
+ rr02D file2           S             10a   Inz('COMAGTM')
+ rr02D fld2            S             10a   Inz('CNTNAM')
+M04  D DYVALU          S             25  0
+M04  D FILE            S             10    inz('LSPCOMST  ')
+M04  D FIELD           S             10    inz('NAGTNO    ')
+     D PLSSEQ        E DS                  EXTNAME(PGETSEQ)
+     D
+     D*****************************************************************
+     D** PROGRAM DESCRIBED DATA STRUCTURES
+     D*****************************************************************
+     D                 DS
+     D  TRMDXX                 1      8  0
+     D  MTRMYX                 1      4  0
+     D  MTRMMX                 5      6  0
+     D  MTRMDX                 7      8  0
+     D
+     D EDTPRM          DS
+     D  EDTDT                  1      8  0
+     D  EDTMO                  1      2  0
+     D  EDTDA                  3      4  0
+     D  EDTYR                  5      8  0
+     D  EDTFMT                 9      9
+     D  EDTRET                10     11
+     D*
+     D DATA            DS
+     D  FNCKEY               369    369
+     D  ROWCOL               370    371B 0
+     D HLDREC          DS          1024
+     D*
+     D UPDREC          DS          1024
+     D*
+     D*****************************************************************
+     D** PROGRAM DESCRIBED VARIABLES
+     D*****************************************************************
+     D MSGID           S              7    INZ(*BLANKS)
+     D MSGDTA          S            256    INZ(*BLANKS)
+     D LWUPDT          S              1A   INZ('N')
+     D TERMINATED      S              1A
+     D DONE            S              1A
+     D SVAGTNO         S                   LIKE(MAGTNO)
+m05  D AGNTN           S             10
+M08  D ApptFlag        S              1
+M08  D ApptFlagB4      S              1
+M08  D ApptFlagAfter   S              1
+M08
+     D PGMSGQ          S             10    INZ('COM504    ')
+     D BPAGES          S              3s 0 INZ(2)
+     D DYFSEQ          S                   LIKE(SKY1350)
+     D*****************************************************************
+     D** PROGRAM CONSTANTS
+     D*****************************************************************
+     D YES             C                   CONST('Y')
+     D NO              C                   CONST('N')
+     I/EJECT
+     C*****************************************************************
+     C*
+     C                   EXSR      INIT
+     C*
+     C     SVERRF        IFNE      Yes
+     C                   EXSR      AGTREC
+     C                   COMMIT
+     C*
+     C                   IF        LWUPDT = 'Y'
+     C                   EVAL      LWUPDT = 'N'
+     C                   EXSR      LIFEWEB
+     C                   ENDIF
+     C*
+     C                   ENDIF
+     C*
+     C                   CALL      'RCLRSC'
+     C                   SETON                                        LR
+
+     C     AGTREC        BEGSR
+     C*****************************************************************
+     C* AGTREC - SELECT AGENT RECORD
+     C*****************************************************************
+     C*
+     C                   Z-ADD     1             CURPAG
+     C*
+     C* CHECK USER DEFINED FIELDS FOR DISPLAY
+     C                   EXSR      CHKUSR
+     C*
+     C                   SETOFF                                       111213
+     C*
+     C                   SELECT
+     C* Inquiry
+     C                   WHEN      PMDE504 = 'INQUIRY'
+     C                   EXSR      DSPAGT
+     C
+     C* Update
+     C                   WHEN      PMDE504 = 'UPDATE '
+     C                   EXSR      CHGAGT
+     C
+     C* Add
+M11  C                   WHEN      PMDE504 = 'ADDS   '
+M11  C                             OR PMDE504 = 'ADDU   '
+     C                   EXSR      ADDAGT
+     C
+     C* Delete
+     C                   WHEN      PMDE504 = 'DELETE '
+     C                   EXSR      DLTAGT
+     C*
+     C                   ENDSL
+     C
+     C*
+     C                   ENDSR
+     C*****************************************************************
+     C* DSPAGT - Display existing agent for inquiry
+     C*****************************************************************
+     C/EJECT
+     C     DSPAGT        BEGSR
+     C*
+     C* GET AGENT NAME
+     C                   CLEAR                   PRM205
+     C                   MOVEL     'AGT'         TYP205
+     C                   MOVEL     '*'           AFM205
+m11  C                   MOVE      AGTN504       MAGTNO
+     C                   EXSR      MVENAM
+     C
+     C     KMAGTM        CHAIN(N)  COMAGTM                            99
+     C                   MOVEL     AGTDS         HLDREC
+     C                   EVAL      *IN11 = *ON
+     C                   EXSR      FMTDTE
+     C*
+     C                   EXSR      DSPSCR
+     C
+     C                   ENDSR
+     C
+     C*****************************************************************
+     C* CHGAGT - Display existing agent for update
+     C*****************************************************************
+     C/EJECT
+     C     CHGAGT        BEGSR
+     C*
+     C* GET AGENT NAME
+     C                   CLEAR                   PRM205
+     C                   MOVEL     'AGT'         TYP205
+     C                   MOVEL     '*'           AFM205
+m11  C                   MOVE      AGTN504       MAGTNO
+     C                   EXSR      MVENAM
+     C
+     C     KMAGTM        CHAIN(N)  COMAGTM                            99
+     C                   MOVEL     AGTDS         HLDREC
+     C                   EVAL      *IN12 = *ON
+     C                   EXSR      FMTDTE
+     C*
+     C* Check if terminated
+     C*
+     C     MTRMYR        IFEQ      *Zero
+     C                   MOVE      NO            TERMINATED
+     C                   ELSE
+     C                   MOVE      YES           TERMINATED
+     C                   ENDIF
+     C*
+     C                   EXSR      DSPSCR
+     C
+     C                   ENDSR
+     C*
+     C/EJECT
+     C*****************************************************************
+     C* ADDAGT - ADD AGENT
+     C*****************************************************************
+     C     ADDAGT        BEGSR
+     C*
+     C*
+     C* INITIALIZE AGENT FIELDS
+     C                   EXSR      INZAGT
+     C*  Display Sceen
+     C                   EXSR      DSPSCR
+     C
+     C* IF ADD ABORTED DELETE ANY CLIENT RELEATION RECORDS ENTERED
+     C     *INKC         IFEQ      *ON
+M09  C     *INKL         OREQ      *ON
+     C                   CLEAR                   PRM530
+     C                   MOVEL     MAGTNO        POL530
+     C                   MOVE      '6'           ENT530
+     C                   MOVE      'A'           STS530
+     C                   MOVEL     'DELETE '     MOD530
+     C                   CALL      'CMS530'
+     C                   PARM                    PRM530
+     C                   PARM                    RLT1
+     C                   PARM                    CLT1
+     C*
+     C* DELETE ANY LEFT OVER DYNAMIC USER FIELDS WITH BLANK KEY
+     C*
+     C                   CLEAR                   DYF360
+     C                   EVAL      SRC360 = 'COMAGTM '
+     C                   EVAL      KY1360 = DYFSEQ
+     C*
+     C                   CALL      'DYF360'
+     C                   PARM                    DYF360
+     C
+     C                   ENDIF
+     C*
+     C                   ENDSR
+     C*
+     C     DLTAGT        BEGSR
+     C*****************************************************************
+     C* DLTAGT - DELETE AGENT
+     C*****************************************************************
+     C*
+     C* Delete Transaction Authorization Relationships for the Agent.
+     C* CMSAUREL file
+     C                   EVAL      *IN99 = *OFF
+     C                   DOU       *IN99 = *ON
+     C     KMAGTM        DELETE    RAUREL                             99
+     C                   ENDDO
+     C*
+     C* Delete Transaction Authorizations for the Agent.
+     C* CMSTRAUT file
+     C                   EVAL      *IN99 = *OFF
+     C                   DOU       *IN99 = *ON
+     C     KMAGTM        DELETE    RTRAUT                             99
+     C                   ENDDO
+     C*
+     C* Delete Agent Reporting Hierarchy for the Agent.
+     C* APRHNODE file
+     C     KMAGTM        SETLL     LFAPRAGT
+     C     KMAGTM        READE     LFAPRAGT
+     C                   DOW       NOT %EOF(LFAPRAGT)
+     C                   CLEAR                   PAPR550
+     C                   EVAL      HSEQ550 = RHHSEQ
+     C                   EVAL      CHNL550 = RHCHNL
+     C                   CALL      'APR550'
+     C                   PARM                    PAPR550
+     C     KMAGTM        READE     LFAPRAGT
+     C                   ENDDO
+     C*
+     C* Delete Balances
+     C                   MOVE      *OFF          *IN99
+     C     *IN99         DOUEQ     *ON
+     C     KMAGTM        DELETE    RAGTBL                             99
+     C                   ENDDO
+     C*
+M11  C                   EVAL      CRCTL1 = AGTN504
+     C     KUSREL        CHAIN     CMSUSREL                           99
+     C     *IN99         IFEQ      *OFF
+     C                   EVAL      SVCLTN = CRCLTN
+     C                   ENDIF
+     C*
+     C* Delete Agent Master
+     C     KMAGTM        DELETE    RAGTM                              99
+     C                   EVAL      DLT101 = 'Y'
+     C*
+     C* Delete Commission History
+     C     KMAGTM        CHAIN     COMCOHST                           99
+     C     *IN99         DOWEQ     *OFF
+     C                   DELETE    RCOHST
+     C*
+     C* DELETE DYNAMIC USER FIELDS
+     C                   CLEAR                   DYF360
+     C                   MOVEL     'COMCOHST'    SRC360
+     C                   MOVEL     CXAGTN        KY1360
+     C                   MOVEL     CXSITC        KY2360
+     C                   MOVEL     CXEFFY        KY3360
+     C                   MOVEL     CXEFFM        KY4360
+     C                   MOVEL     CXEFFD        KY5360
+     C                   CALL      'DYF360'
+     C                   PARM                    DYF360
+     C*
+     C     KMAGTM        READE     COMCOHST                               99
+     C                   ENDDO
+     C*
+     C* Delete Licencing
+     C                   MOVE      *OFF          *IN99
+     C     KMAGTM        CHAIN     COMALIC                            99
+     C     *IN99         DOWEQ     *OFF
+     C                   DELETE    RALIC
+     C     KMAGTM        READE     COMALIC                                99
+     C                   ENDDO
+     C*
+     C* Delete Advance Limits
+     C                   MOVE      *OFF          *IN99
+     C     *IN99         DOUEQ     *ON
+     C     KMAGTM        DELETE    RAGTL                              99
+     C                   ENDDO
+     C*
+     C                   CLEAR                   PRM530
+M11  C                   MOVEL     AGTN504       POL530
+     C                   MOVE      '6'           ENT530
+     C                   MOVE      'A'           STS530
+     C                   MOVEL     'DELETE '     MOD530
+     C                   CALL      'CMS530'
+     C                   PARM                    PRM530
+     C                   PARM                    RLT1
+     C                   PARM                    CLT1
+     C*
+     C* DELETE DYNAMIC USER FIELDS
+     C                   CLEAR                   DYF360
+     C                   MOVEL     'COMAGTM'     SRC360
+M11  C                   MOVEL     AGTN504       KY1360
+     C                   CALL      'DYF360'
+     C                   PARM                    DYF360
+     C*
+     C                   EXSR      CHKREL
+     C*
+     C                   EXSR      LIFEWEB
+     C*
+     C                   ENDSR
+     C/EJECT
+     C*****************************************************************
+     C* DSPSCR - DISPLAY SCREEN
+     C*****************************************************************
+     C     DSPSCR        BEGSR
+     C*
+     C                   EXSR      SETIND
+     C*
+     C                   EVAL      DONE = *OFF
+     C                   DOU       DONE = *ON
+     C*
+ M05 C                   EVAL      TRKMSG = 'N'
+  |  C                   EVAL      AGNTN = MAGTNO
+  |  C*
+  |  C     TRKKY2        CHAIN     AFTRKMST                           90
+  |  C     *IN90         DOWEQ     *OFF
+  |  C*
+  |  c                   if        TMCMP1 = *zero
+  |  C*
+  |  C     TRKKEY        CHAIN     AFTRKCOD
+  |  C                   IF        %FOUND(AFTRKCOD)
+  |  C                   IF        TCDSPM = 'Y'
+  |  C                   EVAL      TRKMSG = 'Y'
+  |  C                   ENDIF
+  |  C                   ENDIF
+  |  C*
+  |  C                   ENDIF
+  |  C*
+  |  C     TRKKY2        READE     AFTRKMST                               90
+  |  C                   ENDDO
+  |  C*
+  |  C                   IF        TRKMSG = 'Y'
+  |  C                   EVAL      *IN65 = *ON
+  |  C                   ELSE
+  |  C                   EVAL      *IN65 = *OFF
+  |  C                   ENDIF
+  |  C*
+  |  C                   EVAL      TRKMSG = 'N'
+  |  C     TRKKY2        SETLL     AFTRKCMM
+  |  C     TRKKY2        READE     AFTRKCMM
+  |  C                   DOW       NOT %EOF(AFTRKCMM)
+  |  C                   IF        TCFUPD <> *ZERO
+  |  C*
+  |  c     trkky3        chain     aftrkmst
+  |  c                   if        %found(aftrkmst)
+  |  c                   if        TMCMP1 = *zero
+  |  C*
+  |  C                   EVAL      TRKMSG = 'Y'
+  |  C*
+  |  C                   ENDIF
+  |  C                   ENDIF
+  |  C*
+  |  C                   ENDIF
+  |  C     TRKKY2        READE     AFTRKCMM
+  |  C                   ENDDO
+  |  C*
+  |  C                   IF        TRKMSG = 'Y'
+  |  C                   EVAL      *IN66 = *ON
+  |  C                   ELSE
+  |  C                   EVAL      *IN66 = *OFF
+ m05 C                   ENDIF
+     C* Display Screen
+     C                   SELECT
+     C
+     C     CURPAG        WHENEQ    1
+     C                   WRITE     SFLERRC
+     C                   EXFMT     COM504A
+      *
+M11  C                   IF        *INKC = *ON
+M11  C                             OR *INKL = *ON
+M11  C                   EVAL      MAGTNO = *BLANKS
+M11  C                   EVAL      AGTN504 = *BLANKS
+M11  C                   ENDIF
+      *
+m13  C                   If        agtn5041 <> *blanks
+m13  C                   eval      magtno = agtn5041
+m13  C                   else
+m13  C                   eval      magtno = agtn504
+m13  C                   endif
+      *
+     C     CURPAG        WHENEQ    2
+     C                   WRITE     SFLERRC
+     C                   EXFMT     COM504B
+      *
+M11  C                   IF        *INKC = *ON
+M11  C                             OR *INKL = *ON
+M11  C                   EVAL      MAGTNO = *BLANKS
+M11  C                   EVAL      AGTN504 = *BLANKS
+M11  C                   ENDIF
+     C
+m11  C                   If        agtn5041 <> *blanks
+m11  C                   eval      magtno = agtn5041
+m11  C                   else
+m09  C                   eval      magtno = agtn504
+m11  C                   endif
+     C                   ENDSL
+     C* Clear Errors
+     C                   EXSR      SETIND
+     C*
+     C* Handle input
+     C                   SELECT
+     C
+     C* Last Page
+     C     *IN07         WHENEQ    *ON
+     C     CURPAG        IFEQ      1
+     C                   MOVE      'LSP9012'     MSGID
+     C                   CLEAR                   MSGDTA
+     C                   EXSR      SNDMSG
+     C                   ELSE
+     C                   SUB       1             CURPAG
+     C                   ENDIF
+     C* Next Page
+     C     *IN08         WHENEQ    *ON
+     C     CURPAG        IFEQ      BPAGES
+     C                   MOVE      'LSP9011'     MSGID
+     C                   CLEAR                   MSGDTA
+     C                   EXSR      SNDMSG
+     C                   ELSE
+     C                   ADD       1             CURPAG            3 0
+     C                   ENDIF
+     C*
+     C* F3 Exit or F12 Cancel
+     C     *INKC         WHENEQ    *ON
+M09  C     *INKL         OREQ      *ON
+     C                   EVAL      DONE = *ON
+     C
+     C* Prompt Key
+     C     *INKD         WHENEQ    *ON
+     C*
+     C                   SELECT
+     C
+     C     FLD           WHENEQ    'MDOMST'
+     C     FLD           OREQ      'MDOMCN'
+     C                   MOVE      'S'           KEY186
+     C                   Z-ADD     3             ROW186
+     C                   Z-ADD     24            COL186
+     C*
+     C                   CALL      'PDF186'
+     C                   PARM                    PDF186
+     C*
+     C     RC186         IFEQ      *ZEROS
+     C                   MOVEL     VAL186        MDOMST
+     C                   MOVEL     CNR186        MDOMCN
+     C                   ENDIF
+     C*
+     C*
+     C     FLD           WHENEQ    'MDCRCD'
+     C                   CALL      'CUR001'
+     C                   PARM                    PRM001
+     C*
+     C     CRC001        IFNE      *BLANK
+     C                   MOVE      CRC001        MDCRCD
+     C                   ENDIF
+     C*
+     C                   OTHER
+     C                   MOVE      'E000507'     MSGID
+     C                   CLEAR                   MSGDTA
+     C                   EXSR      SNDMSG
+     C                   ENDSL
+M09  C* Agent Tracking Msg
+M09  C     *INKF         WHENEQ    *ON
+M09  C                   EXSR      MTKFLD
+      *
+     C*
+     C* Additional Fields
+     C     *INKR         WHENEQ    *ON
+     C                   EXSR      ADDFLD
+      *
+     C*
+     C* AGENT NAME/ADDRESS
+     C     *INKQ         WHENEQ    *ON
+M11  C                   IF        PMDE504 = 'ADDS   '
+M11  C                             or PMDE504 = 'ADDU   '
+     C                   EXSR      EDTADD
+     C                   ENDIF
+     C                   IF        ERROR=NO
+     C                   EXSR      CMS510
+     C                   ENDIF
+     C
+     C     *INKM         WHENEQ    *ON
+M11  C                   IF        PMDE504 = 'ADDS   '
+M11  C                             or PMDE504 = 'ADDU   '
+     C                   EXSR      EDTADD
+     C                   ENDIF
+     C                   IF        ERROR=NO
+     C                   EXSR      ALPHA
+     C                   ENDIF
+     C
+ M06 C* VIEWSTAR
+rs01 C     *INKW         WHENEQ    *ON
+ M06 C                   CALL      'AFL002CL'
+ M06 C                   PARM                    MAGTNO
+     C
+     C* If Inquiry, we are done
+     C     PMDE504       WHENEQ    'INQUIRY'
+     C                   EVAL      DONE = *ON
+     C
+     C* Edit and update
+     C                   OTHER
+M11  C                   IF        PMDE504 = 'ADDS   '
+M11  C                             or PMDE504 = 'ADDU   '
+     C                   EXSR      EDTADD
+     C                   ENDIF
+     C
+     C                   EXSR      EDITB
+     C*
+     C                   IF        ERROR = No
+M11  C                   IF        PMDE504 = 'ADDS   '
+M11  C                             or PMDE504 = 'ADDU   '
+M11  C*replaced at orig. Update    RNDATA
+     C                   EXSR      NEWAGT
+     C                   ELSE
+     C                   EXSR      UPDAGT
+     C                   ENDIF
+     C                   EVAL      DONE = *ON
+     C                   ENDIF
+     C
+     C                   ENDSL
+     C                   ENDDO
+     C*
+     C                   ENDSR
+     C/EJECT
+     C*****************************************************************
+ 09  C* DYFNDA - Agent number and level retrieval
+     C*****************************************************************
+     C     DYFNDA        BEGSR
+     C*
+ rr02C*
+ rr02C* get the agent level from DYFNDATA to be displayed on screen
+ rr02C*
+ M11 C                   if        agtn504       > *blank
+ rr02C                   eval      agtlvl        = *blank
+ m11 C                   eval      agtnum        = agtn5041
+ rr02C     dypky2        chain(N)  dyfndata
+ rr02C                   if        %found(dyfndata)
+ rr02C                   eval      agtlvl        = dypval
+ rr02C                   endif
+ rr02C                   endif
+ rr02C*
+     C* GET AGENT NAME
+     C                   CLEAR                   PRM205
+     C                   MOVEL     'AGT'         TYP205
+     C                   MOVEL     '*'           AFM205
+M11  C                   IF        AGTN504 <> *blanks
+M11  C                   MOVE      AGTN504       MAGTNO
+M11  C                   ENDIF
+     C                   EXSR      MVENAM
+     C*
+     C                   ENDSR
+     C/EJECT
+     C*****************************************************************
+     C* EDTADD - EDIT MAGTNO FOR ADD
+     C*****************************************************************
+     C     EDTADD        BEGSR
+     C*
+     C                   IF        MAGTNO = *BLANKS
+     C                   MOVE      'E000552'     MSGID
+     C                   CLEAR                   MSGDTA
+     C                   EXSR      SNDMSG
+     C                   ENDIF
+     C
+     C                   IF        MAGTNO = '999999999'
+     C                   MOVE      'E000572'     MSGID
+     C                   CLEAR                   MSGDTA
+     C                   EXSR      SNDMSG
+     C                   ENDIF
+     C
+     C                   MOVEL     MAGTNO        AGT910
+     C                   EXSR      FMTAGT
+     C*
+     C     RC910         IFNE      *ZERO
+     C                   MOVE      'E000576'     MSGID
+     C                   EXSR      SNDMSG
+     C                   ELSE
+     C                   MOVEL     AGT910        MAGTNO
+     C                   END
+     C
+     C     KMAGTNO       CHAIN     COMAGTM
+     C                   IF        %FOUND
+     C                   MOVE      'E000623'     MSGID
+     C                   CLEAR                   MSGDTA
+     C                   EXSR      SNDMSG
+     C                   ENDIF
+     C
+     C                   ENDSR
+      *
+      *
+     C/EJECT
+     C     EDITB         BEGSR
+     C*****************************************************************
+     C* EDITB - EDIT AGENT
+     C*****************************************************************
+     C*
+      *
+      * EDIT DISBURSEMENT CURRENCY CODE
+      *
+     C     MDCRCD        CHAIN     LFCURNC                            99
+     C     *IN99         IFEQ      *ON
+     C                   MOVE      'E000581'     MSGID
+     C                   CLEAR                   MSGDTA
+     C                   EXSR      SNDMSG
+     C                   MOVE      *ON           *IN32
+     C                   ENDIF
+     C*
+      * EDIT HIRE DATE
+      *
+     C                   CLEAR                   PRMDAT
+     C                   MOVE      DHIRDT        INDTE
+     C                   EXSR      DTEFMT
+      *
+     C     RTNCD         IFNE      *ZEROS
+     C     DHIRDT        OREQ      *BLANKS
+     C                   MOVE      'E000553'     MSGID
+     C                   EXSR      SNDMSG
+     C                   SETON                                        31
+DB01 C*
+     C                   ELSE
+     C                   MOVE      OUTMON        EDTMO
+     C                   MOVE      OUTDAY        EDTDA
+     C                   MOVE      OUTYR         EDTYR
+     C                   CALL      'VALIDATE'
+     C                   PARM                    EDTPRM
+     C     EDTRET        IFNE      '00'
+     C     EDTYR         ORLT      1900
+     C     EDTDT         OREQ      0
+     C                   MOVE      'E000553'     MSGID
+     C                   EXSR      SNDMSG
+     C                   SETON                                        31
+     C                   ELSE
+     C                   MOVE      OUTMON        MHIRMO
+     C                   MOVE      OUTDAY        MHIRDA
+     C                   MOVE      OUTYR         MHIRYR
+     C                   MOVE      OUTDTE        DHIRDT
+     C                   ENDIF
+     C                   ENDIF
+     C*
+     C*
+      * EDIT TERMINATION DATE
+      *
+     C                   CLEAR                   PRMDAT
+     C                   MOVE      DTRMDT        INDTE
+     C                   EXSR      DTEFMT
+      *
+     C     RTNCD         IFEQ      *ZEROS
+     C     DTRMDT        ANDNE     *BLANKS
+     C                   MOVE      OUTMON        EDTMO
+     C                   MOVE      OUTDAY        EDTDA
+     C                   MOVE      OUTYR         EDTYR
+     C                   CALL      'VALIDATE'
+     C                   PARM                    EDTPRM
+     C     EDTRET        IFNE      '00'
+     C     EDTYR         ORLT      1900
+     C     EDTDT         ANDNE     0
+     C                   MOVE      'E000554'     MSGID
+     C                   EXSR      SNDMSG
+     C                   SETON                                        33
+     C                   ENDIF
+     C*
+     C                   MOVE      OUTMON        MTRMMO
+     C                   MOVE      OUTDAY        MTRMDA
+     C                   MOVE      OUTYR         MTRMYR
+     C                   MOVE      OUTMON        MTRMMX
+     C                   MOVE      OUTDAY        MTRMDX
+     C                   MOVE      OUTYR         MTRMYX
+     C                   MOVE      OUTDTE        DTRMDT
+     C                   Z-ADD     EDTDT         MTRMDT
+     C     MTRMDT        IFNE      0
+     C     MTRMYR        IFLT      MHIRYR
+     C     MTRMYR        OREQ      MHIRYR
+     C     MTRMMO        ANDLT     MHIRMO
+     C     MTRMYR        OREQ      MHIRYR
+     C     MTRMMO        ANDEQ     MHIRMO
+     C     MTRMDA        ANDLT     MHIRDA
+     C                   MOVE      'E000567'     MSGID
+     C                   EXSR      SNDMSG
+     C                   SETON                                        33
+     C                   ENDIF
+     C                   ENDIF
+     C                   ENDIF
+     C*
+     C     DTRMDT        IFNE      *BLANKS
+     C     MCVEST        ANDEQ     ' '
+     C                   MOVE      'Y'           ERROR
+     C                   MOVE      'E000555'     MSGID
+     C                   EXSR      SNDMSG
+     C                   SETON                                        35
+     C                   END
+     C*
+     C     MTRMDT        IFEQ      0
+     C     MCVEST        ANDNE     ' '
+     C                   MOVE      'E000568'     MSGID
+     C                   EXSR      SNDMSG
+     C                   SETON                                        35
+     C                   END
+     C*
+     C* BEGIN TESTING VALIDITY OF VESTING DATE...
+      *
+     C                   CLEAR                   PRMDAT
+     C                   MOVE      DVSTDT        INDTE
+     C                   EXSR      DTEFMT
+      *
+     C     MCVEST        IFEQ      'Y'
+      *
+     C     RTNCD         IFEQ      *ZEROS
+     C     DVSTDT        ANDNE     *BLANKS
+     C                   MOVE      OUTMON        EDTMO
+     C                   MOVE      OUTDAY        EDTDA
+     C                   MOVE      OUTYR         EDTYR
+     C                   CALL      'VALIDATE'
+     C                   PARM                    EDTPRM
+     C                   ENDIF
+     C*
+     C     EDTRET        IFNE      '00'
+     C     EDTYR         ORLT      1900
+     C     DVSTDT        OREQ      *BLANKS
+     C                   MOVE      'E000562'     MSGID
+     C                   EXSR      SNDMSG
+     C                   SETON                                        40
+     C                   ELSE
+     C                   MOVE      OUTMON        MCVSTM
+     C                   MOVE      OUTDAY        MCVSTD
+     C                   MOVE      OUTYR         MCVSTY
+     C                   MOVE      OUTDTE        DVSTDT
+     C                   Z-ADD     EDTDT         MVSTDT
+     C                   ENDIF
+     C*
+     C     MCVSTY        IFLT      MTRMYR
+     C     MCVSTY        OREQ      MTRMYR
+     C     MCVSTM        ANDLT     MTRMMO
+     C     MCVSTY        OREQ      MTRMYR
+     C     MCVSTM        ANDEQ     MTRMMO
+     C     MCVSTD        ANDLT     MTRMDA
+     C                   MOVE      'E000569'     MSGID
+     C                   EXSR      SNDMSG
+     C                   SETON                                        40
+     C                   ENDIF
+     C                   ENDIF
+     C*
+     C     MCVEST        IFNE      'Y'
+     C     DVSTDT        ANDNE     *BLANKS
+     C                   MOVE      'E000570'     MSGID
+     C                   EXSR      SNDMSG
+     C                   SETON                                        40
+     C                   END
+     C*
+     C     MCVEST        IFNE      'Y'
+     C     DVSTDT        ANDEQ     *BLANKS
+     C                   Z-ADD     *ZEROS        MCVSTM
+     C                   Z-ADD     *ZEROS        MCVSTD
+     C                   Z-ADD     *ZEROS        MCVSTY
+     C                   Z-ADD     *ZEROS        MVSTDT
+     C                   ENDIF
+     C*
+     C                   CLEAR                   STAPRM
+     C     MDOMCN        IFNE      *BLANKS
+     C                   MOVE      MDOMCN        SCCNRY
+     C                   ELSE
+     C                   MOVE      '&&'          SCCNRY
+     C                   ENDIF
+     C*
+     C                   MOVE      MDOMST        SCCSTA
+     C                   MOVE      'N'           SCVZIP
+     C*
+     C                   CALL      'STATECHK'
+     C                   PARM                    STAPRM
+     C*
+     C     SCRC          IFNE      *ZEROS
+     C                   MOVE      'E000563'     MSGID
+     C                   EXSR      SNDMSG
+     C                   SETON                                        43
+     C                   END
+     C*
+     C     MPAYTO        IFNE      *BLANKS
+     C*
+     C                   MOVEL     MPAYTO        AGT910
+     C                   EXSR      FMTAGT
+     C*
+     C     RC910         IFNE      *ZERO
+     C                   MOVE      'E000576'     MSGID
+     C                   EXSR      SNDMSG
+     C                   ELSE
+     C                   MOVEL     AGT910        MPAYTO
+     C                   END
+     C*
+     C     MATXCD        IFNE      'I'
+     C     MPAYTX        ANDEQ     'Y'
+     C                   MOVE      'E000578'     MSGID
+     C                   EXSR      SNDMSG
+     C                   SETON                                        59
+     C                   END
+     C*
+     C     MATXCD        IFEQ      'W'
+     C                   MOVE      'E000573'     MSGID
+     C                   EXSR      SNDMSG
+     C                   SETON                                        4547
+     C                   ELSE
+     C*
+     C     MPAYTO        IFNE      MAGTNO
+     C*
+     C     KMAGT3        CHAIN     LFCOMEDT                           99
+     C     *IN99         IFEQ      *ON
+     C                   MOVE      'E000549'     MSGID
+     C                   EXSR      SNDMSG
+     C                   SETON                                        45
+     C                   END
+     C*
+     C                   END
+     C*
+     C                   END
+     C*
+     C                   END
+     C*
+     C     MPAYTO        IFEQ      *BLANKS
+     C     MPAYTX        ANDEQ     'Y'
+     C                   MOVE      'E000579'     MSGID
+     C                   EXSR      SNDMSG
+     C                   SETON                                        59
+     C                   END
+     C*
+     C     MATXCD        IFEQ      'W'
+     C     XTAXCD        ANDEQ     'E'
+     C                   MOVE      'E000571'     MSGID
+     C                   EXSR      SNDMSG
+     C                   SETON                                        47
+     C                   END
+     C*
+     C* EDIT AGENT NAME AND ADDRESS
+     C                   CLEAR                   PRM205
+     C                   MOVEL     'AGT'         TYP205
+     C                   MOVEL     '1'           AFM205
+     C                   EXSR      MVENAM
+     C                   SELECT
+     C     RTN205        WHENEQ    '34'
+     C                   MOVE      'E000557'     MSGID
+     C                   EXSR      SNDMSG
+     C     RTN205        WHENEQ    '36'
+     C                   MOVE      'E000556'     MSGID
+     C                   EXSR      SNDMSG
+     C     CMTIDF        WHENEQ    *ZEROS
+     C     CMTIDU        IFNE      3
+     C     CMTIDU        ANDNE     9
+     C                   MOVE      'E000558'     MSGID
+     C                   EXSR      SNDMSG
+     C                   END
+     C                   ENDSL
+     C*
+     C* EDIT ALTERNATE PAYEE AGENT NAME AND ADDRESS
+     C     MACOR         IFEQ      'ALT'
+     C     RTN205        ANDEQ     *ZEROS
+     C                   MOVEL     'ALT'         TYP205
+     C                   MOVEL     '1'           AFM205
+     C                   EXSR      MVENAM
+     C                   SELECT
+     C     RTN205        WHENEQ    '34'
+     C                   MOVE      'E000565'     MSGID
+     C                   EXSR      SNDMSG
+     C     RTN205        WHENEQ    '36'
+     C                   MOVE      'E000564'     MSGID
+     C                   EXSR      SNDMSG
+      *
+     C     CMTIDF        WHENEQ    *ZEROS
+     C     CMTIDU        IFNE      3
+     C     CMTIDU        ANDNE     9
+     C                   MOVE      'E000566'     MSGID
+     C                   EXSR      SNDMSG
+     C                   END
+     C                   ENDSL
+     C                   ENDIF
+     C*
+     C     MABC          IFNE      'N'
+     C     MABC          ANDNE     'Y'
+     C                   MOVE      'COM0129'     MSGID
+     C                   EXSR      SNDMSG
+     C                   MOVE      *ON           *IN77
+     C*
+     C                   ENDIF
+DB01 C*--------------------------------------------------------
+DB01 C* EDIT: Discretionary trading  . . . . . . (MDTRD)  (Y,N)
+DB01 C*--------------------------------------------------------
+DB01 C*
+     C* E020030=Discretionary trading cannot be blank.
+     C* E020031=Discretionary trading is invalid.
+DB01 C*
+     C                   IF        MDTRD = *BLANKS
+     C                   MOVE      'E020030'     MSGID
+     C                   EXSR      SNDMSG
+     C                   MOVE      *ON           *IN46
+     C                   ELSE
+     C*
+     C                   IF        MDTRD <> 'N' AND MDTRD <> 'Y'
+     C                   MOVE      'E020031'     MSGID
+     C                   EXSR      SNDMSG
+     C                   MOVE      *ON           *IN46
+     C                   ENDIF
+     C                   ENDIF
+     C
+DB01 C*
+     C* USER EXIT EDIT ROUTINE
+     C                   EXSR      USREXT
+     C*
+     C     ENDEDB        ENDSR
+     C/EJECT
+     C     USREXT        BEGSR
+     C*****************************************************************
+     C* USREXT - USER EXIT EDIT ROUTINE
+     C*****************************************************************
+     C*
+     C* CALL USER EXIT PROGRAM TO EDIT USER DATA FIELDS
+     C                   CALL      'COM500U1'
+     C                   PARM                    AGTDS
+     C                   PARM                    U1500
+     C*
+     C     U1MSG         IFNE      *BLANKS
+     C                   MOVE      'E007160'     MSGID
+     C                   MOVEL     U1MSG         MSGDTA
+     C                   EXSR      SNDMSG
+     C*
+     C                   SELECT
+     C     U1IND         WHENEQ    '55'
+     C                   SETON                                        55
+     C     U1IND         WHENEQ    '56'
+     C                   SETON                                        56
+     C     U1IND         WHENEQ    '57'
+     C                   SETON                                        57
+     C     U1IND         WHENEQ    '58'
+     C                   SETON                                        58
+     C                   ENDSL
+     C*
+     C                   END
+     C*
+     C                   ENDSR
+     C
+     C/EJECT
+     C     UPDAGT        BEGSR
+     C*****************************************************************
+     C* UPDAGT - UPDATE AGENT
+     C*****************************************************************
+     C*
+     C* Format dates
+     C*
+     C     DHIRDT        IFNE      *BLANKS
+     C                   CLEAR                   PRMDAT
+     C                   MOVE      DHIRDT        INDTE
+     C                   CALL      'DATEFMT'
+     C                   PARM                    PRMDAT
+     C                   MOVE      OUTMON        MHIRMO
+     C                   MOVE      OUTDAY        MHIRDA
+     C                   MOVE      OUTYR         MHIRYR
+     C                   ENDIF
+     C*
+     C     DTRMDT        IFEQ      *BLANKS
+     C                   MOVE      *ZERO         MTRMMO
+     C                   MOVE      *ZERO         MTRMDA
+     C                   MOVE      *ZERO         MTRMYR
+     C                   ENDIF
+     C
+     C                   CLEAR                   PRMDAT
+     C                   MOVE      DTRMDT        INDTE
+     C                   CALL      'DATEFMT'
+     C                   PARM                    PRMDAT
+     C                   MOVE      OUTMON        MTRMMO
+     C                   MOVE      OUTDAY        MTRMDA
+     C                   MOVE      OUTYR         MTRMYR
+     C                   MOVE      OUTMON        MTRMMX
+     C                   MOVE      OUTDAY        MTRMDX
+     C                   MOVE      OUTYR         MTRMYX
+     C*
+     C                   MOVEL     AGTDS         UPDREC
+     C     KMAGTM        CHAIN     COMAGTM                            99
+     C                   MOVEL     UPDREC        AGTDS
+     C                   UPDATE    RAGTM
+     C                   EVAL      SVAGTNO = MAGTNO
+     C                   EVAL      LWUPDT = 'Y'
+     C*
+     C* if agent terminated, reverse advance records
+     C*
+     C     TERMINATED    IFEQ      NO
+     C     MTRMYR        ANDNE     0
+     C                   EXSR      CRTADV
+     C                   ENDIF
+     C*
+ M11 c**********M05      eval      trktyp = 'A'
+ M11 C                   eval      addtrk = 'D'
+ M11 C***********        EVAL      AGNTN = MAGTNO
+ M11 c***********        call      'MTK010'
+ M11 C***********        PARM                    AGNTN
+ M11 C***********        PARM                    ADDTRK            1
+ M11 C***********M05     PARM                    TRKTYP            1
+ M11  *
+ M06 C* VIEWSTAR
+rs01 C     *INKW         IFEQ      *ON
+ M06 C                   CALL      'AFL002CL'
+ M06 C                   PARM                    MAGTNO
+rs01 C                   endif
+     C                   ENDSR
+     C*
+     C/EJECT
+     C*****************************************************************
+     C* NEWAGT - ADD NEW AGENT MASTER RECORD
+     C*****************************************************************
+     C     NEWAGT        BEGSR
+     C*
+     C                   MOVEL     CMCO          MCO
+     C                   WRITE     RAGTM
+     C                   EVAL      LWUPDT = 'Y'
+m11  C                   EVAL      AGTN504  = MAGTNO
+     C*
+     C* COPY DYNAMIC USER FIELDS TO CORRECT KEY
+     C*
+     C                   CLEAR                   DYF350
+     C                   EVAL      SRC350 = 'COMAGTM '
+     C                   EVAL      SKY1350 = DYFSEQ
+     C                   EVAL      DKY1350 = MAGTNO
+     C*
+     C                   CALL      'DYF350'
+     C                   PARM                    DYF350
+     C*
+     C* DELETE ANY LEFT OVER DYNAMIC USER FIELDS WITH BLANK KEY
+     C*
+     C                   CLEAR                   DYF360
+     C                   EVAL      SRC360 = 'COMAGTM '
+     C                   EVAL      KY1360 = DYFSEQ
+     C*
+     C                   CALL      'DYF360'
+     C                   PARM                    DYF360
+     C
+     C                   ENDSR
+     C/EJECT
+     C     INZAGT        BEGSR
+     C*****************************************************************
+     C* INZAGT - INITIALIZE AGENT MASTER
+     C*****************************************************************
+     C*
+     C                   CLEAR                   RAGTM
+     C*
+     C                   MOVE      *BLANKS       DHIRDT
+     C                   MOVE      *BLANKS       DTRMDT
+     C*
+     C                   MOVEL     *BLANKS       MAGTNO
+     C                   MOVE      'I'           MATXCD
+     C                   Z-ADD     100           MADVRT
+     C                   MOVE      'N'           MPAYTX
+     C                   MOVE      'N'           MADV
+     C                   MOVE      'N'           MNOCHK
+     C                   MOVE      'N'           MSEC
+     C                   MOVE      'AGT'         MACOR
+     C                   MOVE      'N'           MDTRD
+     C*
+     C* GET SEQUENCE FOR DYNAMIC USER FIELD ADD/COPY
+     C                   MOVE      'T'           SEQFLG
+     C                   CALL      'GETSEQ'
+     C                   PARM                    PLSSEQ
+     C                   MOVEL     SEQTSQ        DYFSEQ
+     C
+m11  C                   eval      *in14 = *off
+M11  C                   IF        PMDE504 = 'ADDU   '
+M11  C                   eval      magtno = agtn504
+M13  C                   eval      agtnum = agtn504
+M13  C                   ENDIF
+M11  C                   IF        PMDE504 <> 'ADDU   '
+M11  C                   eval      *IN14 = *on
+bg01 C
+M13  C                   IF        AGTLVL = *blanks
+M13  C     DYPKEY        Chain     DYFNDATA
+bg01 C                   If        %Found(DYFNDATA)
+bg01
+m13  C                   MOVE      DYPVAL        AGTN5041
+m13  C                   movel     cmco          agtn5041
+bg01
+bg01 C                   Eval      DYVALU = (%Dec(DYPVAL:25:0)+ 1)
+bg01 C                   Eval      DYPVAL = %Editc(DYVALU:'X')
+bg01
+M11  C                   Update    RNDATA
+M11  C                   eval      magtno = agtn5041
+bg01
+M13  C                   endif
+bg01 C                   EndIF
+M11  C                   ENDIF
+bg01 C
+     C                   ENDSR
+     C*EJECT
+     C     MVENAM        BEGSR
+     C*****************************************************************
+     C* MVENAM - MOVE AGENT NAME TOGETHER
+     C*****************************************************************
+     C*
+     C                   CLEAR                   CLTM
+     C                   CLEAR                   CLTA
+     C                   MOVE      CMCO          CMP205
+     C                   MOVEL     MAGTNO        CT1205
+     C                   MOVEL     '2'           NFM205
+     C*
+     C                   CALL      'CMS205'
+     C                   PARM                    PRM205
+     C                   PARM                    CLTM
+     C                   PARM                    CLTA
+     C*
+     C     TYP205        IFNE      'ALT'
+DB01 C                   MOVEL(P)  FNM205        AGTNAM
+DB01 C                   MOVEL     AGTNAM        IGCP1
+DB01 C                   Z-ADD     030           IGCP2
+DB01 C                   EXSR      IGCSR
+DB01 C                   MOVEL     IGCP3         AGTNAM
+     C                   ENDIF
+     C*
+     C                   ENDSR
+     C/EJECT
+     C     SETIND        BEGSR
+     C*****************************************************************
+     C* SETIND - SET OFF INDICATORS
+     C*****************************************************************
+     C*
+     C                   CALL      'LSPCLRM'
+     C                   PARM                    PGMSGQ
+     C
+     C                   MOVE      'N'           ERROR             1
+     C
+     C                   SETOFF                                       303132
+     C                   SETOFF                                       333435
+     C                   SETOFF                                       363738
+     C                   SETOFF                                       394041
+     C                   SETOFF                                       424345
+     C                   SETOFF                                       464748
+     C                   SETOFF                                       495051
+     C                   SETOFF                                       555657
+     C                   SETOFF                                       585966
+     C                   SETOFF                                       676877
+     C*
+     C                   ENDSR
+     C/EJECT
+     C     FMTAGT        BEGSR
+     C*****************************************************************
+     C* FORMAT AGENT NUMBER
+     C*****************************************************************
+     C                   MOVE      *ZERO         RC910
+     C                   CALL      'LSP910'
+     C                   PARM                    PRM910
+     C                   ENDSR
+     C/EJECT
+     C     CMS510        BEGSR
+     C*****************************************************************
+     C* CMS510 - CALL CMS510
+     C*****************************************************************
+     C*
+     C                   CLEAR                   PRM510
+     C                   MOVEL     MAGTNO        POL510
+     C                   MOVEL     PMDE504       ACC510
+     C                   MOVE      '6'           TYP510
+     C                   MOVE      'A'           STS510
+     C*
+     C                   CALL      'CMS510'
+     C                   PARM                    PRM510
+     C*
+     C                   ENDSR
+     C/EJECT
+     C*****************************************************************
+     C* ALPHA -  ALPHA SEARCH INQUIRY ROUTINE
+     C*****************************************************************
+     C     ALPHA         BEGSR
+     C*
+     C                   CLEAR                   PRM100
+     C                   MOVE      CMCO          ZCO
+     C                   MOVEL     MAGTNO        ZCTL1
+     C                   MOVE      'UPDATE '     ZMODE
+     C                   MOVE      '6'           ZSELCD
+     C                   MOVE      '6'           ZENTTY
+     C                   MOVE      *BLANKS       RLT1
+     C                   MOVE      *BLANKS       CLT1
+     C                   MOVE      'N'           ZUNDR
+     C                   MOVE      'A'           ZRSTS
+     C                   MOVE      'Y'           ZUPREL
+     C                   MOVEL     'COM504'      ZCALBY
+     C*
+     C                   CALL      'CMS100'
+     C                   PARM                    PRM100
+     C*
+     C* GET AGENT NAME
+     C                   CLEAR                   PRM205
+     C                   MOVEL     'AGT'         TYP205
+     C                   MOVEL     '*'           AFM205
+     C                   EXSR      MVENAM
+     C
+     C                   ENDSR
+     C/EJECT
+     C*****************************************************************
+     C* CREATE ADVANCE TRANSACTION RECORD FOR TERMINATED AGENT
+     C*****************************************************************
+     C     CRTADV        BEGSR
+     C*
+     C     KMAGTM        CHAIN     LFCOMADV                           91
+     C     *IN91         DOWEQ     *OFF
+     C                   MOVE      APOLNO        POL985
+     C                   MOVE      'M'           TRN985
+     C*
+     C                   CALL      'COM985'
+     C                   PARM                    COM985
+     C*
+     C     KMAGTM        READE     LFCOMADV                               91
+     C*
+     C                   ENDDO
+     C*
+     C                   ENDSR
+     C*
+     C/EJECT
+     C     CHKUSR        BEGSR
+     C*****************************************************************
+     C* CHKUSR - CHECK USER DEFINED FIELDS
+     C*****************************************************************
+     C* DISPLAY USER FIELDS ONLY IF FIELD TITLE EXISTS IN USRDTA
+     C                   SETOFF                                       295253
+     C                   SETOFF                                       54
+     C     XCOUS1        IFEQ      *BLANKS
+     C                   SETON                                        29
+     C                   END
+     C     XCOUS2        IFEQ      *BLANKS
+     C                   SETON                                        52
+     C                   END
+     C     XCOUS3        IFEQ      *BLANKS
+     C                   SETON                                        53
+     C                   END
+     C     XCOUS4        IFEQ      *BLANKS
+     C                   SETON                                        54
+     C                   END
+     C*
+     C                   ENDSR
+     C/EJECT
+     C*****************************************************************
+     C* FMTDTE - FORMAT DATABASE DATES TO USER DISPLAY FORMAT
+     C*****************************************************************
+     C     FMTDTE        BEGSR
+     C*
+     C                   MOVE      *BLANKS       DHIRDT
+     C*
+     C     MHIRMO        IFGT      *ZERO
+     C                   CLEAR                   PRMDAT
+     C                   MOVE      MHIRMO        INMON
+     C                   MOVE      MHIRDA        INDAY
+     C                   MOVE      MHIRYR        INYR
+     C                   EXSR      DTEFMT
+     C     RTNCD         IFEQ      '00'
+     C                   MOVE      OUTDTE        DHIRDT
+     C                   ENDIF
+     C                   ENDIF
+     C*
+     C                   MOVE      *BLANKS       DTRMDT
+     C*
+     C     MTRMMO        IFGT      *ZERO
+     C                   CLEAR                   PRMDAT
+     C                   MOVE      MTRMMO        INMON
+     C                   MOVE      MTRMDA        INDAY
+     C                   MOVE      MTRMYR        INYR
+     C                   EXSR      DTEFMT
+     C     RTNCD         IFEQ      '00'
+     C                   MOVE      OUTDTE        DTRMDT
+     C                   ENDIF
+     C                   ENDIF
+     C*
+     C                   MOVE      *BLANKS       DVSTDT
+     C*
+     C     MCVSTM        IFGT      *ZERO
+     C                   CLEAR                   PRMDAT
+     C                   MOVE      MCVSTM        INMON
+     C                   MOVE      MCVSTD        INDAY
+     C                   MOVE      MCVSTY        INYR
+     C                   EXSR      DTEFMT
+     C     RTNCD         IFEQ      '00'
+     C                   MOVE      OUTDTE        DVSTDT
+     C                   ENDIF
+     C                   ENDIF
+     C*
+     C                   ENDSR
+     C/EJECT
+     C*****************************************************************
+     C* DTEFMT - CALLS DATEFMT SUBPROGRAM
+     C*****************************************************************
+     C     DTEFMT        BEGSR
+     C*
+     C                   CALL      'DATEFMT'
+     C                   PARM                    PRMDAT
+     C*
+     C                   ENDSR
+     C/EJECT
+     C*****************************************************************
+     C* LIFEWEB - LOAD AGENT DATA INTO LIFEWEB
+     C*****************************************************************
+     C     LIFEWEB       BEGSR
+     C*
+     C                   IF        WBNABL = 'Y'
+     C                   EVAL        CO101  =  CMCO
+     C                   EVAL        CTY101 =  30
+M11  C                   EVAL        CTL101 =  AGTN504
+     C                   EVAL        STP101 =  'A'
+     C                   EVAL        RID101 =  *ZEROS
+     C                   EVAL        PTY101 = *BLANKS
+     C                   IF        REMAGT = 'Y'
+     C                   EVAL      DLT101 = 'N'
+     C                   EVAL      CTL101 =  SVCTL1
+     C                   ENDIF
+
+     C                   CALL      'WEB101'
+     C                   PARM                    PRM101
+     C                   ENDIF
+     C
+     C                   ENDSR
+     C/EJECT
+     C****************************************************************
+     C* CHECK USER RELATIONSHIP FOR EXISTING AGENTS FOR CLIENT NUMBER
+     C****************************************************************
+     C     CHKREL        BEGSR
+     C*
+     C*
+     C     SVCLTN        CHAIN     LFCMSREL                           99
+     C     *IN99         DOWEQ     *OFF
+     C     REMAGT        ANDEQ     'N'
+     C     CRALPH        IFEQ      'AGT'
+     C                   EVAL      REMAGT = 'Y'
+     C                   EVAL      SVCTL1 = CRCTL1
+     C                   ENDIF
+     C*
+     C     SVCLTN        READE     LFCMSREL                               99
+     C                   ENDDO
+     C*
+     C                   ENDSR
+     C/EJECT
+     C********************************************************
+     C* ADDITIONAL FIELDS
+     C********************************************************
+     C     ADDFLD        BEGSR
+     C                   CLEAR                   PDYF200
+     C                   MOVEL     'COMAGTM'     SRC200
+     C     *IN11         IFEQ      *ON
+     C                   MOVEL     'INQUIRY'     MOD200
+     C                   ELSE
+     C                   MOVEL     'UPDATE '     MOD200
+     C                   ENDIF
+     C                   MOVEL     'COM504'      PGM200
+     C                   MOVEL     MAGTNO        KY1200
+M08  *                  Clear Appointed Flags
+M08  C                   Eval      ApptFlag = ' '
+M08  C                   Eval      ApptFlagB4 = ' '
+M08  C                   Eval      ApptFlagAfter = ' '
+bg05 c                   Clear                   NewRecord
+bg05 c                   Clear                   OldRecord
+M08  *                  Get Agent Appointed Flag - Before
+M08  C                   Exsr      GetAgtAppt
+M08  C                   Eval      ApptFlagB4 = ApptFlag
+bg05 C                   Eval      OldAMLDte  = AMLDte
+bg05 C                   Eval      OldRole    = Role
+bg05 C                   Eval      OldAgreemn = Agreemn
+bg05 C                   Eval      OldParAgmt = ParAgmt
+M08   *
+      *
+     C                   CALL      'DYF200'
+     C                   PARM                    PDYF200
+      *
+M09  C                   Exsr      DYFNDA
+      *
+bg05 c                   Clear                   NewRecord
+M08  *                  Get Agent Appointed Flag - After
+M08  C                   Exsr      GetAgtAppt
+M08  C                   Eval      ApptFlagAfter = ApptFlag
+bg05 C                   If        OldRecord  <> NewRecord
+bg05 C                   ExSr      SirconUpdte
+bg05 C                   EndIf
+bg05 C
+M08   *
+M08  *                  If Appointed Flag has changed and it is no, check for l
+BKLF C***COM506***       If        ApptFlagB4 <> ApptFlagAfter
+BKLF C****NOW*****                 and ApptFlagAfter = 'N'
+BKLF C**HANDLES***       Exsr      CreatePal
+BKLF C************       Endif
+M08   *
+M10  *                  If Appointed Flag has been changed, call program to cre
+M10  *                  the Agent Welcome Letter and the Commission Schedule.
+M10  C                   If        ApptFlagB4 <> ApptFlagAfter
+M10  C                             and ApptFlagB4 = 'N'
+M10  C                             and ApptFlagAfter = 'Y'
+M10  C                   Call      'AGT116CL'
+M10  C                   Parm                    MAGTNO
+M10  C                   Endif
+M10   *
+     C                   ENDSR
+bg05 ************************************************************************
+bg05 * SirconUpdte - Update the Siorcon Extract File PWF001F
+bg05 ************************************************************************
+bg05 C     SirconUpdte   Begsr
+bg05
+bg05 C     KMAGTNO       Chain     PWF001l02
+bg05 C                   If        %Found(PWF001L02)
+bg05 C                   Eval      S_AMLEXDATE  = AMLDte
+bg05 C                   Eval      S_PRODROL    = Role
+bg05 C                   Eval      S_AGREEMNT   = Agreemn
+bg05 C                   Eval      S_PARENTAGMT = ParAgmt
+bg05 C                   Eval      S_MAINTDATE  = %Int(%Char(%Date():*ISO0))
+bg05 C                   Eval      S_MAINTTIME  = %Int(%Char(%Time():*Iso0))
+bg05 C                   Update    RPWF001F
+bg05 C                   EndIf
+bg05 C                   EndSr
+     C/EJECT
+     C     ADDFLD2       BEGSR
+     C********************************************************
+     C* ADDITIONAL FIELDS
+     C********************************************************
+     C                   CLEAR                   PDYF200
+     C                   MOVEL     'COMCOHST'    SRC200
+     C     *IN11         IFEQ      *ON
+     C                   MOVEL     'INQUIRY'     MOD200
+     C                   ELSE
+     C                   MOVEL     'UPDATE '     MOD200
+     C                   ENDIF
+     C                   MOVEL     'COM504'      PGM200
+     C                   MOVEL     CXAGTN        KY1200
+     C                   MOVEL     CXSITC        KY2200
+     C                   MOVEL     CXEFFY        KY3200
+     C                   MOVEL     CXEFFM        KY4200
+     C                   MOVEL     CXEFFD        KY5200
+      *
+     C                   CALL      'DYF200'
+     C                   PARM                    PDYF200
+      *
+M09  C                   EXSR      DYFNDA
+     C                   ENDSR
+     C/EJECT
+     C********************************************************
+     C* Agent Tracking System
+     C********************************************************
+ M09 C     MTKFLD        BEGSR
+ M09 c                   eval      trktyp = 'A'
+ M11 C                   IF        addtrk = ' '
+ M09 C                   eval      addtrk = 'A'
+ M11 C                   endif
+ M09 C                   EVAL      AGNTN = MAGTNO
+ M09 c                   call      'MTK010'
+ M09 C                   PARM                    AGNTN
+ M09 C                   PARM                    ADDTRK            1
+ M09 C                   PARM                    TRKTYP            1
+ M09  *
+ M09 C* MAINTAIN AGENT MESSAGES.
+ M09 C                   EVAL      TRKMSG = 'N'
+ M09 C                   EVAL      AGNTN = MAGTNO
+ M09 C*
+ M09 C     TRKKY2        CHAIN     AFTRKMST                           90
+ M09 C     *IN90         DOWEQ     *OFF
+ M09 C*
+ M09 c                   if        TMCMP1 = *zero
+ M09 C*
+ M09 C     TRKKEY        CHAIN     AFTRKCOD
+ M09 C                   IF        %FOUND(AFTRKCOD)
+ M09 C                   IF        TCDSPM = 'Y'
+ M09 C                   EVAL      TRKMSG = 'Y'
+ M09 C                   ENDIF
+ M09 C                   ENDIF
+ M09 C*
+ M09 C                   ENDIF
+ M09 C*
+ M09 C     TRKKY2        READE     AFTRKMST                               90
+ M09 C                   ENDDO
+ M09 C*
+ M09 C                   IF        TRKMSG = 'Y'
+ M09 C                   EVAL      *IN65 = *ON
+ M09 C                   ELSE
+ M09 C                   EVAL      *IN65 = *OFF
+ M09 C                   ENDIF
+ M09 C*
+ M09 C                   EVAL      TRKMSG = 'N'
+ M09 C     TRKKY2        SETLL     AFTRKCMM
+ M09 C     TRKKY2        READE     AFTRKCMM
+ M09 C                   DOW       NOT %EOF(AFTRKCMM)
+ M09 C                   IF        TCFUPD <> *ZERO
+ M09 C*
+ M09 c     trkky3        chain     aftrkmst
+ M09 c                   if        %found(aftrkmst)
+ M09 c                   if        TMCMP1 = *zero
+ M09 C*
+ M09 C                   EVAL      TRKMSG = 'Y'
+ M09 C
+ M09 C                   ENDIF
+ M09 C                   ENDIF
+ M09 C*
+ M09 C                   ENDIF
+ M09 C     TRKKY2        READE     AFTRKCMM
+ M09 C                   ENDDO
+ M09 C*
+ M09 C                   IF        TRKMSG = 'Y'
+ M09 C                   EVAL      *IN66 = *ON
+ M09 C                   ELSE
+ M09 C                   EVAL      *IN66 = *OFF
+ M09 C                   ENDIF
+ M09 C                   ENDSR
+     C/EJECT
+     C*****************************************************************
+     C* SNDMSG - SEND ERROR MESSAGE TO PROGRAM MESSAGE QUEUE FOR DISPLAY
+     C*****************************************************************
+     C     SNDMSG        BEGSR
+     C*
+     C                   IF        MSGID <> *BLANKS
+     C                   CALL      'LSPSNDM'
+     C                   PARM                    MSGID
+     C                   PARM                    MSGDTA
+     C                   PARM                    PGMSGQ
+     C                   ENDIF
+     C*
+     C                   CLEAR                   MSGID
+     C                   CLEAR                   MSGDTA
+     C                   EVAL      ERROR = YES
+     C*
+     C                   ENDSR
+     C/EJECT
+     C     INIT          BEGSR
+     C*****************************************************************
+     C* INIT - INITIALIZE
+     C*****************************************************************
+     C*
+     C     *ENTRY        PLIST
+     C                   PARM                    PRM504
+     C*
+rs01 C     AGTKEY        KLIST
+rs01 C                   KFLD                    CMCO
+rs01 C                   KFLD                    MAGTNO
+     C*
+m05  C     TRKKEY        KLIST
+ |   C                   KFLD                    TMGRP1
+ |   C                   KFLD                    TMRQST
+ |   C*
+ |   C     TRKKY2        KLIST
+ |   C                   KFLD                    CMCO
+ |   C                   KFLD                    AGNTN
+ |   C*
+ |   C     TRKKY3        KLIST
+ |   C                   KFLD                    TCCOMP
+ |   C                   KFLD                    TCPOLN
+ |   C                   KFLD                    TCSEQN
+m05  C*
+     C*
+     C     KMAGTM        KLIST
+     C                   KFLD                    CMCO
+     C                   KFLD                    AGTN504
+     C*
+     C     KMAGTNO       KLIST
+     C                   KFLD                    CMCO
+     C                   KFLD                    MAGTNO
+     C*
+     C     KMAGT3        KLIST
+     C                   KFLD                    CMCO
+     C                   KFLD                    MPAYTO
+     C*
+     C     KUSREL        KLIST
+     C                   KFLD                    CMCO
+     C                   KFLD                    CRCTL1
+     C*
+M04  C     DYPKEY        klist
+ |   C                   KFLD                    FILE
+ |   C                   KFLD                    FIELD
+M04  C                   kfld                    CMCO
+     C*
+ rr02C     dypky2        klist
+ rr02C                   kfld                    file2
+ rr02C                   kfld                    fld2
+ rr02C                   kfld                    CMCO
+ rr02C                   kfld                    agtnum
+     C*
+     C     *DTAARA       DEFINE                  LSPCO
+     C                   IN        *DTAARA
+     C     *DTAARA       DEFINE                  PGMACT           10
+     C                   IN        PGMACT
+      *
+     C     PGMACT        IFEQ      *BLANKS
+     C     *LOCK         IN        PGMACT
+     C                   MOVEL(P)  'COM504'      PGMACT
+     C                   OUT       PGMACT
+     C                   ENDIF
+     C*
+     C                   CALL      'GETID'
+     C                   PARM                    USER             10
+     C*
+     C                   MOVE      'N'           ERROR
+     C                   MOVEL     CMCO          CO200
+     C                   MOVEL     'USRDTA'      DTA200
+     C                   MOVE      'R'           ACT200
+     C                   MOVE      'N'           LCK200
+     C                   CALL      'LSP200'
+     C                   PARM                    LSP200
+     C                   PARM                    USRDTA
+     C*
+     C                   MOVE      'N'           ERROR
+     C                   MOVEL     CMCO          CO200
+     C                   MOVEL     'COMDTA'      DTA200
+     C                   MOVE      'R'           ACT200
+     C                   MOVE      'N'           LCK200
+     C                   CALL      'LSP200'
+     C                   PARM                    LSP200
+     C                   PARM                    COMDTA
+     C*
+     C                   MOVE      'N'           ERROR
+     C                   MOVEL     CMCO          CO200
+     C                   MOVEL     'WEBDTA'      DTA200
+     C                   MOVE      'R'           ACT200
+     C                   MOVE      'N'           LCK200
+     C                   CALL      'LSP200'
+     C                   PARM                    LSP200
+     C                   PARM                    WEBDTA
+     C*
+     C                   EVAL      DLT101 = 'N'
+     C                   MOVE      '1'           EDTFMT
+     C*
+     C                   MOVE      USER          SVUID
+     C                   MOVEL     'LSP'         SVAPID
+  m12C***********        MOVEL     'COM504'      SVPROG
+  m12C                   MOVEL     'COM500'      SVPROG
+     C*
+     C                   CALL      'LSPCHKSC'
+     C                   PARM                    SECPRM
+     C*
+     C     SVERRF        IFNE      Yes
+     C     SVCHG         IFEQ      NO
+     C     PMDE504       ANDEQ     'UPDATE '
+     C     SVDEL         OREQ      NO
+     C     PMDE504       ANDEQ     'DELETE '
+     C     SVADD         OREQ      NO
+     C     PMDE504       ANDEQ     'ADD    '
+     C                   EVAL       SVERRF = Yes
+     C                   ENDIF
+     C                   ENDIF
+     C
+     C     SVERRF        IFEQ      Yes
+     C                   CALL      'LSPSNDMP'
+     C                   PARM      'LSP9014'     MSGID             7
+     C                   PARM      '5'           MSGDTA          256
+     C                   PARM      'COM504'      PGMSGQ           10
+     C                   ENDIF
+     C*
+     C     *LIKE         DEFINE    EDTDT         MTRMDT
+     C     *LIKE         DEFINE    EDTDT         MVSTDT
+     C     *LIKE         DEFINE    CRCLTN        SVCLTN
+     C     *LIKE         DEFINE    CRCTL1        SVCTL1
+     C*
+     C                   MOVE      'N'           REMAGT            1
+     C                   Z-ADD     2             BPAGES            3 0
+     C                   MOVEL     '*'           FLDPGM
+     C*
+     C* SETUP SYSTEM DATE
+     C*
+     C                   CLEAR                   PRMDAT
+     C                   MOVE      '*'           FMTC01
+     C                   MOVE      *MONTH        INMON
+     C                   MOVE      *DAY          INDAY
+     C                   MOVE      *YEAR         INYR
+     C                   EXSR      DTEFMT
+     C     RTNCD         IFEQ      *ZEROS
+     C                   MOVE      OUTDTE        SDATE
+     C                   ENDIF
+     C*
+ rr02C*
+ rr02C* get the agent level from DYFNDATA to be displayed on screen
+ rr02C*
+ rr02C                   if        agtn504       > *blank
+ rr02C                   eval      agtlvl        = *blank
+ rr02C                   eval      agtnum        = agtn504
+ rr02C     dypky2        chain(N)  dyfndata
+ rr02C                   if        %found(dyfndata)
+ rr02C                   eval      agtlvl        = dypval
+ rr02C                   endif
+ rr02C                   endif
+ rr02C*
+     C*
+     C                   ENDSR
+     C/EJECT
+DB01 C**************************************************************
+DB01 C*** INSERTED SOURCE FOR DOUBLE BYTE CHARACTER SET CONVERSION *
+DB01 C**************************************************************
+DB01 C*
+DB01 C     IGCSR         BEGSR
+DB01 C                   MOVEL     *BLANKS       IGCP3
+DB01 C                   CALL      'DCU799'
+DB01 C                   PARM                    IGCP1           256
+DB01 C                   PARM                    IGCP2             3 0
+DB01 C                   PARM                    IGCP3           256
+DB01 C                   ENDSR
+M08   /EJECT
+M08  **********************************************************************
+M08  * GetAgtAppt - Get Agent Appointment Flag from DYFNDATA              *
+M08  **********************************************************************
+M08  C     GetAgtAppt    BEGSR
+M08
+M08  *                  Get Appointment Flag.
+M08  C                   clear                   dyf300
+M08  C                   eval      src300 = 'COMAGTM'
+M08  C                   eval      ky1300 = MAGTNO
+bg05 C                   Eval      ent300 = 5
+bg05 * M08  C                   eval      ent300 = 1
+M08  C                   eval      rtv300 = 'Y'
+M08  C                   eval      dsp300 = 'Y'
+M08  C                   eval      fmt300 = 'Y'
+M08  *
+bg05 *  M08  C                   clear                   dsuser
+bg05 C                   Clear     *all          dsUser
+bg05 C                   Eval      %Occur(dsUser) = 1
+M08  C                   eval      dy1fld = 'AGTAPPT'
+bg05 C                   Eval      %Occur(dsUser) = 2
+bg05 C                   Eval      dy1fld = 'AMLEXPDT'
+bg05 C                   Eval      %Occur(dsUser) = 3
+bg05 C                   eval      dy1fld = 'CNTNAM'
+bg05 C                   Eval      %Occur(dsUser) = 4
+bg05 C                   Eval      dy1fld = 'SIRAID'
+bg05 C                   Eval      %Occur(dsUser) = 5
+bg05 C                   Eval      dy1fld = 'SIRAPID'
+
+M08  *
+M08  C                   call      'DYF300'
+M08  C                   parm                    dyf300
+M08  C                   parm                    dsuser
+M08  *
+bg05 C                   Eval      %Occur(dsUser) = 1
+bg05
+M08  C                   If        dy1fval <> *blanks
+M08  C                   eval      ApptFlag = dy1fval
+M08  C                   Endif
+bg05 C                   Eval      %Occur(dsUser) = 2
+bg05 C                   If        dy1fval <> *blanks
+bg05 C                   Eval      AMLDte = %Int(%Trim(dy1fval))
+bg05 C                   Endif
+bg05 C                   Eval      %Occur(dsUser) = 3
+bg05 C                   If        dy1fval <> *blanks
+bg05 C                   Eval      Role   = dy1fval
+bg05 C                   Endif
+bg05 C                   Eval      %Occur(dsUser) = 4
+bg05 C                   If        dy1fval <> *blanks
+bg05 C                   Eval      Agreemn = dy1fval
+bg05 C                   Endif
+bg05 C                   Eval      %Occur(dsUser) = 5
+bg05 C                   If        dy1fval <> *blanks
+bg05 C                   Eval      ParAgmt = dy1fval
+bg05 C                   Endif
+M08  *
+M08  C                   ENDSR
+M08   /EJECT
+M08  C*****************************************************************
+M08  C* CreatePAL - CREATE SAGICOR PENDING APPROVAL LETTER
+M08  C*****************************************************************
+M08  C     CreatePAL     BEGSR
+M08   *
+M08  C                   Clear                   AgentNumber      10
+M08  C                   Eval      AgentNumber = MAGTNO
+M08  C                   CALL(E)   'AGT115CL'
+M08  C                   PARM                    AgentNumber
+M08   *
+M08  C                   ENDSR
+M08  C*****************************************************************
