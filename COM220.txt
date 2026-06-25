@@ -1,0 +1,4338 @@
+bg03 H Option(*SrcStmt:*NoDebugIo) Debug(*Yes)
+bg03 H DftActGrp(*No)
+      *   D0169        08/15/06   09:37:00   PIGGOTT      V4.4M11
+      *   N44169       04/05/06   09:03:11   ROTH         V4.4M11
+      *   N43952       03/22/06   13:49:25   ROTH         V4.4M11
+      *   D0155        02/01/05   16:44:13   VOGEL        V4.4M09
+      *   D0144        12/16/03   14:22:01   VANNATTA     V4.4M07
+      *   R0010        12/12/03   10:48:41   VANNATTA     V4.4M07
+      *   D0128R       08/27/03   16:31:13   MINTON       V4.4M07
+      *   C26214       04/22/03   13:12:25   EICHER       V4.4M06
+      *   C26214       04/02/03   11:59:18   EICHER       V4.4M06
+      *   C28443       03/19/03   09:46:14   EICHER       V4.4M06
+      *   C28548       03/14/03   09:46:14   LATSCH       V4.4M06
+      *   D0046   01/21/02   14:52:58   MINTON       V4.4M03
+      *   S0064   01/16/02   14:54:37   CRANDAL      V4.4M02A
+      *   D0037   11/26/01   12:57:19   ATLDP        V4.4M02A
+      *   S0164   11/16/01   14:31:08   MINTON       V4.4M02A
+      *   S0161   11/07/01   16:09:11   MINTON       V4.4M02A
+      *   M0001   07/05/01   14:41:45   BRASEL       V4.4M01
+      *   M3893   02/28/01   13:35:16   ATLRC        V4.4M00
+      *   M3893   02/10/01   15:57:05   ATLRC        V4.4M00
+      *   M3893   01/16/01   10:09:19   LATSCH       V4.4M00
+      *   M3893   01/05/01   15:26:40   PAULH        V4.4M00
+      *   M3893   12/12/00   11:20:25   LATSCH       V4.4M00
+M3928 *   3928   07/26/93  KAUHL
+M4085 *   4085   08/24/93  FRIEDEL
+M4368 *   4368   12/06/93  FRIEDEL
+M4606 *   4606   01/20/94  VOGEL
+M5502 *   5502   12/13/94  FRIEDEL
+M5548 *   5548   01/03/95  ROTH
+M5749 *   5749   08/01/95  SMINCHAK                                  V042M000
+M6409 *   6409   09/22/95  KELLEY                                    V042M000
+M6468 *   6468   10/12/95  KELLEY                                    V042M000
+M6486 *   6486   11/30/95  SEAVERS                                   V042M000
+M6825 *   6825   04/30/96  STUKEN                                    V043M000
+M6863 *   6863   06/03/96  EICHER                                    V043M000
+M7344 *   7344   01/21/97  EICHER                                    V043M000
+M4814 *   4814   07/22/97  ROTH                                      V043M010
+M8559 *   8559   06/04/98  RANCILIO                                  V142M010
+M8559 *   8559   08/25/98  SWAFFORD                                  V142M010
+M8559 *   8559   06/09/99  DARNELL                                   V142M010
+M8559 *   8559   05/24/00  PIGGOTT                                   V143M010
+     F*   0930   01/09/90  BRASEL
+     F*   0929   01/22/90  MARGHERI
+     F*   1022   04/30/90  BRASEL
+     F*   1224   10/02/90  PEARSON
+     F*   1848   10/22/91  PAULH
+     F*   1905   12/04/91  VOGEL
+     F*   2071   01/01/89  BRASEL
+     F*   2084   01/01/89  FRIEDEL
+     F*   0386   11/01/88  PGMR018
+     F/TITLE --- STATEMENT RUN                         GENELCO, INC.---   COM220
+     F*****************************************************************
+     F**  PROPRIETARY RIGHTS NOTICE: ALL RIGHTS RESERVED. THIS       **
+     F**  MATERIAL CONTAINS THE VALUABLE PROPERTIES AND TRADE        **
+     F**  SECRETS OF GENELCO, INC. OF ST. LOUIS, MO. EMBODYING       **
+     F**  SUBSTANTIAL CREATIVE EFFORTS AND CONFIDENTIAL INFORMATION, **
+     F**  IDEAS, AND EXPRESSIONS, NO PART OF WHICH MAY BE REPRODUCED **
+     F**  OR TRANSMITTED IN ANY FORM OR BY ANY MEANS, ELECTRONIC,    **
+     F**  MECHANICAL, OR OTHERWISE, INCLUDING PHOTOCOPYING AND       **
+     F**  RECORDING OR IN CONNECTION WITH ANY INFORMATION STORAGE    **
+     F**  OR RETRIEVAL SYSTEM WITHOUT THE PERMISSION IN WRITING OF   **
+     F**  GENELCO, INC.                                              **
+     F**                                                             **
+     F**  COPYRIGHT NOTICE: COPYRIGHT 1982    GENELCO, INC.          **
+     F*****************************************************************
+     F** C R E A T I O N        **                                   **
+     F****************************                                   **
+     F**                                                             **
+     F**  PROGRAM NAME:  COM220                                      **
+     F**  CREATED BY:    LAR                                         **
+     F**                                                             **
+     F**  NARRATIVE: STATEMENT RUN                                   **
+     F**                                                             **
+     F*****************************************************************
+     F** M A I N T E N A N C E  **                                   **
+     F****************************                                   **
+     F**                                                             **
+     F**  CHANGED BY: LOIS BRASEL                                    **
+     F**  DATE:       01/09/1990                                     **
+     F**  NARRATIVE:  REPLACED LF0510 LOGICAL WITH LTCOMDST          **
+     F**                                                             **
+     **  CHANGED BY: PAMELA W KELLER                                **
+     **  DATE:       03/02/1999                                     **
+     **  NARRATIVE:  PROJECT #56510 - ADDED WRITING AGT# TO         **
+     **              OVERWRITE LEVEL 2 OR HIGHER                    **
+      **              **PWK used as mod id** rls
+     **                                                             **
+     **  CHANGED BY: PAMELA W KELLER                                **
+     **  DATE:       01/11/2000                                     **
+     **  NARRATIVE:  ADDED MODIFICATIONS FOR CHANGES FROM 4.2       **
+     **              TO 4.3   PK1                                   **
+     **                                                             **
+     **  CHANGED BY: DFB                                            **
+     **  DATE:       10/06/2000                                     **
+     **  NARRATIVE:  PRINT THE MARKETING CODE IN PLACE OF THE       **
+     **              DISTRIBUTION CODE     M01                      **
+      **              **M01 not ref. in base** could be DFB** rls    **
+     **                                                             **
+     **  CHANGED BY: DFB                                            **
+     **  DATE:       12/04/2000                                     **
+     **  NARRATIVE:  REMOVE THE MARKETING CODE AND REPLACE WITH     **
+     **                                                             **
+     **  CHANGED BY:   PAB                                          **
+     **  DATE:         01/02/2000                                   **
+     **  MOD LEVEL:    PB1                                          **
+     **  PROJECT ID:   61150                                        **
+     **  NARRATIVE:    PRINT MISCELLANEOUS TRANSACTION HEADING.     **
+     **                ELIMINATE DUPLICATE FOR "FROM COMMISSION     **
+     **                DETAIL" TOTAL FOR REPORT                     **
+     **                                                             **
+      **                **PB1 no ref. to mod in base** rls
+     **  CHANGED BY:   PAB                                          **
+     **  DATE:         01/02/2000                                   **
+     **  MOD LEVEL:    PB2                                          **
+     **  PROJECT ID:   63110                                        **
+     **  NARRATIVE:    MODIFY TO PRINT PORTRAIT.  PRINT ADDRESS     **
+     **                INFO AT TOP AND BOTTOM TO ACCOMODATE LARGE   **
+     **                AND SMALL ENVELOPE FOR MAILING.  REMOVE      **
+     **                "TRN" FIELD AND ADD "PRM" RSN CODE FOR TRN   **
+     **                                                             **
+     **  CHANGED BY:   MIKE STRICKER                                **
+     **  DATE:         03/05/2002                                   **
+     **  MOD LEVEL:    M02                                          **
+     **  PROJECT ID:                                                **
+     **  NARRATIVE:    CHANGE COM220P TO HAVE COMPANY CODE ON THE   **
+     **                USER DATA FOR THE SPOOL FILE.                **
+     **                                                             **
+     **                                                             **
+     **  CHANGED BY:      PEGI BRUMETT                              **
+     **  DATE CHANGED:    07/19/2002                                **
+     **  DESCRIPTION:     MOVED CHANGES FROM 4.3 TO 4.4             **
+     **                                                             **
+     **                                                             **
+     **  CHANGED BY:      Mike Stricker                             **
+     **  DATE CHANGED:    01/07/2003                                **
+     **  MOD LEVEL:       M03                                       **
+     **  PROJECT ID:      69520                                     **
+     **  DESCRIPTION:     Print statement if balance is not equal   **
+     **                   to zero.                                  **
+     **                                                             **
+      **                   **M03 NOT REFERENCED IN BASE AS MOD** RLS **
+      **                                                             **
+     **  CHANGED BY:      dfb                                       **
+     **  DATE CHANGED:    06/04/2003                                **
+     **  MOD LEVEL:       M04                                       **
+     **  PROJECT ID:      68240                                     **
+     **  DESCRIPTION:     Write correct company code on the spooled **
+     **                   file entries                              **
+     **                                                             **
+     **  AFL - BKL 04/22/04 Mod's for 4.4.5 / 4.4.6 upgrade         **
+     **                                                             **
+     **  CHANGED BY:      Brian Loghry                              **
+     **  DATE CHANGED:    06/02/2004                                **
+     **  MOD LEVEL:       M05                                       **
+     **  PROJECT ID:      74430                                     **
+     **  DESCRIPTION:     Calculate and print the YTD Production    **
+     **                   Credit for the Million Dollar Club for    **
+     **                   Agents.                                   **
+     **                                                             **
+     **  CHANGED BY:      Brian Loghry                              **
+     **  DATE CHANGED:    06/23/2004                                **
+     **  MOD LEVEL:       M06                                       **
+     **  PROJECT ID:      75220                                     **
+     **  DESCRIPTION:     Calculate and print the YTD Production    **
+     **                   Credit for the Million Dollar Club for    **
+     **                   MGA's.                                    **
+     **                                                             **
+     **  CHANGED BY:      Bob Gulbransen                            **
+     **  DATE CHANGED:    02/14/2007                                **
+     **  MOD LEVEL:       BG01                                      **
+     **  PROJECT ID:      AS07-0047                                 **
+     **  DESCRIPTION:     Fix the reason code on the report         **
+     **                                                             **
+     **  CHANGED BY..:    Bob Gulbransen                            **
+     **  DATE CHANGED:    09/25/2007                                **
+     **  MOD LEVEL...:    BG02                                      **
+     **  PROJECT ID..:    AS07-0081                                 **
+     **  DESCRIPTION.:    Modify for new messages for SLIC agents   **
+     **                                                             **
+     **  CHANGED BY..:    J. Reeves                                 **
+     **  PROJECT.....:    AS07-0839                                 **
+     **  DATE........:    01/10/2007                                **
+     **  NARRATIVE...:    REMOVED CHANGES MADE BY PROJECT AS07-0081.**
+     **                                                             **
+     **  CHANGED BY:      Robert Szoke                              **
+     **  DATE:            07/18/2008                                **
+     **  NARRATIVE:       Added AFL mod's for 4.4.7 - 4.4.11 upgrade**
+     **                                                             **
+     **  CHANGED BY..:    dfb                                       **
+     **  PROJECT.....:    AS08-0406                                 **
+     **  DATE........:    08/26/2008                                **
+     **  NARRATIVE...:    Add new draw code 'E' - pay agents        **
+     **                   Additional amount to be paid to agent is  **
+     **                   calculated in pgm AFCOM180.   dfb1        **
+     **                   rls1 added for Non 'E' 1/19/09            **
+     **                                                             **
+     **  CHANGED BY..:    B Gulbransen                              **
+     **  PROJECT.....:    AS09-0162                                 **
+     **  DATE........:    04/21/2009                                **
+     **  MOD LEVEL...:    BG03                                      **
+     **  NARRATIVE...:    Send XML version of the report to Doc     **
+     **                   Science to be e-mailed to the agents.     **
+     **                                                             **
+     **  CHANGED BY..:    B Gulbransen                              **
+     **  PROJECT.....:    AS09-0162                                 **
+     **  DATE........:    08/19/2009                                **
+     **  MOD LEVEL...:    BG04                                      **
+     **  NARRATIVE...:    Adapt for multiple notifications          **
+     **                   Add Min Chk Amt per Company               **
+     **                                                             **
+     **  CHANGED BY..:    Bart Garlotte                             **
+     **  PROJECT.....:    AS09-0373                                 **
+     **  DATE........:    10/29/2009                                **
+     **  MOD LEVEL...:    bmg01                                     **
+     **  NARRATIVE...:    If JobName = 'COMSERIES' (MidMonth) and   **
+     **                   Series = 'CR', write JobDate to Data Area **
+     **                   CAGTDT.                                   **
+     **                                                             **
+     **                   If JobName <> 'COMSERIES' and this is a   **
+     **                   Career Agent, Get date from CAGTDT, add   **
+     **                   1 to the day and put into FromDay.        **
+     **                                                             **
+     ** BL01              Clear Agent Messages after use.  This will**
+     **                   prevent message from being carried over   **
+     **                   to next Company/Agent.                    **
+     **                                                             **
+     ** BL02              Remove the hold on MAILRCV job.           **
+     **                                                             **
+     **  CHANGED BY..:    Michael Stricker                          **
+     **  PROJECT.....:    AS10-0096                                 **
+     **  DATE........:    04/05/2010                                **
+     **  MOD LEVEL...:    ms1                                       **
+     **  NARRATIVE...:  Added code to hold month end balance in user
+     **    field on COMAGTBL file. Added code to hold commissions   **
+     **            for agent if his payto agent has commissions held**
+     **  CHANGED BY..:    Brian Loghry                              **
+     **  DATE........:    07/16/2010                                **
+     **  MOD LEVEL...:    BL03                                      **
+     **  NARRATIVE...:    Year To Date Income - For Month End run,  **
+     **                   use the value in MBUSR7 to be the beginn- **
+     **                   ing of month value.                       **
+     **                                                             **
+     **  CHANGED BY..:    DFB                                       **
+     **  PROJECT.....:    AS10-0096                                 **
+     **  DATE........:    09/24/2010                                **
+     **  MOD LEVEL...:    DFB2                                      **
+     **  NARRATIVE...:    Added fields for Future amount, Release   **
+     **                   date and held amount to XML.  Allow the   **
+     **                   future trans to be printed on stmt        **
+     **                    These will need to be suppress on the    **
+     **                    old COM220 printouts that are currently  **
+     **                    used daily for backup to transactions    **
+     **                    that occurred                            **
+     **                                                             **
+     **  CHANGED BY..:    Rick Roasa                                **
+     **  PROJECT.....:    AS11-0048                                 **
+     **  DATE........:    02/08/2011                                **
+     **  MOD LEVEL...:    rr02                                      **
+     **  NARRATIVE...:    modified to fix a bug causing commission  **
+     **                   amounts to be doubled for some agents -   **
+     **                   modified to send either 'DLY' for a       **
+     **                   'daily' run or *blank for a 'monthly'     **
+     **                   run - this info is sent to COM990 and     **
+     **                   COM991 - this info comes from the *entry  **
+     **                   parm PRM220, the field is SS220           **
+     **                                                             **
+     **  CHANGED BY..:    Rick Roasa                                **
+     **  PROJECT.....:                                              **
+     **  DATE........:    08/12/2011                                **
+     **  MOD LEVEL...:    rr03                                      **
+     **  NARRATIVE...:    made mods for Bob G. for Print Commission **
+     **                   Statements - COM220 is checked out to     **
+     **                   AS11-0048                                 **
+     **                                                             **
+     **  CHANGED BY..:    Bob Gulbransen                            **
+     **  PROJECT.....:    AS12-0130                                 **
+     **  DATE........:    03/08/2012                                **
+     **  MOD LEVEL...:    bg05                                      **
+     **  NARRATIVE...:    Fixed error in the name for statements    **
+     **                   for a distribution group.                 **
+     **                                                             **
+ RJ01**  CHANGED BY..:    Rahul Jain(RJ01)                          **
+ RJ01**  PROJECT.....:    AS25-0003 LSP-395/LSP-408/LSP-422/LSP-426 **
+ RJ01**  DATE........:    04/11/2025                                **
+ RJ01**  NARRATIVE...:    Modified program to Account Balance       **
+ RJ01**                   calculation to be based on commission     **
+ RJ01**                   paid and taxable amount.                  **
+ RJ01**                                                             **
+     *****************************************************************
+     F*****************************************************************
+     F* INDICATOR SUMMARY.....*                                      **
+     F*************************                                      **
+     F*                                                              **
+     F*****************************************************************
+     F/EJECT
+     FLTCOM220  IF   E           K DISK
+     F***GLSDLYTR  O    E             DISK    COMMIT
+     FGLSDLYTR  O    E             DISK
+     F***COMPAYAM  O    E             DISK    COMMIT
+     FCOMPAYAM  O    E             DISK
+     F***COMPCSUM  O    E             DISK    COMMIT
+     FCOMPCSUM  O    E             DISK
+PWK  FCASMWAGT  IF   E           K DISK
+     FLSPCOMST  IF   E           K DISK
+     FCOMPTDEX  IF   E           K DISK
+     FCOMPTDDC  IF   E           K DISK
+     FCOMAGTBL  IF   E           K DISK
+     FLFCURNC   IF   E           K DISK
+BG01
+BG01  * POLICY BENEFITS: LIFE, HEALTH, AN
+BG01 FCASBENE   IF   E           K Disk
+bg03 FCOMMSGF   IF   E           K Disk    Prefix('M_') UsrOpn
+bg03 FCOMAGTM   IF   E           K Disk    Rename(RAGTM:AgentMast)
+ ms1 F                                     Prefix('A2')
+bg03 FCTL001F   IF   E           K DISK
+bg04 FLSPSVMSC  IF   E           K Disk    Prefix('V_')
+RJ02 FCMSUSREL  IF   E           K DISK    Prefix('R_')
+     FCOM220P   O    E             PRINTER OFLIND(*IN25)
+     F                                     USROPN
+PB2  FCOM220P1  O    E             PRINTER OFLIND(*IN26)
+PB2  F                                     USROPN
+      *
+     D TABA            S              1    DIM(8) CTDATA PERRCD(1)
+     D TABB            S              7    DIM(8) ALT(TABA)
+     D COCR            S              4    DIM(100)
+bg03 *ADR             S             35    DIM(4)
+bg03 D ADR             S             50    DIM(4)
+      *
+     D DTOT            S                   Like(MBBAL)
+     D PAYAMT          S                   Like(PPYAMT)
+     D BEGBAL          S                   Like(MBAL)
+     D NETTOT          S                   Like(MBAL)
+bg03 D GAddy           S             50    Dim(4)
+bg03 D String          S            100A   Inz
+
+bg03 D AdvanceAmount   S                   Like(CMADV)
+bg03 D AgentName       S             36A   Inz
+BG03 D BalanceForward  S                   Like(MBBAL)
+bg03 D CompanyName     S                   Like(COMP)
+bg03 D DebitAmount     S                   Like(MBBAL)
+bg03 D EmailAgent      S                   Like(MAGTNO)
+bg03 D EmailFile       S                   Like(DataQData)
+bg03 D InsuredFName    S             36A   Inz
+bg03 D InsuredLName    S             36A   Inz
+bg03 D InsuredName     S             36A   Inz
+bg03 D AdvancePct      S                   Like(MADVRT)
+bg03 D AgentFName      S             60A   Inz
+bg03 D AgentLName      S             60A   Inz
+bg03 D AgentLevel      S             25A   Inz
+bg03 D BarZip          S             10A   Inz
+bg03 D DefaultOutputMode...
+     D                 S              1A   Inz
+bg03 D DateAlpha       S              8A   Inz
+bg03 D EMailAddy       S                   Like(CMEMAL)
+bg03 D FromDate        S               D   DatFmt(*Iso)
+bg03 D JobDate         S               D   DatFmt(*Iso)
+ ms1 D TrnDate         S               D   DatFmt(*Iso)
+bg03 D*** JobDate         S               D   DatFmt(*Iso) Inz(*Job)
+bg03 D IssueDate       S               D   DatFmt(*Iso)
+bg03 D PaidToDate      S               D   DatFmt(*Iso)
+     D Run_Date        S               D   DatFmt(*Iso)
+bg03 D GroupNumber     S                   Like(MAGTNO)
+bg03 D GroupName       S             60A
+bg04 D MinCheckAmt     S                   Like(V_XMINCK)
+bg03 D OutputMode      S              1A
+bg03 D SequenceNo      S             10I 0 Inz
+BG03 D StartPos        S              2  0 Inz
+bg03 D DefaultAmt      S             10I 0 Inz
+bg03 D RecordCountT    S              4A   Inz
+bg03 D RecordCountP    S              4A   Inz
+bg03 D TransTblCount   S              4A   Inz
+bg03 D TransTotal      S             15A   Inz
+bg03 D TransTaxTotal   S             15A   Inz
+bg03 D ProdTotal       S             15A   Inz
+bg03 D I               S              1  0 Inz
+bg04 D J               S              1  0 Inz
+bg03 D AgtMsg          S             95A   Dim(5) Inz
+bg03 D Yes             C                   Const('Y')
+bg03 D AgtLevel        S              5A   Dim(50)
+bg03 D Index           s              2  0 Inz
+bg03 D YTDCommissions  S             15  2 Inz
+bg03 D WriteAgtLevel   S             25A   Inz
+bg03 d Y               S              2  0 Inz
+bg03 d TrialBalance    C                   Const('LSPCOMSTMT')
+DFB2 d FutureAmount    S             15  2 Inz
+DFB2 d FutureTotal     S             15  2 Inz
+dfb2 D ReleaseAmount   S             15  2 Inz
+dfb2 D ReleaseDate     S               D   DatFmt(*Iso)
+RJ01 d OldBal          S             15P 2 Inz
+RJ02 d SplitCnt        S              5P 0 Inz
+BMG01d*** BiMonthFlag     S              1A   Inz
+bg03
+bg03 D                 DS
+bg03 D PrintTables                   95A
+bg03 D  TblAGA                        5A   Overlay(PrintTables) Inz
+bg03 D  TblBROK                       5A   Overlay(PrintTables:*Next) Inz
+bg03 D  TblCANL                       5A   Overlay(PrintTables:*Next) Inz
+bg03 D  TblCAWL                       5A   Overlay(PrintTables:*Next) Inz
+bg03 D  TblCSM                        5A   Overlay(PrintTables:*Next) Inz
+bg03 D  TblCUM                        5A   Overlay(PrintTables:*Next) Inz
+bg03 D  TblDMGA                       5A   Overlay(PrintTables:*Next) Inz
+bg03 D  TblDMG3                       5A   Overlay(PrintTables:*Next) Inz
+bg03 D  TblFMO                        5A   Overlay(PrintTables:*Next) Inz
+bg03 D  TblFSD                        5A   Overlay(PrintTables:*Next) Inz
+bg03 D  TblGA                         5A   Overlay(PrintTables:*Next) Inz
+bg03 D  TblIMO                        5A   Overlay(PrintTables:*Next) Inz
+bg03 D  TblMGA                        5A   Overlay(PrintTables:*Next) Inz
+bg03 D  TblPGA                        5A   Overlay(PrintTables:*Next) Inz
+bg03 D  TblPPGA                       5A   Overlay(PrintTables:*Next) Inz
+bg03 D  TblPREC                       5A   Overlay(PrintTables:*Next) Inz
+bg03 D  TblSD                         5A   Overlay(PrintTables:*Next) Inz
+bg03 D  TblSGA                        5A   Overlay(PrintTables:*Next) Inz
+bg03 D  TblWA                         5A   Overlay(PrintTables:*Next) Inz
+bg03
+bg03 D PSDS           SDS
+bg03 D ProgramName       *PROC
+bg03 D Job_Name              244    253
+      *
+     D/EJECT
+     D PRM220        E DS                  EXTNAME(PCOM220)
+     D COMDTA        E DS                  EXTNAME(COMDTA)
+bg03 D dyf300        E DS                  EXTNAME(Pdyf300)
+bg03 D dsuser        E DS                  occurs(100) extname(dyffldds)
+     D                 DS
+     D  FMTDT                  1      8  0
+     D  FMTMO                  1      2  0
+     D  FMTDA                  3      4  0
+     D  FMTYR                  5      8  0
+     D CMTOTS          DS                  OCCURS(1000)
+     D  PRM1YR                 1     15  2
+     D  PRMREN                16     30  2
+     D  COM1YR                31     45  2
+     D  COMREN                46     60  2
+     D CMPFDC          DS                  OCCURS(100)
+     D  FDCTOT                 1     15  2
+     D DS01            DS
+     D  DPROCM                 1      2  0
+     D  DPROCD                 3      4  0
+     D  DPROCY                 5      8  0
+     D DS02            DS
+     D  ISSDT                  1      8  0
+     D  CISSMO                 1      2  0
+     D  CISSDA                 3      4  0
+     D  CISSYR                 5      8  0
+PB2  D  CISSCC                 5      6  0
+|    D  CISSYY                 7      8  0
+|    D DS02A           DS
+|    D  ISSUE                  1      6  0
+|    D  ISSMO                  1      2  0
+|    D  ISSDA                  3      4  0
+PB2  D  ISSYR                  5      6  0
+     D DS03            DS
+     D  PDDT                   1      8  0
+     D  CPDTMO                 1      2  0
+     D  CPDTDA                 3      4  0
+     D  CPDTYR                 5      8  0
+PB2  D  CPDTCC                 5      6  0
+|    D  CPDTYY                 7      8  0
+|    D DS03A           DS
+|    D  PTD                    1      6  0
+|    D  PTDMO                  1      2  0
+|    D  PTDDA                  3      4  0
+PB2  D  PTDYR                  5      6  0
+     D NAMPRM          DS
+     D  FMT                    1      1
+     D  NAME                   2     61
+     D FMT8            DS
+     D  FMT8P                  1      4
+     D  FMT8F                  5     24
+     D  FMT8M                 25     25
+     D  FMT8L                 26     54
+     D  FMT8S                 55     60
+      *
+      * COMBAL - DATA STRUCTURE TO CONVERT ALL CURRENCIES TO
+      *          DISBURSEMENT CURRENCY. USED TO DETERMINE IF
+      *          AGENT HAS MET DRAW.
+      *
+     D COMBAL          DS                  OCCURS(100)
+     D  BCRCD                  1      4
+     D  BBAL                  15     29  2
+     D  BPAY                  30     44  2
+     D  DCRCD                 45     48
+     D  DBAL                  49     63  2
+     D  DPAY                  64     88  2
+     D  DNET                               LIKE(MBAL)
+     D  SBAL                               LIKE(MBAL)
+     D PROCDT          DS
+     D  DPRMM                  1      2  0
+     D  DPRDD                  3      4  0
+     D  DPRYY                  5      6  0
+     D                 DS
+     D  PRCDAT                 1      8  0
+     D  PRCYY                  1      4  0
+     D  PRCMM                  5      6  0
+     D  PRCDD                  7      8  0
+M05  D*
+M05  D WORK305         DS
+M05  D  MM305                  1      2  0
+M05  D  DD305                  3      4  0
+M05  D  YY305                  5      6  0
+M05  D*
+M06  D*
+M06  D WORK306         DS
+M06  D  MM306                  1      2  0
+M06  D  DD306                  3      4  0
+M06  D  YY306                  5      6  0
+M06  D*
+     D/EJECT
+     D*
+     D LSP200        E DS                  EXTNAME(PLSP200)
+     D LSPCO         E DS          1024    EXTNAME(LSPCOMST)
+     D PRM205        E DS                  EXTNAME(PLSP205)
+     D PRCDTA        E DS                  EXTNAME(PRCDTA)
+     D CMS205        E DS                  EXTNAME(PCMS205)
+     D CLTM          E DS                  EXTNAME(CMSCLNTM)
+     D CLTA          E DS                  EXTNAME(CMSCLNAD)
+     D LSP220        E DS                  EXTNAME(PLSP220)
+     D PRMDAT        E DS                  EXTNAME(PDATEFMT)
+     D COM990        E DS                  EXTNAME(PCOM990)
+     D COM991        E DS                  EXTNAME(PCOM991)
+     D LSP300        E DS                  EXTNAME(PLSP300)
+M05  D AMB305        E DS                  EXTNAME(PAMB305)
+M06  D AMB306        E DS                  EXTNAME(PAMB306)
+BG01 D Premium         C                   Const('PRM')
+BG01 D NotTaken        C                   Const('NTK')
+BG01 D Cancel          C                   Const('CNL')
+Bg03 D Electronic      C                   Const('E')
+bg03 D Print           C                   Const('P')
+bg03 D TextNotify      C                   Const('T')
+bg03 D Directory       C                   Const('/Commissions/')
+bg03 D StreamFile      S             27A   Inz
+bg03 D SuffixTrialP    C                   Const('Tril_p.xml')
+bg03 D SuffixTrialM    C                   Const('Tril_m.xml')
+bg03 D SuffixP         C                   Const('Comm_p.xml')
+bg03 D SuffixM         C                   Const('Comm_m.xml')
+bg03 D ComDataQue      S             10A   Inz('COMMISS')
+bg03 D MailDataQue     S             10A   Inz('COMMAIL')
+bg03 D DataQue         S             10A   Inz
+bg03 D DataQueLib      S             10A   Inz('*LIBL')
+bg03 D DataQueLen      S              5  0 Inz(27)
+bg03 D DataQData       S             27    Inz
+bg03 D KeyLength       S              3  0 Inz(4)
+bg03 D DataQKey        S              4    Inz('0001')
+bg03 D Command         S           1028    Inz
+bg03 D ProgramType     S              5A   Inz
+bg03 D MailFile        S             27A   Inz
+bg03 D TestNumber      S              1  0 Inz
+bg03
+     D COM225        E DS                  EXTNAME(PCOM225)
+     D COM220U5      E DS                  EXTNAME(PCOM220U5)
+     D AGTDR         E DS                  EXTNAME(COMAGTDR)
+bg03 d OutputKey       ds                  LikeRec(RCTL001F:*Key)
+bg03 d Library         S             10    DTAARA(LSPDTA)
+bmg01D RunDate         DS                  DTAARA(CAGTDT)
+bmg01D  DateAlpha2                    8
+bg03
+bg03 * Get the Transaction Table Totals for XML
+bg03 D GetTransTotals  PR                  ExtPgm('COMTRANTOT')
+bg03 D Company                        4A   Const
+bg03 D AgentNo                        9A   Const
+bg03 D ChargeCredit                  15A
+bg03 D Income                        15A
+bg03 D TRecordCnt                     4A
+bg03 D PRecordCnt                     4A
+bg03 D PTotal                        15A
+bg03 D Level                               Like(AgtLevel)
+bg03 D                                     Dim(50)
+bg03
+bg03 * Get the user defined fields
+bg03 D GetUserFields   PR                  ExtPgm('DYF300')
+bg03 D  pdyf300                            Like(dyf300)
+bg03 D  pdsuser                            Like(dyf300)
+bg03
+bg03 * Call to format &, ', <, > to HTML tags acceptable to XML
+bg03 D CheckCharacter  PR                  Extpgm('XMLCHRSCAN')
+bg03 D  InString                    100A
+bg03
+bg03 * Call to Send the XML ot the server
+bg03 D SendXML         PR                  Extpgm('COMXMLSND')
+bg03 D  CallingPgm                   10A
+bg03
+bg03 * Clear the data queue
+bg03 D ClearDataQ      PR                  Extpgm('QCLRDTAQ')
+bg03 D  DataQueP                           Like(DataQue)
+bg03 D  DataQueLibP                        Like(DataQueLib)
+bg03
+bg03 * API to send the data queue info
+bg03 D SendData        PR                  Extpgm('QSNDDTAQ')
+bg03 D  DataQueP                           Like(DataQue)
+bg03 D  DataQueLibP                        Like(DataQueLib)
+bg03 D  DataQueLenP                        Like(DataQueLen)
+bg03 D  DataQDataP                         Like(DataQData)
+bg03 D  KeyLengthP                         Like(KeyLength)
+bg03 D  KeyP                               Like(DataQKey)
+bg03
+bg03 D SubmitJob       PR                  Extpgm('QCMDEXC')
+bg03 D  String                     1028    Const
+bg03 D                                     Options(*Varsize)
+bg03 D CmdLength                     15P 5 Const
+bg03
+bg03 ** API call to open a stream file
+bg03 d Open            PR            10I 0 extproc('open')
+bg03 d   path                          *   value options(*string)
+bg03 d   oflag                       10I 0 value
+bg03 d   mode                        10U 0 value options(*nopass)
+bg03 d   codepage                    10U 0 value options(*nopass)
+bg03
+bg03 ** API call to write data to a stream file
+bg03 d Write           PR            10I 0 extproc('write')
+bg03 d   fildes                      10I 0 value
+bg03 d   buf                           *   value
+bg03 d   nbyte                       10U 0 value
+bg03
+bg03 ** API call to close a stream file
+bg03 d Close           PR            10I 0 extproc('close')
+bg03 d   fildes                      10I 0 value
+bg03
+bg03 ** API oflag options.
+bg03 d O_WRONLY        C                   2
+bg03 d O_CREAT         C                   8
+bg03 d O_TRUNC         C                   64
+bg03 d O_APPEND        C                   256
+bg03
+bg03 ** API Mode Flags.
+bg03 **********************************************************************
+bg03 *      Mode Flags.
+bg03 *         basically, the mode parm of open(), creat(), chmod(),etc
+bg03 *         uses 9 least significant bits to determine the
+bg03 *         file's mode. (peoples access rights to the file)
+bg03 *
+bg03 *           user:       owner    group    other
+bg03 *           access:     R W X    R W X    R W X
+bg03*           bit:        8 7 6    5 4 3    2 1 0
+bg03 *
+bg03 * (This is accomplished by adding the flags below to get the mode)
+bg03 **********************************************************************
+bg03 *                                         owner authority
+bg03 d S_IRUSR         C                   256
+bg03 d S_IWUSR         C                   128
+bg03 d S_IXUSR         C                   64
+bg03 d S_IRWXU         C                   448
+bg03 *                                         group authority
+bg03 d S_IRGRP         C                   32
+bg03 d S_IWGRP         C                   16
+bg03 d S_IXGRP         C                   8
+bg03 d S_IRWXG         C                   56
+bg03 *                                         other people
+bg03 d S_IROTH         C                   4
+bg03 d S_IWOTH         C                   2
+bg03 d S_IXOTH         C                   1
+bg03 d S_IRWXO         C                   7
+bg03 *                                         special modes:
+bg03 *                                         Set effective GID
+bg03 d S_ISGID         C                   1024
+bg03 *                                         Set effective UID
+bg03 d S_ISUID         C                   2048
+bg03
+bg03 d Fd              S             10I 0
+bg03 d Data            S           1000A   varying
+bg03 d Msg             S             52A
+bg03 d CRLF            C                   x'0d25'
+bg03
+bg03 **Copy in Commissions XML Fields
+bg03  /Copy QRPGLESRC,XML_Comm
+bg03
+bg03  /Eject
+      *
+     C     *ENTRY        PLIST
+     C                   PARM                    PROCDT
+     C                   PARM                    PRM220
+      *
+     C     KPTDX         KLIST
+     C                   KFLD                    CMCO
+     C                   KFLD                    MAGTNO
+     C                   KFLD                    CUCRCD
+     C*                                                    INSERT
+PWK  C     AG1KEY        KLIST
+PWK  C                   KFLD                    CMCO
+PWK  C                   KFLD                    CPOLNO
+     *
+     C     KPTDDC        KLIST
+     C                   KFLD                    CMCO
+     C                   KFLD                    MAGTNO
+     C                   KFLD                    CUCRCD
+      *
+     C     KEY           KLIST
+     C                   KFLD                    CMCO
+     C                   KFLD                    MAGTNO
+     C                   KFLD                    CUCRCD
+     C*
+BG01
+BG01 C     BeneKey       KList
+BG01 C                   KFld                    CMCO
+BG01 C                   KFld                    CPOLNO
+bg03 C
+bg03 C     AgentKey      KList
+bg03 C                   KFld                    CMCO
+ ms1 C                   KFld                    Mpayto
+RJ02 C*
+RJ02 C     KALT          KLIST
+RJ02 C                   KFLD                    R_CRCO
+RJ02 C                   KFLD                    R_CRCTL1
+RJ02 C                   KFLD                    R_CRCTL2
+RJ02 C                   KFLD                    R_CRALPH
+RJ02 C*
+bg03
+     C*                                                    INSERT
+     C                   EXSR      INIT
+     C*                                                    INSERT
+     C/EJECT
+     F*****************************
+     C*     MAINLINE              *
+     C*****************************
+     C*
+     C                   READ      LSPCOMST                               LR
+     C     *INLR         DOWEQ     *OFF
+     C*
+     C* If a company is passed into program then process that company,
+     C* Else process all companies (company passed is blank).
+     C*
+     C     CO220         IFNE      *BLANKS
+     C     CO220         ANDEQ     CMCO
+     C     CO220         OREQ      *BLANKS
+     C                   EXSR      CMPCHG
+bg03
+bg03 C                   Eval      CompanyName = CMCO
+bg04 C     CMCO          Chain     LSPSVMSC
+bg04 C                   If        %Found(LSPSVMSC)
+bg04 C                   Eval      MinCheckAmt = V_XMINCK
+bg04 C                   Else
+bg04 C                   Eval      MinCheckAmt = *Zero
+bg04 C                   EndIf
+bg03 C                   ExSr      GetCompanyStat
+bg03
+bg03 C                   If        Not %Open(COMMSGF)
+bg03 C                   Open      COMMSGF
+bg03 C                   EndIf
+bg03
+bg03 C                   ExSr      OpenXMLStream
+bg03 C                   ExSr      WriteXMLComS
+bg03
+     C                   EXSR      PRCCMP
+bg03
+bg03 C                   ExSr      WriteXMLComE
+bg03
+bg03 C                   Callp     Close(fd)
+bg03
+bg03 C                   If        %Open(COMMSGF)
+bg03 C                   Close     COMMSGF
+bg03 C                   EndIf
+bg03
+bg03 *                  Call program to Send XML file to server and run batch j
+bg03 C                   Eval      DataQData = StreamFile
+bg03
+bg03 C                   Eval      DataQue = ComDataQue
+bg03
+bg03 C                   If        ProgramType <> 'TRIAL' and
+ ms1 C                             programtype <> 'DAILY'
+bg03 C                   If        OutputMode = Electronic or
+bg03 C                             OutputMode = TextNotify
+bg03 C                   Eval      StartPos   = %Scan('/Commissions':DataQData)
+bg03
+bg03 C                   Eval      EmailFile  = %Replace('/Mail':
+bg03 C                                          %Trim(DataQData):
+bg03 C                                          StartPos:12)
+bg03
+bg03 C                   Eval      StartPos   = %Scan('Comm':EmailFile)
+bg03
+bg03 C                   Eval      EmailFile  = %Replace('Mail':
+bg03 C                                          %Trim(EmailFile):
+bg03 C                                          StartPos:4)
+bg03
+bg03 C***rr03            Eval      Command = 'CPY OBJ(' + '''' + DataQData +
+bg03 C***rr03                                 '''' + ') +
+bg03 C***rr03                                 TOOBJ(' + '''' + EmailFile +
+bg03 C***rr03                                 '''' + ') +
+bg03 C***rr03                                 REPLACE(*YES)'
+bg03 C                   Eval      Command = 'CPY OBJ(' + '''' +
+     c                                        %Trim(DataQData) +
+bg03 C                                        '''' + ') +
+bg03 C                                        TOOBJ(' + '''' +
+**** c                                        %Trim(EmailFile) +
+bg03 C                                        '''' + ') +
+bg03 C                                        REPLACE(*YES)'
+bg03 C                   Callp     SubmitJob(Command:%Len(%Trim(Command)))
+bg03
+bg03 C                   Callp     SendData(DataQue:
+bg03 C                                      DataQueLib:
+bg03 C                                      DataQueLen:
+bg03 C                                      DataQData:
+bg03 C                                      KeyLength:
+bg03 C                                      DataQKey)
+bg03 C
+bg04
+bg04 C***rr03            Eval      Command = 'SBMJOB CMD(CALL PGM(COMMAILRCV)) +
+BL02 C***rr03                                  JOB(MAILRCV) HOLD(*NO)'
+bg04 C***rr03            Callp     SubmitJob(Command:%Len(Command))
+bg03
+bg03 C***rr03            Eval      DataQData = EmailFile
+bg03 C                   Eval      DataQData = %Trim(EmailFile)
+bg03 C                   Eval      DataQue = MailDataQue
+bg03 C                   EndIf
+bg03 C                   EndIf
+bg03
+bg03 C                   Callp     SendData(DataQue:
+bg03 C                                      DataQueLib:
+bg03 C                                      DataQueLen:
+bg03 C                                      DataQData:
+bg03 C                                      KeyLength:
+bg03 C                                      DataQKey)
+bg03 C
+     C                   ENDIF
+     C*
+     C                   READ      LSPCOMST                               LR
+     C*
+     C                   ENDDO
+     C*
+     C     SVCO          IFNE      *BLANKS
+     C                   MOVE      'N'           OPNFLG            1
+     C                   EXSR      CMPCHG
+     C                   ENDIF
+     C*
+bg03 * EOF will tell the receiver jobs to end
+bg03 C***rr03            Eval      DataQData = 'EOF'
+bg03 C
+bg03 C***rr03            Eval      DataQue = MailDataQue
+bg03
+bg03 C***rr03            Callp     SendData(DataQue:
+bg03 C***rr03                               DataQueLib:
+bg03 C***rr03                               DataQueLen:
+bg03 C***rr03                               DataQData:
+bg03 C***rr03                               KeyLength:
+bg03 C***rr03                               DataQKey)
+bg03
+bg03 C                   If        ProgramType <> 'TRIAL'
+BL01 C                             and ProgramType <> 'DAILY'
+bg03 c                   Eval      Command = 'CLRPFM FILE(COMMSGF)'
+bg03 C
+bg03 C                   Callp     SubmitJob(Command:%Len(Command))
+bg03 C                   EndIf
+bg03 C
+     C                   COMMIT
+     C                   CALL      'RCLRSC'
+     C/EJECT
+
+bg03 **********************************************************************
+bg03 * OpenXMLStream - Open the XML Stream File for record creation.
+bg03 **********************************************************************
+bg03  /free
+bg03     Begsr OpenXMLStream;
+bg03
+bg03        //Open the Stream file in IFS:
+bg03        //Open the "MODEL" stream file if Testing.
+bg03       If Library = 'AFMODEL';
+bg03
+bg03          Select;
+bg03          When %Len(%Trim(CMCO)) = 3 and ProgramType <> 'TRIAL';
+bg03
+bg03             StreamFile = %Trim(Directory) + %Trim(CMCO) +
+bg03                          '_' + %Trim(SuffixM);
+bg03
+bg03          When %Len(%Trim(CMCO)) = 3 and ProgramType = 'TRIAL';
+bg03
+bg03             StreamFile = %Trim(Directory) + %Trim(CMCO) +
+bg03                          '_' + %Trim(SuffixTrialM);
+bg03
+bg03          When %Len(%Trim(CMCO)) = 4 and ProgramType <> 'TRIAL';
+bg03
+bg03             StreamFile = %Trim(Directory) + %Trim(CMCO) +
+bg03                          %Trim(SuffixM);
+bg03
+bg03          When %Len(%Trim(CMCO)) = 4 and ProgramType = 'TRIAL';
+bg03
+bg03             StreamFile = %Trim(Directory) + %Trim(CMCO) +
+bg03                          %Trim(SuffixTrialM);
+bg03          EndSL;
+bg03       Else;
+bg03          //Open the "PRODUCTION" stream file if Live.
+bg03
+bg03          Select;
+bg03          When  %Len(%Trim(CMCO)) = 3 and ProgramType <> 'TRIAL';
+bg03             StreamFile = %Trim(Directory)  + %Trim(CMCO) +
+bg03                          '_'+ %Trim(SuffixP);
+bg03
+bg03          When  %Len(%Trim(CMCO)) = 3 and ProgramType = 'TRIAL';
+bg03             StreamFile = %Trim(Directory)  + %Trim(CMCO) +
+bg03                          '_'+ %Trim(SuffixTrialP);
+bg03
+bg03          When  %Len(%Trim(CMCO)) = 4 and ProgramType <> 'TRIAL';
+bg03             StreamFile = %Trim(Directory)  + %Trim(CMCO) +
+bg03                          %Trim(SuffixP);
+bg03
+bg03          When  %Len(%Trim(CMCO)) = 4 and ProgramType = 'TRIAL';
+bg03             StreamFile = %Trim(Directory)  + %Trim(CMCO) +
+bg03                          %Trim(SuffixTrialP);
+bg03          EndSl;
+bg03       Endif;
+bg03
+bg03          Fd = open(StreamFile:
+bg03                     O_CREAT+O_TRUNC+O_WRONLY:
+bg03                     S_IRWXU+S_IRWXG+S_IRWXO);
+bg03
+bg03       If Fd < 0;
+bg03          *inlr = *on;
+bg03          Return;
+bg03       Endif;
+bg03
+bg03    Endsr;
+bg03  /End-Free
+
+     C     PRCCMP        BEGSR
+     C*****************************************************************
+     C* PRCCMP - PROCESS COMPANY
+     C*****************************************************************
+     C*
+     C     CMCO          SETLL     LTCOM220
+     C                   SETOFF                                       97
+     C*
+     C     *IN97         DOWEQ     OFF
+     C     CMCO          READE     LTCOM220                               97
+      *
+     C                   MOVE      'N'           PRCAGT            1
+     C                   EXSR      CLRBAL
+      *
+     C     *IN97         IFEQ      *ON
+     C                   LEAVE
+     C                   ENDIF
+      *
+     C     MTRMMO        IFEQ      0
+     C     XPAGTS        ANDEQ     'Y'
+     C                   MOVE      'Y'           PRCAGT
+     C                   END
+      *
+     C     *LOVAL        SETLL     LFCURNC
+     C                   MOVE      *OFF          *IN96
+      *
+     C     *IN96         DOWEQ     *OFF
+     C                   READ      LFCURNC                                96
+      *
+     C                   EXSR      CLRBAL
+      *
+     C     *IN96         IFEQ      *ON
+     C                   LEAVE
+     C                   ENDIF
+      *
+     C                   EXSR      GETBAL
+      *
+     C     KPTDX         CHAIN     COMPTDEX                           99
+     C     KPTDDC        CHAIN     COMPTDDC                           98
+      *
+     C     *IN98         IFEQ      *OFF
+     C     *IN99         OREQ      *OFF
+     C                   MOVE      'Y'           PRCAGT
+     C                   ENDIF
+      *
+     C                   MOVE      MCO           XCO
+     C                   MOVE      CUCRCD        XCRCD
+     C                   CALL      'LSP220'
+     C                   PARM                    LSP220
+     C*
+     C     PRCAGT        IFEQ      'Y'
+     C*
+     C* If a statement series is passed to pgm select that statement series,
+     C* Elsa if blank then select all statement series.
+     C     SS220         IFNE      *BLANKS
+     C     SS220         ANDEQ     MSTSER
+     C     SS220         OREQ      *BLANKS
+     C                   EXSR      GETNA
+PB2  C*****              Z-ADD     8             LCNT
+PB2  C                   Z-ADD     20            LCNT
+     C                   WRITE     HDRSTM
+     C                   EXSR      PRCMEM
+     C                   EXSR      PRCCOM
+     C                   EXSR      UPDBAL
+     C                   EXSR      PAYAGT
+     C                   EXSR      PRTFT
+     C                   ENDIF
+     C                   ENDIF
+      *
+     C                   ENDDO
+      *
+     C                   ENDDO
+     C*
+     C                   EXSR      CMPTOT
+     C*
+     C                   ENDSR
+     C/EJECT
+     C*****************************************************************
+     C*                    PRCMEM SUBROUTINE
+     C*****************************************************************
+     C     PRCMEM        BEGSR
+
+bg03 C                   Clear                   dyf300
+bg03 C                   Eval      ky1300 = MAGTNO
+bg03 C                   ExSr      GetAgentLevel
+bg03 C                   Eval      AgentLevel = %Trim(DY1DSP)
+bg03 C                   ExSr      GetAgentMsg
+bg03 C                   ExSr      WriteComPrim
+BL01 C                   Clear                   AgtMsg
+bg03 C                   Eval      AdvancePct = MADVRT
+bg03
+bg03 C                   Eval      Sequenceno = *Zero
+      *
+PB2   *****              ADD       4             LCNT              2 0
+PB2  C                   ADD       7             LCNT              2 0
+     C                   WRITE     DCHEAD
+     C                   Z-ADD     0             DCRECS            5 0
+     C                   Z-ADD     0             DCTOT
+     C                   Z-ADD     0             DCTAX
+     C*
+     C     *IN98         DOWEQ     OFF
+     C     DAGTNO        ANDEQ     MAGTNO
+     C     DOCRCD        ANDEQ     CUCRCD
+     C*
+     C     DTAXCD        IFEQ      'N'
+     C                   Z-SUB     0             TAXINC
+     C*
+     C                   ELSE
+     C     DTAXCD        IFEQ      'I'
+     C     DAMT          IFGT      0
+     C                   Z-ADD     DAMT          TAXINC
+     C                   ELSE
+     C                   Z-SUB     DAMT          TAXINC
+     C                   END
+     C*
+     C                   ELSE
+     C     DAMT          IFGT      0
+     C                   Z-SUB     DAMT          TAXINC
+     C                   ELSE
+     C                   Z-ADD     DAMT          TAXINC
+     C                   END
+     C                   END
+     C                   END
+     C*
+PB2   ***  *IN25         IFEQ      *ON
+PB2  C     *IN26         IFEQ      *ON
+PB2  C     LCNT          ORGT      LSTDTL
+     C                   EXSR      PRTFT
+     C                   ADD       1             PAGES
+     C                   WRITE     HDRSTM
+     C                   WRITE     DCHEAD
+PB2   *****              Z-ADD     12            LCNT
+PB2  C                   Z-ADD     28            LCNT
+PB2   *****              MOVE      *OFF          *IN25
+PB2  C                   MOVE      *OFF          *IN26
+     C                   END
+     C*
+     C                   ADD       1             LCNT
+     C                   EXSR      CVTDTL
+     C                   WRITE     DCDETL
+
+bg03 C                   Eval      SequenceNo = SequenceNo + 1
+bg03 C                   ExSr      WriteTransTbl
+     C*
+PB2   ***  *IN25         IFEQ      *ON
+PB2  C     *IN26         IFEQ      *ON
+     C                   EXSR      PRTFT
+     C                   ADD       1             PAGES
+     C                   WRITE     HDRSTM
+     C                   WRITE     DCHEAD
+     C                   Z-ADD     12            LCNT
+PB2   *****              MOVE      *OFF          *IN25
+PB2  C                   MOVE      *OFF          *IN26
+     C                   END
+     C*
+     C                   ADD       DAMT          DCTOT
+     C                   ADD       TAXINC        DCTAX
+     C                   ADD       1             DCRECS
+     C*
+     C     KPTDDC        READE     COMPTDDC                               98
+     C*
+     C                   END
+     C*
+     C                   ADD       4             LCNT
+     C*
+     C     DCRECS        IFEQ      0
+     C                   MOVE      ON            *IN81
+     C                   ELSE
+     C                   MOVE      OFF           *IN81
+     C                   END
+     C*
+     C                   WRITE     DCTOTL
+     C*
+     C                   Z-ADD     1             B
+     C     CUCRCD        LOOKUP    COCR(B)                                90
+      *
+     C     *IN90         IFEQ      *OFF
+     C                   ADD       1             C
+     C                   MOVE      CUCRCD        COCR(C)
+     C     C             OCCUR     CMPFDC
+     C                   ELSE
+     C     B             OCCUR     CMPFDC
+     C                   ENDIF
+      *
+     C                   ADD       DCTOT         FDCTOT
+     C*
+     C                   ENDSR
+     C/EJECT
+     C*****************************************************************
+     C* PROCESS COMMISSIONS FOR AN AGENT
+     C*****************************************************************
+     C     PRCCOM        BEGSR
+     C*
+     C                   EXSR      ZERCOM
+bg03 C                   Eval      SequenceNo = *Zero
+     C*
+     C     *IN99         DOWEQ     OFF
+     C     CAGTNO        ANDEQ     MAGTNO
+     C     LCRCD         ANDEQ     CUCRCD
+     C*
+     C                   EXSR      ZEROST
+     C                   EXSR      PRTCHD
+     C                   EXSR      PRTCOM
+     C                   EXSR      PRCSUB
+     C                   EXSR      ADTOCT
+     C*
+     C                   END
+     C*
+     C                   EXSR      PRTCMT
+     C*
+     C                   ENDSR
+     C/EJECT
+PRTCOM*****************************************************************
+     C*   PRINT COMMISSIONS FOR AGENT UNTIL COM LEVEL OR INS TYPE CHG
+     C*****************************************************************
+     C     PRTCOM        BEGSR
+     C*
+     C                   MOVE      CITYPE        HTYPE             1
+     C                   MOVE      CLVLCM        HLVL              2
+     C*
+     C     *IN99         DOWEQ     OFF
+     C     CAGTNO        ANDEQ     MAGTNO
+     C     LCRCD         ANDEQ     CUCRCD
+     C     CLVLCM        ANDEQ     HLVL
+     C     CITYPE        ANDEQ     HTYPE
+     c*
+ ms1 c*  Format COMPTDEX processing date for calcs.
+ ms1 C                   Eval      DateAlpha = %Editc(LMONTH:'X') +
+ ms1 C                                         %Editc(LDAY:'X') +
+ ms1 C                                         %Editc(LYEAR:'X')
+ ms1 C     *USA0         Test(de)                DateAlpha
+ ms1 C                   If        Not %Error
+ ms1 C                   Eval      TrnDate = %Date(DateAlpha:*USA0)
+ ms1 C                   Else
+ ms1 C                   Eval      TrnDate = *LoVal
+ ms1 C                   EndIf
+     C*
+ ms1 c* Only process records if they are not in the future.  Future
+ ms1 c*  transactions will be kept for later date.
+dfb2 c**                 if        trndate <= jobdate
+     c*
+     C     CTTYPE        IFEQ      'C'
+bg01 C     CTTYPE        Oreq      'Z'
+     C     CCMAMT        SUB       CADVPB        CAMT
+     C     CAMT          SUB       CESCAM        CAMT
+     C*
+     C                   ELSE
+     C                   Z-ADD     CCMAMT        CAMT
+     C                   END
+dfb2 c*
+dfb2 C**                 END
+     *
+PWK  **  GET WRITING AGENT FOR OVERWRITE LEVEL TWO AND HIGHER      **
+PWK  C     CLVLCM        IFGE      '02'
+PWK  C                   MOVE      '00'          BRCD              2 0
+PWK  C                   MOVE      '01'          DSTL              2 0
+PWK  C                   MOVE      'W'           ATYP              1
+PWK  C                   Z-ADD     *ZEROS        EFFY              4 0
+PWK  C                   Z-ADD     *ZEROS        EFFM              2 0
+PWK  C                   Z-ADD     *ZEROS        EFFD              2 0
+PWK  C                   Z-ADD     *ZEROS        TIME              6 0
+PWK  C                   MOVE      *BLANKS       AGTN              9
+PWK  C                   ENDIF
+     *
+PWK  C     AG1KEY        CHAIN     CASMWAGT                           91
+PWK  C     *IN91         DOWEQ     *OFF
+     *
+PWK  C     MWATYP        IFEQ      'W'
+PWK  C                   MOVE      MWAGTN        WAGT              9
+PWK  C                   ELSE
+PWK  C                   MOVE      *BLANKS       WAGT              9
+     *
+PWK  C                   ENDIF
+PWK  C     AG1KEY        READE     CASMWAGT                               91
+PWK  C                   ENDDO
+     C*
+bg01 C                   If        CINLAS = *Blanks
+bg01 C                   Clear                   cms205
+bg01 C                   Clear                   cltm
+bg01 C                   Clear                   clta
+bg01
+bg01 C                   Eval      CMP205 = CMCO
+bg01 C                   Eval      CT1205 = CPOLNO
+bg01 C                   Eval      TYP205 = 'INS'
+bg01 C                   Eval      nfm205 = '9'
+bg01 C                   Eval      afm205 = '*'
+bg01 C                   CALL      'CMS205'
+bg01 C                   PARM                    CMS205
+bg01 C                   PARM                    CLTM
+bg01 C                   PARM                    CLTA
+bg01
+bg01 C     RTN205        IFEQ      *ZEROS
+bg01 C                   Eval      F = %SubSt(FNM205:1:1)
+bg01 C                   Eval      L = %SubSt(FNM205:12:13)
+bg03 C                   Eval      InsuredFName = %Trim(%SubSt(FNM205:1:10))
+bg03 C                   Eval      InsuredLName = %Trim(%SubSt(FNM205:12:13))
+bg03 C                   Eval      InsuredName = %Trim(InsuredFName) +
+bg03 C                                     ' ' + %Trim(InsuredLName)
+bg01 C                   Else
+bg01 C                   Eval      F = *Blanks
+bg01 C                   Eval      L = *Blanks
+bg03 C                   Eval      InsuredFName = *Blanks
+bg03 C                   Eval      InsuredLName = *Blanks
+bg01 C                   Endif
+bg01
+bg01 C                   Else
+
+     C                   MOVEL     CINFIR        F                 1
+DB01 C                   MOVEL     CINLAS        L                13
+bg03 C                   Eval      InsuredFName = %Trim(CINFIR)
+bg03 C                   Eval      InsuredLName = %Trim(CINLAS)
+bg03 C                   Eval      InsuredName = %Trim(CINFIR) +
+bg03 C                                     ' ' + %Trim(CINLAS)
+bg01 C                   EndIf
+DB01 C*
+DB01 C                   MOVEL     L             IGCP1
+DB01 C                   Z-ADD     013           IGCP2
+DB01 C                   EXSR      IGCSR
+DB01 C                   MOVEL     IGCP3         L
+DB01 C*
+     C*
+     C     LCNT          IFGT      LSTDTL
+     C                   EXSR      PRTCHD
+     C                   END
+     *
+     C*
+ ms1 c* Only process records if they are not in the future.  Future
+ ms1 c*  transactions will be kept for later date.
+dfb2 c*****              if        trndate <= jobdate
+ dfb2c* removed this section when adding future trans info
+     C*
+PB2  C     CTTYPE        IFEQ      'C'
+bg01 C     CTTYPE        OrEQ      'Z'
+BG01 C                   If        CPRMPD < *Zero
+BG01 C     BeneKey       Setll     CASBENE
+BG01 C     BeneKey       Reade     CASBENE
+BG01 C                   DoW       Not %EOF(CASBENE) and
+BG01 C                             FPLAN <> CPLAN
+BG01 C     BeneKey       Reade     CASBENE
+BG01 C                   EndDo
+BG01 C
+BG01 C                   If        FPLAN = CPLAN
+BG01 C                   Select
+BG01 C                   When      FPSFLG = 'N'
+BG01 C                   Eval      CATYPE = NotTaken
+BG01 C                   When      FPSFLG = 'C'
+BG01 C                   Eval      CATYPE = Cancel
+BG01 C                   Other
+BG01 C                   Eval      CATYPE = Premium
+BG01 C                   EndSL
+BG01 C
+BG01 C                   EndIf
+BG01 C                   Else
+|    C                   MOVE      'PRM'         CATYPE
+BG01 C                   EndIf
+PB2  C                   ENDIF
+dfb2 C***                ENDIF
+dfb2 C** removed above line
+     *
+PB2  C                   Z-ADD     CISSMO        ISSMO
+|    C                   Z-ADD     CISSDA        ISSDA
+|    C                   Z-ADD     CISSYY        ISSYR
+|    C                   Z-ADD     CPDTMO        PTDMO
+|    C                   Z-ADD     CPDTDA        PTDDA
+PB2  C                   Z-ADD     CPDTYY        PTDYR
+bg03
+bg03 C                   Eval      DateAlpha = %Editc(CISSYY:'X') +
+bg03 C                                         %Editc(CISSMO:'X') +
+bg03 C                                         %Editc(CISSDA:'X')
+bg03 C     *YMD0         Test(de)                DateAlpha
+bg03 C                   If        Not %Error
+bg03 C                   Eval      IssueDate = %Date(DateAlpha:*YMD0)
+bg03 C                   Else
+bg03 C                   Eval      IssueDate = *HiVal
+bg03 C                   EndIf
+bg03
+bg03 C                   Eval      DateAlpha = %Editc(CPDTYY:'X') +
+bg03 C                                         %Editc(CPDTMO:'X') +
+bg03 C                                         %Editc(CPDTDA:'X')
+bg03 C     *YMD0         Test(de)                DateAlpha
+bg03 C                   If        Not %Error
+bg03 C                   Eval      PaidToDate = %Date(DateAlpha:*YMD0)
+bg03 C                   Else
+bg03 C                   Eval      PaidToDate = *LoVal
+bg03 C                   EndIf
+     C*
+     C                   EXSR      CVTCOM
+     C*
+bg03 C                   If        CO220 <> *Blanks and
+bg03 C                             CO220 =  CMCO Or
+bg03 C                             CO220 = *Blanks
+bg03
+bg03 C                   If        (SS220 = MSTSER) or
+bg03 C                             (SS220 = *Blanks)
+
+bg03 C                   Eval      CMP205 = CMCO
+bg03 C                   Eval      CT1205 = CWRAGT
+bg03 C                   Eval      TYP205 = 'AGT'
+bg03 C                   Eval      nfm205 = '9'
+bg03 C                   Eval      afm205 = '*'
+bg03 C                   CALL      'CMS205'
+bg03 C                   PARM                    CMS205
+bg03 C                   PARM                    CLTM
+bg03 C                   PARM                    CLTA
+bg03
+bg03 C                   If        RTN205 = '00'
+bg03 C                   If        CMNCIN = 'N'
+bg03 C                   Eval      AgentFName = %Trim(%SubSt(FNM205:1:10))
+bg03 C                   Eval      AgentLName = %Trim(%SubSt(FNM205:12:25))
+bg03 C                   Else
+bg03 C                   Eval      AgentFName = *Blanks
+bg03 C                   Eval      AgentLName = %Trim(CMNAME)
+bg03 C                   EndIf
+bg03 C                   Else
+bg03 C                   Eval      AgentFName = *Blanks
+bg03 C                   Eval      AgentlName = *Blanks
+bg03 C                   EndIf
+bg03
+bg03 C                   Clear                   dyf300
+bg03 C                   Eval      ky1300 = CWRAGT
+bg03 C                   ExSr      GetAgentLevel
+bg03 C                   Eval      WriteAgtLevel = %Trim(DY1DSP)
+bg03
+bg03 C                   Eval      SequenceNo = SequenceNo + 1
+     c*dfb2
+dfb2 c                   eval      ReleaseDate  = trndate
+dfb2 c                   eval      FutureAmount   = 0
+dfb2 c                   eval      ReleaseAmount  = 0
+dfb2 c* if this is a future trans prep fields for output to stmt.
+dfb2 c                   if        trndate >  jobdate
+dfb2 c                   exsr      futurest
+dfb2 c                   endif
+bg03 C                   ExSr      WriteProdTable
+bg03 C                   EndIf
+bg03 C                   EndIf
+bg03
+dfb2 c                   if        trndate <= jobdate
+     C                   WRITE     COMDTL
+     C                   ADD       1             LCNT
+dfb2 c                   end
+     C*
+PB2   ******IN25         IFEQ      *ON
+PB2  C     *IN26         IFEQ      *ON
+     C                   EXSR      PRTCHD
+PB2  C*****              MOVE      *OFF          *IN25
+PB2  C                   MOVE      *OFF          *IN26
+     C                   END
+     C*
+ ms1 c* Only process records if they are not in the future.  Future
+ ms1 c*  transactions will be kept for later date.
+dfb2 c                   if        trndate <= jobdate
+     C*
+     C                   EXSR      ADTOST
+dfb2 c                   endif
+     C*
+     C     KPTDX         READE     COMPTDEX                               99
+     C*
+     C                   END
+     C*
+     C                   ENDSR
+     C/EJECT
+     C*****************************************************************
+     C*  UPDATE AGENT MASTER BALANCES
+     C*****************************************************************
+     C     UPDBAL        BEGSR
+     C*
+     C                   ADD       12            LCNT
+     C     LCNT          IFGT      LSTDTL
+     C                   SUB       12            LCNT
+     C                   EXSR      PRTFT
+     C                   ADD       1             PAGES
+     C                   WRITE     HDRSTM
+PB2   *****              Z-ADD     19            LCNT
+PB2  C                   Z-ADD     31            LCNT
+     C                   END
+     C*
+     C     XTAXCD        IFEQ      'P'
+     C     COM1          ADD       COMR          CMTAX
+     C                   ELSE
+     C     ECM1          ADD       ECMR          CMTAX
+     C                   END
+     C*
+     C     COM1          ADD       COMR          CMTOT
+     C     ADV1          ADD       ADVR          CMADV
+     C     ESC1          ADD       ESCR          CMESC
+     C*
+     C*  CALCULATE BEGINING ESCROW BALANCE
+     C     MEBAL         SUB       ESC1          XEBAL
+     C                   SUB       ESCR          XEBAL
+     C*
+     C*  INTEREST ON AGENTS BALANCE CALULATED AFTER CHGS/CREDITS FOR MO
+     C     MBAL          ADD       DCTOT         WKBAL
+     C                   ADD       CMTOT         WKBAL
+     C*
+     C     WKBAL         IFLT      0
+     C     XDCIRT        MULT      .01           WKRATE            5 4
+     C     WKRATE        MULT(H)   WKBAL         AINTAM
+     C*
+     C                   ELSE
+     C                   Z-ADD     0             AINTAM
+     C                   END
+     C*
+     C*  CALCULATE INTEREST EARNED ON ESCROW BALANCE
+     C     XESIRT        MULT      .01           WKRATE            5 4
+     C     WKRATE        MULT      MEBAL         EINTAM
+     C*
+     C*  INTEREST CALCULATED IS AN EXPENSE ITEM AND IS TAXABLE
+     C     AINTAM        IFNE      0
+     C                   EXSR      AINTGL
+     C                   END
+     C*
+     C                   Z-ADD     0             INTTAX
+     C*
+     C     EINTAM        IFNE      0
+     C                   EXSR      EINTGL
+     C                   END
+     C*
+bg02 C                   Eval      BalanceForward = MBAL
+
+     C                   WRITE     AGTBAL
+     C*
+     C                   ADD       DCTOT         MBAL
+     C                   ADD       CMTOT         MBAL
+     C                   ADD       AINTAM        MBAL
+     C*
+     C                   ADD       CMADV         MABAL
+     C*
+     C                   ADD       EINTAM        MEBAL
+      *
+     C                   EXSR      LODBAL
+      *
+     C                   CLEAR                   COM991
+     C                   MOVEL     CMCO          CO991
+     C                   MOVEL     MAGTNO        AGT991
+     C                   MOVEL     CUCRCD        CRC991
+     C                   MOVEL     'BAL'         TYP991
+     C                   Z-ADD     MBAL          AMT991
+ rr02C                   eval      us3991           = ss220
+     C                   CALL      'COM991'
+     C                   PARM                    COM991
+     C*
+     C                   CLEAR                   COM991
+     C                   MOVEL     CMCO          CO991
+     C                   MOVEL     MAGTNO        AGT991
+     C                   MOVEL     CUCRCD        CRC991
+     C                   MOVEL     'ADV'         TYP991
+     C                   Z-ADD     MABAL         AMT991
+ rr02C                   eval      us3991           = ss220
+     C                   CALL      'COM991'
+     C                   PARM                    COM991
+     C*
+     C                   CLEAR                   COM991
+     C                   MOVEL     CMCO          CO991
+     C                   MOVEL     MAGTNO        AGT991
+     C                   MOVEL     CUCRCD        CRC991
+     C                   MOVEL     'INC'         TYP991
+     C                   Z-ADD     MIBAL         AMT991
+ rr02C                   eval      us3991           = ss220
+     C                   CALL      'COM991'
+     C                   PARM                    COM991
+     C*
+     C                   CLEAR                   COM991
+     C                   MOVEL     CMCO          CO991
+     C                   MOVEL     MAGTNO        AGT991
+     C                   MOVEL     CUCRCD        CRC991
+     C                   MOVEL     'ESC'         TYP991
+     C                   Z-ADD     MEBAL         AMT991
+ rr02C                   eval      us3991           = ss220
+     C                   CALL      'COM991'
+     C                   PARM                    COM991
+     C*
+     CSR                 ENDSR
+     C/EJECT
+     C*****************************************************************
+     C* PRODUCE GENERAL LEDGER TRANSACTIONS FOR DR BALANCE INTEREST
+     C*****************************************************************
+     C     AINTGL        BEGSR
+     C*
+     C                   MOVE      'G'           GDRCID
+     C                   Z-ADD     *MONTH        FMTMO
+     C                   Z-ADD     *DAY          FMTDA
+     C                   Z-ADD     *YEAR         FMTYR
+     C                   MOVE      FMTDT         GDDATE
+     C                   Z-ADD     0             GDLADT
+     C                   MOVE      *BLANKS       GDSTCD
+     C                   MOVE      *BLANKS       GDCNRY
+     C                   MOVE      'CM'          GDTRCD
+     C                   MOVEL     MAGTNO        GDREF1
+     C                   MOVE      *BLANKS       GDREF2
+     C                   MOVE      *BLANKS       GDTQCD
+     C                   Z-ADD     0             GDCNTY
+     C                   MOVE      'E000829'     MSGID
+     C                   EXSR      $XMSG
+DB01 C                   MOVEL     CTLMSG        GDDESC
+DB01 C*
+DB01 C                   MOVEL     GDDESC        IGCP1
+DB01 C                   Z-ADD     040           IGCP2
+DB01 C                   EXSR      IGCSR
+DB01 C                   MOVEL     IGCP3         GDDESC
+     C*
+     C                   Z-SUB     AINTAM        GDAMT
+     C                   MOVEL     XAGTGL        GDACT
+     C                   MOVEL     USER          GDUSER
+     C*
+     C                   MOVEL     CMCO          GDCO
+     C                   MOVEL     CUCRCD        GDCRCD
+     C                   MOVE      LRCPT         GDRCPT
+     C                   WRITE     RDLYTR
+     C*
+     C                   Z-ADD     AINTAM        GDAMT
+     C                   MOVEL     XAIINC        GDACT
+     C*
+     C                   MOVEL     CMCO          GDCO
+     C                   MOVE      CUCRCD        GDCRCD
+     C                   MOVE      LRCPT         GDRCPT
+     C                   WRITE     RDLYTR
+     C*
+     C                   ENDSR
+     C/EJECT
+     C*****************************************************************
+     C* PRODUCE GENERAL LEDGER TRANSACTIONS FOR DR BALANCE INTEREST
+     C*****************************************************************
+     C     EINTGL        BEGSR
+     C*
+     C                   MOVE      'G'           GDRCID
+     C                   Z-ADD     *MONTH        FMTMO
+     C                   Z-ADD     *DAY          FMTDA
+     C                   Z-ADD     *YEAR         FMTYR
+     C                   MOVE      FMTDT         GDDATE
+     C                   Z-ADD     0             GDLADT
+     C                   MOVE      *BLANKS       GDSTCD
+     C                   MOVE      *BLANKS       GDCNRY
+     C                   MOVE      'CM'          GDTRCD
+     C                   MOVEL     MAGTNO        GDREF1
+     C                   MOVE      *BLANKS       GDREF2
+     C                   MOVE      *BLANKS       GDTQCD
+     C                   Z-ADD     0             GDCNTY
+     C                   MOVE      'E000830'     MSGID
+     C                   EXSR      $XMSG
+DB01 C                   MOVEL     CTLMSG        GDDESC
+DB01 C*
+DB01 C                   MOVEL     GDDESC        IGCP1
+DB01 C                   Z-ADD     040           IGCP2
+DB01 C                   EXSR      IGCSR
+DB01 C                   MOVEL     IGCP3         GDDESC
+DB01 C*
+     C                   MOVEL     USER          GDUSER
+     C*
+     C                   Z-SUB     EINTAM        GDAMT
+     C                   MOVEL     XESCGL        GDACT
+     C*
+     C                   MOVEL     CMCO          GDCO
+     C                   MOVEL     CUCRCD        GDCRCD
+     C                   MOVE      LRCPT         GDRCPT
+     C                   WRITE     RDLYTR
+     C*
+     C                   Z-ADD     EINTAM        GDAMT
+     C                   MOVEL     XEIEXP        GDACT
+     C*
+     C                   MOVEL     CMCO          GDCO
+     C                   MOVE      CUCRCD        GDCRCD
+     C                   MOVE      LRCPT         GDRCPT
+     C                   WRITE     RDLYTR
+     C*
+     C                   ENDSR
+     C/EJECT
+     C*****************************************************************
+     C*                    PAYAGT SUBROUTINE                          *
+     C*****************************************************************
+     C     PAYAGT        BEGSR
+     C*
+ ms1 c*  Get payto agent record to determine if this agent should
+ ms1 c*    have commissions held as well.
+ ms1 c                   if        mnochk = 'N' and mpayto <> ' '
+ ms1 c*
+ ms1 c     agentkey      chain     comagtm
+ ms1 c                   if        %found(comagtm) and a2mnochk = 'Y'
+ ms1 c                   move      a2mnochk      mnochk
+ ms1 c                   endif
+ ms1 c                   endif
+     c*
+     C                   Z-ADD     *ZEROS        PAYAMT
+     C                   Z-ADD     *ZEROS        DTOT
+     C                   Z-ADD     *ZEROS        NETTOT
+     C                   Z-ADD     *ZEROS        BEGBAL
+     C                   Z-ADD     1             DSOCUR
+      *
+     C     1             DO        100           DSOCUR
+     C     DSOCUR        OCCUR     COMBAL
+     C     BCRCD         IFEQ      *BLANKS
+     C                   LEAVE
+     C                   ENDIF
+     C                   ADD       DBAL          DTOT
+     C                   ADD       DNET          NETTOT
+     C                   ADD       SBAL          BEGBAL
+     C                   ENDDO
+     C*
+     C                   Exsr      CheckDraw
+     C*
+     C     MNOCHK        IFEQ      'Y'
+     C                   Z-ADD     0             PAYAMT
+     C*
+     C                   ELSE
+     C                   If        ADRP225 <> 'B' and MDCRCD = CUCRCD
+     C                   Eval      PAYAMT = PAYAMT225
+     C*
+     C                   ELSE
+     C     DTOT          IFGT      0
+     C     XPASDB        OREQ      'Y'
+     C     MATXCD        ANDEQ     'I'
+     C     MAGTNO        ANDNE     MPAYTO
+     C     MPAYTO        ANDNE     *BLANKS
+     C*
+     C                   Z-ADD     DTOT          PAYAMT
+     C*
+dfb1 c     dwadrw        ifne      0
+dfb1 c     dwadrc        andeq     'E'
+dfb1 c                   z-sub     dctot         dctot1            9 2
+dfb1 c                   eval       payamt = dwadrw + dctot1
+dfb1 c                   end
+     C*
+     C                   ELSE
+     C                   Z-ADD     0             PAYAMT
+     C*
+     C                   END
+     C                   END
+     C                   END
+      *
+     C     PAYAMT        IFNE      *ZEROS
+dfb1 C                   IF        dwadrc <> 'E'
+rls1 C                   ADD       PAYAMT        DPAY
+rls1 C                   SUB       PAYAMT        DBAL
+dfb1 C                   ELSE
+dfb1 C                   ADD       PAYAMT        DPAY
+dfb1 C                   ADD       PAYAMT        DBAL
+dfb1 C                   END
+     C                   Z-ADD     1             DSOCUR
+     C                   Z-ADD     0             SVOCUR
+     C     1             DO        100           DSOCUR
+     C     DSOCUR        OCCUR     COMBAL
+     C     BCRCD         IFEQ      *BLANKS
+     C                   LEAVE
+     C                   ENDIF
+      *
+      * IF IN DEFAULT CURRENCY CODE SAVE THE OCCURRENCE NUMBER
+     C     BCRCD         IFEQ      DCRCD
+     C                   Z-ADD     DSOCUR        SVOCUR
+     C                   ENDIF
+      *
+     C                   Z-ADD     DBAL          DPAY
+     C                   SUB       DBAL          PAYAMT
+     C                   ENDDO
+     C                   ENDIF
+      *
+      * IF PAYAMT NE *ZEROS, THEN UPDATE OCCURANCE TO COMBAL
+      * DATA STRUCTURE FOR REMAINING AMOUNT. THIS SHOULD ONLY HAPPEN
+      * WHEN AN AGENT DRAW IS PROCESSED.
+      *
+     C     PAYAMT        IFNE      *ZEROS
+      *
+     C                   If        SVOCUR < 1
+     C                   Eval      SVOCUR = DSOCUR
+     C                   Endif
+      *
+     C     SVOCUR        OCCUR     COMBAL
+     C     BCRCD         IFEQ      *BLANKS
+     C                   Eval      BCRCD = MDCRCD
+     C                   Eval      DCRCD = MDCRCD
+     C                   Endif
+     C*
+     C                   ADD       PAYAMT        DPAY
+     C                   SUB       PAYAMT        DBAL
+     C                   ENDIF
+     C*
+     C                   Z-ADD     1             DSOCUR
+      *
+     C     1             DO        100           DSOCUR
+     C     DSOCUR        OCCUR     COMBAL
+     C     BCRCD         IFEQ      *BLANKS
+     C                   LEAVE
+     C                   ENDIF
+     C     BCRCD         IFNE      DCRCD
+     C                   CLEAR                   LSP300
+     C                   MOVE      '00'          ERTNCD
+     C                   MOVE      DCRCD         EINCUR
+     C                   MOVE      BCRCD         EOTCUR
+     C                   MOVE      'TRN'         ERATE1
+     C                   MOVE      'S'           ERATE2
+     C                   MOVE      PRCYY         ECNVYR
+     C                   MOVE      PRCMM         ECNVMM
+     C                   MOVE      PRCDD         ECNVDD
+     C                   Z-ADD     DPAY          EINAMT
+     C                   CALL      'LSP300'
+     C                   PARM                    LSP300
+     C     ERTNCD        IFEQ      '00'
+     C                   Z-ADD     EOTAMT        BPAY
+     C                   ENDIF
+     C                   ELSE
+     C                   Z-ADD     DPAY          BPAY
+     C                   ENDIF
+
+      * 1099 agent with debit balance transferred to payto agent
+     C                   IF        MATXCD = 'I' AND
+     C                             DTOT < *Zero AND
+     C                             MAGTNO <> MPAYTO AND
+     C                             MPAYTO <> *Blanks AND
+     C                             XPASDB = 'Y'
+      *
+     C                   SELECT
+
+      * Agent has withhold check set to 'Y'
+     C                   WHEN      MNOCHK = 'Y'
+     C                   EVAL      PAYOUT = *ZERO
+ rr01C*
+ rr01C* the field "BALOUT" was defined in the print file COM220P in
+ rr01C* libraries PCHOLDPRDO and PCHPRDOBJ, but not in the new PCH
+ rr01C* upgrade library - so BALOUT has been commented in this pgm
+ rr01C*
+ rr01C****               EVAL      BALOUT = BPAY
+
+      * Agent has draw amount due to repayment processing
+     C                   WHEN      ADRP225 = 'D'
+     C                   EVAL      PAYOUT = PAYAMT225 * -1
+ rr01C****               EVAL      BALOUT = DTOT + PAYOUT
+     C                   EVAL      BPAY   = DTOT
+
+      * Standard processing for agent with debit balance
+     C                   OTHER
+     C                   EVAL      PAYOUT = *ZERO
+ rr01C****               EVAL      BALOUT = BPAY
+     C                   ENDSL
+
+     C                   ELSE
+
+      * Not a 1099 agent with debit balance to be transferred to payto agt
+ rr01C****               EVAL      BALOUT = *Zero
+
+     C                   SELECT
+
+      * Agent has withhold check set to 'Y'
+     C                   WHEN      MNOCHK = 'Y'
+     C                   EVAL      PAYOUT = *Zero
+
+      * Agent has draw amount (from draw or repayment process)
+     C                   WHEN      ADRP225 = 'D'
+     C                   EVAL      PAYOUT = PAYAMT225 * -1
+
+      * Standard payout processing
+     C                   OTHER
+     C                   EVAL      PAYOUT = BPAY * -1
+     C                   ENDSL
+
+     C                   ENDIF
+     C*
+     C     MATXCD        IFEQ      'W'
+     C                   Z-ADD     BPAY          TAXAMT
+     C                   ELSE
+     C     XTAXCD        IFEQ      'P'
+     C     COM1          ADD       COMR          TAXAMT
+     C                   ADD       DCTAX         TAXAMT
+     C                   ADD       INTTAX        TAXAMT
+     C                   ELSE
+     C     ECM1          ADD       ECMR          TAXAMT
+     C                   ADD       DCTAX         TAXAMT
+     C                   ADD       INTTAX        TAXAMT
+     C                   END
+     C                   END
+     C*
+     C                   Z-SUB     TAXAMT        TAXOUT
+     C*
+     C     BPAY          IFNE      0
+     C     TAXAMT        ORNE      0
+      *
+      * UPDATE AGENT BALANCE
+      *
+     C                   CLEAR                   COM990
+     C                   MOVEL     CMCO          CO990
+     C                   MOVEL     MAGTNO        AGT990
+     C                   MOVEL     BCRCD         CRC990
+     C                   MOVEL     'BAL'         TYP990
+ rr02C                   eval      us3990           = ss220
+     C                   CALL      'COM990'
+     C                   PARM                    COM990
+ RJ01C                   Eval      OldBal=BAL990
+      *
+     C* Call COM220U5 user exit to allow for changes in agent balance.
+     C                   Clear                   COM220U5
+     C                   Eval      BPAY220 = BPAY
+     C                   Call      'COM220U5'
+     C                   Parm                    COM220U5
+     C                   Parm                    COM990
+     C                   Parm                    COM225
+     C                   Parm                    AGTDR
+     C*
+dfb1 C                   IF        dwadrc <> 'E'
+     C                   SUB       BPAY220       BAL990
+     C                   SUB       BPAY220       MBAL
+dfb1 C                   end
+ RJ01 *
+ RJ01* This Account Balance calculation will perform when WITH HOLD check as 'N' or BLANK
+ RJ01* and setting Taxable income balance also.
+ RJ01C                   If        MNOCHK <>'Y'
+ RJ01C                   If        BPAY < 0
+ RJ01C                   Eval      MBAL = BPAY
+ RJ01C                   Eval      BAL990 = BPAY
+ RJ01C                   Eval      TAXAMT=0
+ RJ01C                   ElseIf    TAXAMT < 0
+ RJ01C                   Eval      MBAL = TAXAMT
+ RJ01C                   Eval      BAL990 = TAXAMT
+ RJ01C                   Eval      TAXAMT=0
+ RJ01C                   Else
+ RJ01C                   Eval      MBAL = 0
+ RJ01C                   Eval      BAL990 = 0
+ RJ01C                   Eval      TAXAMT=BPAY
+ RJ01C                   EndIf
+ RJ01C                   EndIf
+ RJ01 *
+     C                   CLEAR                   COM991
+     C                   MOVEL     CO990         CO991
+     C                   MOVEL     AGT990        AGT991
+     C                   MOVEL     CRC990        CRC991
+     C                   MOVEL     TYP990        TYP991
+     C                   Z-ADD     BAL990        AMT991
+     C                   MOVEL     US1990        US1991
+     C                   MOVEL     US2990        US2991
+     C                   MOVEL     US3990        US3991
+     C                   MOVEL     US4990        US4991
+     C                   MOVEL     US5990        US5991
+     C                   MOVEL     US6990        US6991
+     C                   Z-ADD     US7990        US7991
+     C                   Z-ADD     US8990        US8991
+     C                   Z-ADD     US9990        US9991
+ rr02C                   eval      us3991           = ss220
+     C                   CALL      'COM991'
+     C                   PARM                    COM991
+      *
+     C                   MOVEL     MAGTNO        PAGTNO
+     C*
+     C     MPAYTO        IFEQ      *BLANKS
+     C                   MOVEL     MAGTNO        PPAYTO
+     C                   ELSE
+     C                   MOVEL     MPAYTO        PPAYTO
+     C                   END
+     C*
+     C                   MOVE      CMNCIN        PANMTY
+     C     CMNCIN        IFEQ      'C'
+DB01 C                   MOVEL     NAME          PACORP
+DB01 C*
+DB01 C                   MOVEL     PACORP        IGCP1
+DB01 C                   Z-ADD     035           IGCP2
+DB01 C                   EXSR      IGCSR
+DB01 C                   MOVEL     IGCP3         PACORP
+DB01 C*
+     C                   ENDIF
+DB01 C                   MOVEL     FMT8F         PAFRST
+DB01 C*
+DB01 C                   MOVEL     PAFRST        IGCP1
+DB01 C                   Z-ADD     010           IGCP2
+DB01 C                   EXSR      IGCSR
+DB01 C                   MOVEL     IGCP3         PAFRST
+DB01 C*
+     C                   MOVEL     FMT8M         PAMID
+DB01 C                   MOVEL     FMT8L         PALAST
+DB01 C*
+DB01 C                   MOVEL     PALAST        IGCP1
+DB01 C                   Z-ADD     025           IGCP2
+DB01 C                   EXSR      IGCSR
+DB01 C                   MOVEL     IGCP3         PALAST
+DB01 C*
+     C                   Z-ADD     BPAY          PPYAMT
+     C                   Z-ADD     TAXAMT        PTXAMT
+     C                   Z-ADD     *MONTH        PPENDM
+     C                   Z-ADD     *DAY          PPENDD
+     C                   Z-ADD     *YEAR         PPENDY
+      *
+     C                   MOVEL     CUCRCD        PPCRCD
+     C*
+     C                   MOVEL     CMCO          PCO
+     C*
+     C                   Eval      PPADRP = ADRP225
+     C                   Eval      PPADRS = ADRS225
+     C                   Eval      PPADRW = ADRW225
+     C                   Eval      PPABAL = MBAL
+     C*
+     C* RJ02             WRITE     RPAYAM
+RJ02 C                   MOVEL     CMCO          R_CRCO
+RJ02 C                   MOVEL(P)  MAGTNO        R_CRCTL1
+RJ02 C                   Z-ADD     0             R_CRCTL2
+RJ02 C                   MOVE      'ALT'         R_CRALPH
+RJ02 C                   Z-ADD     0             SplitCnt
+RJ02 C     KALT          SETLL     CMSUSREL
+RJ02 C     KALT          READE     CMSUSREL
+RJ02 C                   DOW       Not %Eof(CMSUSREL)
+RJ02 C     R_CRPCPT      IFGT      *ZEROS
+RJ02 C                   MOVEL     R_CRCLTN      PPAYTO
+RJ02 C                   EVAL(H)   PPYAMT = BPAY   * R_CRPCPT / 100
+RJ02 C                   EVAL(H)   PTXAMT = TAXAMT * R_CRPCPT / 100
+RJ02 C                   WRITE     RPAYAM
+RJ02 C                   ADD       1             SplitCnt
+RJ02 C                   ENDIF
+RJ02 C     KALT          READE     CMSUSREL
+RJ02 C                   ENDDO
+RJ02 C     SplitCnt      IFEQ      0
+RJ02 C                   WRITE     RPAYAM
+RJ02 C                   ENDIF
+RJ02 C*
+     c*
+     C                   END
+BG03 C*ms1*AGENTKEY      CHAIN     COMAGTM
+BG03 C***ms1********     IF        %FOUND(COMAGTM)
+BG03 C                   IF        (MPAYTO <> *Blanks And MPAYTO <> MAGTNO) Or
+bg03 C                             (MDSTNO <> *Blanks and MDSTNO <> MAGTNO)
+bg03 C                   Else
+bg03
+bg03 C                   Eval      YTDCommissions = YTDCommissions + CMTAX
+bg03 C                             + DCTAX
+bg03 C                   EndIf
+
+bg03 C***ms1***********  EndIf
+bg03
+bg03 C                   Eval      SequenceNo = 1
+bg03 C                   ExSr      WriteTotTable
+bg03 C                   ExSr      WriteStmtEnd
+     C*
+     C                   WRITE     PAYMNT
+     C*
+     C                   WRITE     CURBAL
+     C*
+M05   *        Calculate YTD Production Credit for Million Dollar Club.
+M05  C                   EXSR      CalcYTDProdCrd
+      *
+     C                   ENDDO
+     C*
+     C                   ENDSR
+     C/EJECT
+     C*****************************************************************
+     C*   CheckDraw - Call COM225 to calculate draw amount and payout
+     C*****************************************************************
+     C     CheckDraw     BEGSR
+     C*
+     C                   Eval      DTOT225 = DTOT
+     C                   Eval      NET225  = NETTOT
+     C                   Eval      BBAL225 = BEGBAL
+     C                   Eval      PRCC225 = 'C'
+     C                   Call      'COM225'
+     C                   Parm                    COM225
+     C                   Parm                    AGTDR
+     C*
+     C                   ENDSR
+     C/EJECT
+     C*****************************************************************
+     C*   GetDraw - Call COM225 to load draw structures
+     C*****************************************************************
+     C     GetDraw       BEGSR
+     C*
+     C                   Clear                   COM225
+     C                   Clear                   AGTDR
+     C                   Eval      AGTN225 = MAGTNO
+     C                   Eval      EndY225 = PRCYY
+     C                   Eval      EndM225 = PRCMM
+     C                   Eval      EndD225 = PRCDD
+     C                   Eval      PRCC225 = 'L'
+     C                   Call      'COM225'
+     C                   Parm                    COM225
+     C                   Parm                    AGTDR
+     C*
+     C                   ENDSR
+     C/EJECT
+      *****************************************************************
+      * GETBAL - RETRIEVES AGENT BALANCE RECORDS FOR A CURRENCY
+      *****************************************************************
+     C     GETBAL        BEGSR
+      *
+     C                   Z-ADD     *ZEROS        MBAL
+     C                   Z-ADD     *ZEROS        MEBAL
+     C                   Z-ADD     *ZEROS        MIBAL
+     C                   Z-ADD     *ZEROS        MABAL
+bg03 C                   Clear                   YTDCommissions
+      *
+     C     KEY           SETLL     COMAGTBL
+     C                   MOVE      *OFF          *IN95
+      *
+     C     *IN95         DOWEQ     *OFF
+     C     KEY           READE     COMAGTBL                               95
+      *
+     C     *IN95         IFEQ      *ON
+     C                   LEAVE
+     C                   ENDIF
+      *
+     C                   SELECT
+      *
+     C     MBTYPE        WHENEQ    'ADV'
+ ms1 c                   if        mco = 'SLIC' and mstser = 'DLY' and
+ ms1 c                             ss220 = *blanks
+ ms1 c                   z-add     mbusr7        mabal
+ ms1 c                   else
+     C                   Z-ADD     MBBAL         MABAL
+ ms1 c                   endif
+      *
+     C     MBTYPE        WHENEQ    'ESC'
+ ms1 c                   if        mco = 'SLIC' and mstser = 'DLY' and
+ ms1 c                             ss220 = *blanks
+ ms1 c                   z-add     mbusr7        mebal
+ ms1 c                   else
+     C                   Z-ADD     MBBAL         MEBAL
+ ms1 c                   endif
+      *
+     C     MBTYPE        WHENEQ    'INC'
+ ms1 c                   if        mco = 'SLIC' and mstser = 'DLY' and
+ ms1 c                             ss220 = *blanks
+ ms1 c                   z-add     mbusr7        mibal
+BL03 c                   z-add     mbusr7        YTDCommissions
+ ms1 c                   else
+     C                   Z-ADD     MBBAL         MIBAL
+bg03 C                   Eval      YTDCommissions = MBBAL
+ ms1 c                   endif
+      *
+     C     MBTYPE        WHENEQ    'BAL'
+ ms1 c                   if        mco = 'SLIC' and mstser = 'DLY' and
+ ms1 c                             ss220 = *blanks
+ ms1 c                   z-add     mbusr7        mbal
+ ms1 c                   else
+     C                   Z-ADD     MBBAL         MBAL
+ ms1 c                   endif
+      *
+     C                   ENDSL
+      *
+     C                   ENDDO
+     C*
+     C                   Exsr      GetDraw
+     C*
+     C     MBAL          IFNE      0
+     C     MABAL         ORNE      0
+     C     MEBAL         ORNE      0
+     C     ADRW225       ORNE      0
+     C     MDCRCD        ANDEQ     CUCRCD
+     C                   MOVE      'Y'           PRCAGT
+     C                   ENDIF
+     C*
+     C                   ENDSR
+     C/EJECT
+     C*****************************************************************
+     C* GETNA SUBROUTINE
+     C*****************************************************************
+     C     GETNA         BEGSR
+     C*
+     C                   SETOFF                                       20
+DFB  C                   SETOFF                                       65
+DFB  C                   CLEAR                   ADDR1
+DFB  C                   CLEAR                   ADDR2
+DFB  C                   CLEAR                   ADDR3
+DFB  C                   CLEAR                   ADDR4
+DFB  C                   CLEAR                   ADR
+     C*
+     C                   CLEAR                   CMS205
+     C                   CLEAR                   CLTM
+     C                   CLEAR                   CLTA
+     C*
+     C                   MOVE      CMCO          CMP205
+     C                   MOVEL     MAGTNO        CT1205
+     C                   MOVEL     MACOR         TYP205
+PK1  C*****              MOVE      '4'           NFM205
+PK1  C*****              MOVE      ' '           AFM205
+PK1  C                   MOVE      '2'           NFM205
+DFB  C                   MOVE      '2'           AFM205
+     C*
+     C                   CALL      'CMS205'
+     C                   PARM                    CMS205
+     C                   PARM                    CLTM
+     C                   PARM                    CLTA
+     C*
+     C     RTN205        IFEQ      *ZEROS
+DB01 C                   MOVEL     FNM205        NAM              38
+PB2  C                   MOVEL     FNM205        NAM1             38
+DB01 C*
+DB01 C                   MOVEL     NAM           IGCP1
+DB01 C                   Z-ADD     038           IGCP2
+DB01 C                   EXSR      IGCSR
+DB01 C                   MOVEL     IGCP3         NAM
+PB2  C                   MOVEL     IGCP3         NAM1
+DB01 C*
+DB01 C                   MOVEL     CYCAD1        ADDR1            35
+DB01 C*
+DB01 C                   MOVEL     ADDR1         IGCP1
+DB01 C                   Z-ADD     035           IGCP2
+DB01 C                   EXSR      IGCSR
+DB01 C                   MOVEL     IGCP3         ADDR1
+DB01 C*
+DB01 C                   MOVEL     CYCAD2        ADDR2            35
+DB01 C*
+DB01 C                   MOVEL     ADDR2         IGCP1
+DB01 C                   Z-ADD     035           IGCP2
+DB01 C                   EXSR      IGCSR
+DB01 C                   MOVEL     IGCP3         ADDR2
+DB01 C*
+DB01 C                   MOVEL     CYCAD3        ADDR3            35
+DB01 C*
+DB01 C                   MOVEL     ADDR3         IGCP1
+DB01 C                   Z-ADD     035           IGCP2
+DB01 C                   EXSR      IGCSR
+DB01 C                   MOVEL     IGCP3         ADDR3
+DB01 C*
+     C                   MOVEL     CYCCIT        CITY             20
+     C                   MOVE      CYCSTA        ST                2
+DB01 C                   MOVEL     CYCZIP        ZIP              10
+DFB  C                   MOVEL     FAD205        CTSTZP           57
+DFB  C     ADDR3         IFGT      *BLANKS
+DFB  C                   MOVE      *ON           *IN65
+DFB  C                   ENDIF
+     C                   CLEAR                   ADDR4
+     C                   EVAL      ADDR4  = %TRIM(CITY) + ', ' +
+     C                                      %TRIM(ST) + ' ' +
+     C                                      %TRIM(ZIP)
+DB01 C*
+DB01 C                   MOVEL     ADDR4         IGCP1
+DB01 C                   Z-ADD     035           IGCP2
+DB01 C                   EXSR      IGCSR
+DB01 C                   MOVEL     IGCP3         ADDR4
+DB01 C*
+bg03 C                   Eval      NFM205 = '9'
+bg03 C                   Eval      AFM205 = '*'
+bg03 C*
+bg03 C                   CALL      'CMS205'
+bg03 C                   PARM                    CMS205
+bg03 C                   PARM                    CLTM
+bg03 C                   PARM                    CLTA
+bg03 C*
+bg04 C                   Eval      J = 1
+bg03 C                   If        RTN205 = *ZEROS
+bg03 C                   If        CMNCIN = 'C'
+bg03 C                   Eval      AgentLName = %Trim(CMNAME)
+bg03 C                   Eval      AgentFName = *Blanks
+bg03 C                   Else
+bg03 C                   Eval      AgentFName = %Subst(FNM205:1:10)
+bg03 C                   Eval      AgentLName = %Subst(FNM205:12:25)
+bg03 C                   EndIf
+bg04 C                   Eval      EMailAddy = CMEMAL
+bg03 C                   Else
+bg03 C                   Eval      AgentFName = *Blanks
+bg03 C                   Eval      AgentLName = *Blanks
+bg03 C                   EndIf
+bg03
+     C                   ELSE
+     C                   MOVEL     *BLANKS       NAM              38
+PB2  C                   MOVEL     *BLANKS       NAM1             38
+     C                   MOVEL     *BLANKS       ADDR1            35
+     C                   MOVEL     *BLANKS       ADDR2            35
+     C                   MOVEL     *BLANKS       ADDR3            35
+     C                   MOVEL     *BLANKS       ADDR4            35
+     C                   MOVEL     *BLANKS       CITY             20
+     C                   MOVE      *BLANKS       ST                2
+     C                   MOVE      *BLANKS       ZIP              10
+     C                   ENDIF
+bg03
+bg03 C                   EXSR      GetOutputMethd
+     C*
+     C                   MOVEL(P)  CMNAME        NAME
+     C     CMNCIN        IFEQ      'N'
+     C                   MOVE      '8'           FMT
+     C                   CALL      'NAMEFMT'
+     C                   PARM                    NAMPRM
+     C                   MOVE      *OFF          *IN80
+     C                   ELSE
+     C                   MOVE      *ON           *IN80
+     C                   ENDIF
+     C                   MOVEL     NAME          FMT8
+     C*
+     C                   Z-ADD     1             PAGES
+     C                   Z-ADD     7             LCNT
+     C*
+     C                   Z-ADD     *ZEROS        A                 3 0
+     C                   CLEAR                   AD1
+     C                   CLEAR                   AD2
+     C                   CLEAR                   AD3
+     C                   CLEAR                   AD4
+     C*
+     C                   DO        4             Z                 2 0
+     C                   CLEAR                   ADR(Z)
+     C                   ENDDO
+     C*
+     C                   IF        ADDR1 <> *BLANKS
+     C                   ADD       1             A
+     C                   MOVEL     ADDR1         ADR(A)
+     C                   ENDIF
+     C                   IF        ADDR2 <> *BLANKS
+     C                   ADD       1             A
+     C                   MOVEL     ADDR2         ADR(A)
+     C                   ENDIF
+     C                   IF        ADDR3 <> *BLANKS
+     C                   ADD       1             A
+     C                   MOVEL     ADDR3         ADR(A)
+     C                   ENDIF
+     C                   IF        (CITY <> *BLANKS) OR
+     C                             (ST <> *BLANKS) OR
+     C                             (ZIP<> *BLANKS)
+     C                   ADD       1             A
+     C                   MOVEL     ADDR4         ADR(A)
+     C                   ENDIF
+     C*
+     C                   MOVEL     ADR(1)        AD1
+     C                   MOVEL     ADR(2)        AD2
+     C                   MOVEL     ADR(3)        AD3
+     C                   MOVEL     ADR(4)        AD4
+     C*
+     C     AD3           IFNE      *BLANKS
+     C                   SETON                                        20
+     C                   ENDIF
+     C     AD4           IFNE      *BLANKS
+     C                   SETON                                        21
+     C                   ENDIF
+
+bgo3 C                   Clear                   AgtLevel
+bg03
+bg03 C                   Callp     GetTransTotals(CMCO
+bg03 C                                           :MagtNo
+bg03 C                                           :TransTotal
+bg03 C                                           :TransTaxTotal
+bg03 C                                           :RecordCountT
+bg03 C                                           :RecordCountP
+bg03 C                                           :ProdTotal
+bg03 C                                           :AgtLevel)
+bg03 C                   Exsr      LoadPrtTblData
+     C*
+     C                   ENDSR
+     C/EJECT
+bg03 *****************************************************************
+bg03 *LoadPrtTblData   ZERO COMMISSION TOTALS    *
+bg03 *****************************************************************
+bg03 C     LoadPrtTblDataBegSr
+bg03 *
+bg03 C                   Reset                   PrintTables
+bg03
+bg03 C                   Eval      Index = %Lookup('AGA':AgtLevel)
+bg03 C                   If        Index > *Zero
+bg03 C                   Eval      TblAGA = AgtLevel(Index)
+bg03 C                   EndIf
+bg03
+bg03 C                   Eval      Index = %Lookup('BROK':AgtLevel)
+bg03 C                   If        Index > *Zero
+bg03 C                   Eval      TblBROK = AgtLevel(Index)
+bg03 C                   EndIf
+bg03
+bg03 C                   Eval      Index = %Lookup('CANL':AgtLevel)
+bg03 C                   If        Index > *Zero
+bg03 C                   Eval      TblCANL = AgtLevel(Index)
+bg03 C                   EndIf
+bg03
+bg03 C                   Eval      Index = %Lookup('CAWL':AgtLevel)
+bg03 C                   If        Index > *Zero
+bg03 C                   Eval      TblCAWL = AgtLevel(Index)
+bg03 C                   EndIf
+bg03
+bg03 C                   Eval      Index = %Lookup('CSM':AgtLevel)
+bg03 C                   If        Index > *Zero
+bg03 C                   Eval      TblCSM = AgtLevel(Index)
+bg03 C                   EndIf
+bg03
+bg03 C                   Eval      Index = %Lookup('CUM':AgtLevel)
+bg03 C                   If        Index > *Zero
+bg03 C                   Eval      TblCUM = AgtLevel(Index)
+bg03 C                   EndIf
+bg03
+bg03 C                   Eval      Index = %Lookup('DMGA':AgtLevel)
+bg03 C                   If        Index > *Zero
+bg03 C                   Eval      TblDMGA = AgtLevel(Index)
+bg03 C                   EndIf
+bg03
+bg03 C                   Eval      Index = %Lookup('DMG3':AgtLevel)
+bg03 C                   If        Index > *Zero
+bg03 C                   Eval      TblDMG3 = AgtLevel(Index)
+bg03 C                   EndIf
+bg03
+bg03 C                   Eval      Index = %Lookup('FMO':AgtLevel)
+bg03 C                   If        Index > *Zero
+bg03 C                   Eval      TblFMO = AgtLevel(Index)
+bg03 C                   EndIf
+bg03
+bg03 C                   Eval      Index = %Lookup('FSD':AgtLevel)
+bg03 C                   If        Index > *Zero
+bg03 C                   Eval      TblFSD = AgtLevel(Index)
+bg03 C                   EndIf
+bg03
+bg03 C                   Eval      Index = %Lookup('GA':AgtLevel)
+bg03 C                   If        Index > *Zero
+bg03 C                   Eval      TblGA = AgtLevel(Index)
+bg03 C                   EndIf
+bg03
+bg03 C                   Eval      Index = %Lookup('IMO':AgtLevel)
+bg03 C                   If        Index > *Zero
+bg03 C                   Eval      TblIMO = AgtLevel(Index)
+bg03 C                   EndIf
+bg03
+bg03 C                   Eval      Index = %Lookup('MGA':AgtLevel)
+bg03 C                   If        Index > *Zero
+bg03 C                   Eval      TblMGA = AgtLevel(Index)
+bg03 C                   EndIf
+bg03
+bg03 C                   Eval      Index = %Lookup('PGA':AgtLevel)
+bg03 C                   If        Index > *Zero
+bg03 C                   Eval      TblPGA = AgtLevel(Index)
+bg03 C                   EndIf
+bg03
+bg03 C                   Eval      Index = %Lookup('PPGA':AgtLevel)
+bg03 C                   If        Index > *Zero
+bg03 C                   Eval      TblPPGA = AgtLevel(Index)
+bg03 C                   EndIf
+bg03
+bg03 C                   Eval      Index = %Lookup('PREC':AgtLevel)
+bg03 C                   If        Index > *Zero
+bg03 C                   Eval      TblPREC = AgtLevel(Index)
+bg03 C                   EndIf
+bg03
+bg03 C                   Eval      Index = %Lookup('SD':AgtLevel)
+bg03 C                   If        Index > *Zero
+bg03 C                   Eval      TblSD = AgtLevel(Index)
+bg03 C                   EndIf
+bg03
+bg03 C                   Eval      Index = %Lookup('SGA':AgtLevel)
+bg03 C                   If        Index > *Zero
+bg03 C                   Eval      TblSGA = AgtLevel(Index)
+bg03 C                   EndIf
+bg03
+bg03 C                   Eval      Index = %Lookup('WA':AgtLevel)
+bg03 C                   If        Index > *Zero
+bg03 C                   Eval      TblWA = AgtLevel(Index)
+bg03 C                   EndIf
+bg03
+bg03 * 01 - 10 are used for non-SLIC companies
+bg03
+bg03 C                   Eval      Index = %Lookup('01':AgtLevel)
+bg03 C                   If        Index > *Zero
+bg03 C                   Eval      TblAGA = AgtLevel(Index)
+bg03 C                   EndIf
+bg03
+bg03 C                   Eval      Index = %Lookup('02':AgtLevel)
+bg03 C                   If        Index > *Zero
+bg03 C                   Eval      TblBROK = AgtLevel(Index)
+bg03 C                   EndIf
+bg03
+bg03 C                   Eval      Index = %Lookup('03':AgtLevel)
+bg03 C                   If        Index > *Zero
+bg03 C                   Eval      TblCANL = AgtLevel(Index)
+bg03 C                   EndIf
+bg03
+bg03 C                   Eval      Index = %Lookup('04':AgtLevel)
+bg03 C                   If        Index > *Zero
+bg03 C                   Eval      TblCAWL = AgtLevel(Index)
+bg03 C                   EndIf
+bg03
+bg03 C                   Eval      Index = %Lookup('05':AgtLevel)
+bg03 C                   If        Index > *Zero
+bg03 C                   Eval      TblCSM = AgtLevel(Index)
+bg03 C                   EndIf
+bg03
+bg03 C                   Eval      Index = %Lookup('06':AgtLevel)
+bg03 C                   If        Index > *Zero
+bg03 C                   Eval      TblCUM = AgtLevel(Index)
+bg03 C                   EndIf
+bg03
+bg03 C                   Eval      Index = %Lookup('07':AgtLevel)
+bg03 C                   If        Index > *Zero
+bg03 C                   Eval      TblDMGA = AgtLevel(Index)
+bg03 C                   EndIf
+bg03
+bg03 C                   Eval      Index = %Lookup('08':AgtLevel)
+bg03 C                   If        Index > *Zero
+bg03 C                   Eval      TblDMG3 = AgtLevel(Index)
+bg03 C                   EndIf
+bg03
+bg03 C                   Eval      Index = %Lookup('09':AgtLevel)
+bg03 C                   If        Index > *Zero
+bg03 C                   Eval      TblFMO = AgtLevel(Index)
+bg03 C                   EndIf
+bg03
+bg03 C                   Eval      Index = %Lookup('10':AgtLevel)
+bg03 C                   If        Index > *Zero
+bg03 C                   Eval      TblFSD = AgtLevel(Index)
+bg03 C                   EndIf
+bg03
+bg03 C                   EndSr
+     C*****************************************************************
+     C*            *    ZERO COMMISSION TOTALS    *
+     C*****************************************************************
+     C     ZERCOM        BEGSR
+     C*
+     C                   Z-ADD     0             COM1
+     C                   Z-ADD     0             PRM1
+     C                   Z-ADD     0             ADV1
+     C                   Z-ADD     0             ESC1
+     C                   Z-ADD     0             ECM1
+     C                   Z-ADD     0             COMR
+     C                   Z-ADD     0             PRMR
+     C                   Z-ADD     0             ADVR
+     C                   Z-ADD     0             ESCR
+     C                   Z-ADD     0             ECMR
+dfb2 c                   eval      FutureTotal = 0
+     C*
+     C                   ENDSR
+     C/EJECT
+     C*****************************************************************
+     C*            *  ZERO COMMISSION SUBTOTALS   *
+     C*****************************************************************
+     C     ZEROST        BEGSR
+     C*
+     C                   Z-ADD     0             COMS1
+     C                   Z-ADD     0             PRMS1
+     C                   Z-ADD     0             ADVS1
+     C                   Z-ADD     0             ESCS1
+     C                   Z-ADD     0             ECMS1
+     C                   Z-ADD     0             COMSR
+     C                   Z-ADD     0             PRMSR
+     C                   Z-ADD     0             ADVSR
+     C                   Z-ADD     0             ESCSR
+     C                   Z-ADD     0             ECMSR
+     C/SPACE
+     C                   ENDSR
+     C/EJECT
+     C*****************************************************************
+     C*  ADD DETAIL INTO THE SUBTOTAL FOR TYPE
+     C*****************************************************************
+     C     ADTOST        BEGSR
+     C*
+     C     CDUR          IFEQ      01
+     C                   ADD       CAMT          COMS1
+     C                   ADD       CADVPB        ADVS1
+     C                   ADD       CESCAM        ESCS1
+     C     CTTYPE        IFEQ      'C'
+bg01 C     CTTYPE        OrEQ      'Z'
+     C                   ADD       CCMAMT        ECMS1
+     C                   ADD       CPRMPD        PRMS1
+     C                   END
+     C*
+     C                   ELSE
+     C                   ADD       CAMT          COMSR
+     C                   ADD       CADVPB        ADVSR
+     C                   ADD       CESCAM        ESCSR
+     C     CTTYPE        IFEQ      'C'
+bg01 C     CTTYPE        OrEq      'Z'
+     C                   ADD       CCMAMT        ECMSR
+     C                   ADD       CPRMPD        PRMSR
+     C                   END
+     C                   END
+     C*
+     C                   ENDSR
+     C/EJECT
+dfb2 C*****************************************************************
+dfb2 C*  ADD DETAIL INTO for the Future Transactions and totals
+dfb2 C*****************************************************************
+dfb2 C     FutureST      BEGSR
+dfb2 C*  clear amount in premium applied on future trans - doesnt
+dfb2 C*  make sense to show amount on this line.
+dfb2 c                   eval      cprmpd = 0
+dfb2 c*
+dfb2 C     CDUR          IFEQ      01
+dfb2 C                   z-add     CAMT          FutureAmount
+dfb2 c                   add       FutureAmount  FutureTotal
+dfb2 C                   END
+dfb2 c*
+dfb2 c* format release date
+dfb2 c                   eval      ReleaseDate = Trndate
+dfb2 c* Release amount
+dfb2 c                   eval      ReleaseAmount = CAMT
+dfb2 C*
+dfb2 C                   ENDSR
+dfb2 C/EJECT
+     C*****************************************************************
+     C*  PRINT TYPE/LEVEL SUBTOTALS  AND WRITE THEM TO SUMMARY FILE
+     C*****************************************************************
+     C     PRCSUB        BEGSR
+     C*
+     C     LCNT          IFGT      LSTHDR
+     C                   EXSR      PRTFT
+     C                   ADD       1             PAGES
+     C                   WRITE     HDRSTM
+     C                   MOVE      ON            *IN83
+     C                   WRITE     COMHDR
+     C                   MOVE      OFF           *IN83
+PB2   *****              Z-ADD     10            LCNT
+PB2  C                   Z-ADD     22            LCNT
+     C                   END
+     C*
+     C                   ADD       4             LCNT
+     C                   WRITE     COMSUB
+     C*
+     C                   MOVEL     MAGTNO        SAGTNO
+     C                   MOVE      HLVL          SCMLVL
+     C                   MOVE      HTYPE         SITYPE
+     C                   MOVE      *MONTH        SPENDM
+     C                   MOVE      *DAY          SPENDD
+     C                   Z-ADD     *YEAR         SPENDY
+     C                   Z-ADD     COMS1         S1YRCM
+     C                   Z-ADD     COMSR         SRENCM
+     C                   Z-ADD     PRMS1         S1YRPM
+     C                   Z-ADD     PRMSR         SRENPM
+     C     ADVS1         ADD       ADVSR         SADVAM
+     C*
+     C                   MOVEL     CMCO          SCO
+     C                   MOVE      LCRCD         SCRCD
+     C                   WRITE     RPCSUM
+     C*
+     C                   ENDSR
+     C/EJECT
+     C*****************************************************************
+     C* ADD SUBTOTALS TO COMMISSION TOTALS
+     C*****************************************************************
+     C     ADTOCT        BEGSR
+     C*
+     C                   ADD       COMS1         COM1
+     C                   ADD       PRMS1         PRM1
+     C                   ADD       ADVS1         ADV1
+     C                   ADD       ESCS1         ESC1
+     C                   ADD       ECMS1         ECM1
+     C                   ADD       COMSR         COMR
+     C                   ADD       PRMSR         PRMR
+     C                   ADD       ADVSR         ADVR
+     C                   ADD       ESCSR         ESCR
+     C                   ADD       ECMSR         ECMR
+      *
+     C                   Z-ADD     1             B
+     C                   Z-ADD     0             ID
+     C                   Z-ADD     0             STRPOS
+     C                   Z-ADD     0             OFSPOS
+     C                   Z-ADD     0             CMTOCR
+     C     LCRCD         LOOKUP    COCR(B)                                90
+      *
+     C     *IN90         IFEQ      *OFF
+     C                   ADD       1             C
+     C                   MOVEL     LCRCD         COCR(C)
+     C                   Z-ADD     C             ID
+     C                   ELSE
+     C                   Z-ADD     B             ID
+     C                   EndIf
+     C*
+     C                   MOVE      HLVL          WKLVL             2 0
+     C     ID            MULT      10            STRPOS
+     C     10            SUB       WKLVL         OFSPOS
+     C     STRPOS        SUB       OFSPOS        CMTOCR
+      *
+     C     CMTOCR        OCCUR     CMTOTS
+     C*
+     C                   ADD       COMS1         COM1YR
+     C                   ADD       PRMS1         PRM1YR
+     C                   ADD       COMSR         COMREN
+     C                   ADD       PRMSR         PRMREN
+     C*
+     C                   ENDSR
+     C/EJECT
+     C*****************************************************************
+     C*  PRINT AGENT'S COMMISSION TOTALS
+     C*****************************************************************
+     C     PRTCMT        BEGSR
+     C*
+     C     LCNT          IFGT      LSTHDR
+     C                   EXSR      PRTFT
+     C                   ADD       1             PAGES
+     C                   WRITE     HDRSTM
+     C                   MOVE      ON            *IN83
+     C                   WRITE     COMHDR
+     C                   MOVE      OFF           *IN83
+PB2   *****              Z-ADD     10            LCNT
+PB2  C                   Z-ADD     22            LCNT
+     C                   END
+     C*
+     C                   ADD       2             LCNT
+     C                   WRITE     COMTOT
+     C*
+     C                   ENDSR
+     C/EJECT
+     C*****************************************************************
+     C*   PRINT HEADER FOR COMMISSION PORTION OF STATEMENT
+     C*****************************************************************
+     C     PRTCHD        BEGSR
+     C*
+     C     CITYPE        LOOKUP    TABA          TABB                     31
+     C     *IN31         IFEQ      ON
+     C                   MOVE      TABB          MSGID
+     C                   EXSR      $XMSG
+DB01 C                   MOVEL     CTLMSG        TYPE             36
+DB01 C*
+DB01 C                   MOVEL     TYPE          IGCP1
+DB01 C                   Z-ADD     036           IGCP2
+DB01 C                   EXSR      IGCSR
+DB01 C                   MOVEL     IGCP3         TYPE
+DB01 C*
+     C                   ELSE
+     C                   MOVE      *BLANKS       TYPE
+     C                   END
+     C*
+     C     CLVLCM        IFEQ      '01'
+     C                   MOVE      ON            *IN82
+     C                   ELSE
+     C                   MOVE      OFF           *IN82
+     C                   END
+     C*
+     C     LCNT          IFGT      LSTHDR
+     C                   EXSR      PRTFT
+     C                   ADD       1             PAGES
+     C                   WRITE     HDRSTM
+ PB2  *****              Z-ADD     8             LCNT
+PB2  C                   Z-ADD     20            LCNT
+     C                   END
+     C*
+     C                   WRITE     COMHDR
+     C*
+     C                   ADD       3             LCNT
+     C*
+     C                   ENDSR
+     C/EJECT
+     C*****************************************************************
+     C*  PRINT FOOTING ON STMT
+     C*****************************************************************
+     C     PRTFT         BEGSR
+     C*
+     C     MDSTNO        IFEQ      *BLANKS
+     C                   MOVEL     MAGTNO        GRP
+     C                   ELSE
+     C                   MOVEL     MDSTNO        GRP
+     C                   END
+     C*
+     C     LCNT          DOWLT     FOOTLN
+     C                   WRITE     BLKLN
+     C                   ADD       1             LCNT
+     C                   END
+     C*
+     C                   WRITE     FOOT
+     C*
+     C                   ENDSR
+     C/EJECT
+     C*****************************************************************
+     C*  PRINT FINAL TOTALS FOR THE STATEMENT RUN
+     C*****************************************************************
+     C     FINTOT        BEGSR
+     C*
+     C                   Z-ADD     1             B
+      *
+     C     COCR(1)       IFEQ      *BLANKS
+     C                   MOVE      *BLANKS       RPCRCD
+     C                   WRITE     FTOTHD
+     C                   ELSE
+     C     COCR(B)       DOWNE     *BLANKS
+      *
+     C                   Z-ADD     0             STRPOS
+     C                   Z-ADD     0             ENDPOS
+     C     B             MULT      10            ENDPOS
+     C     ENDPOS        SUB       9             STRPOS
+      *
+     C                   MOVEL     COCR(B)       RPCRCD
+     C                   WRITE     FTOTHD
+     C     STRPOS        OCCUR     CMTOTS
+     C                   Z-ADD     1             COMLVL
+     C*
+     C     STRPOS        DOWLE     ENDPOS
+     C*
+     C                   WRITE     FCMTOT
+     C*
+     C                   ADD       PRM1YR        PRM1FN
+     C                   ADD       COM1YR        COM1FN
+     C                   ADD       PRMREN        PRMRFN
+     C                   ADD       COMREN        COMRFN
+     C*
+     C                   ADD       1             COMLVL
+     C                   ADD       1             STRPOS
+     C     STRPOS        OCCUR     CMTOTS
+     C                   ENDDO
+     C*
+     C                   WRITE     FINCOM
+     C*
+     C     B             OCCUR     CMPFDC
+     C                   WRITE     FTOTDC
+     C*
+     C                   Z-ADD     0             PRM1FN
+     C                   Z-ADD     0             COM1FN
+     C                   Z-ADD     0             PRMRFN
+     C                   Z-ADD     0             COMRFN
+      *
+     C                   ADD       1             B
+     C                   ENDDO
+     C*
+     C                   ENDIF
+     C                   ENDSR
+     C/EJECT
+     C     CMPCHG        BEGSR
+     C*****************************************************************
+     C* CMPCHG - CHANGE COMPANY DATA AREA
+     C*****************************************************************
+     C*
+     C     XCREPT        IFEQ      'N'
+     C     OPNFLG        ANDEQ     '*'
+     C     OPNFLG        OREQ      'Y'
+     C                   OPEN      COM220P
+PK1  C                   OPEN      COM220P1
+     C                   MOVE      '*'           OPNFLG
+     C                   ENDIF
+     C*
+     C     *INLR         IFEQ      *OFF
+     C                   MOVEL     CMCO          CO205
+     C                   ELSE
+     C                   MOVEL     SVCO          CO205
+     C                   ENDIF
+     C*
+     C                   MOVE      'Y'           UPD205
+     C                   MOVE      'N'           TST205
+     C                   CALL      'LSP205'
+     C                   PARM                    PRM205
+     C*
+     C                   MOVE      'N'           DUP205
+     C                   IN        LSPCO
+     C*
+     C                   MOVEL     CMCO          CO200
+     C                   MOVEL     'COMDTA'      DTA200
+     C                   MOVE      'R'           ACT200
+     C                   MOVE      'N'           LCK200
+     C                   CALL      'LSP200'
+     C                   PARM                    LSP200
+     C                   PARM                    COMDTA
+     C*
+     C* RESET PAGE CONTROLS FOR EACH COMPANY
+     C                   Z-ADD     0             PAGES             3 0
+     C*
+     C     1             DO        1000          X
+     C     X             OCCUR     CMTOTS
+     C                   CLEAR                   CMTOTS
+     C                   END
+      *
+     C     1             DO        100           X
+     C     X             OCCUR     CMPFDC
+     C                   CLEAR                   CMPFDC
+     C                   ENDDO
+      *
+     C                   Z-ADD     0             C
+     C                   MOVEA     *BLANKS       COCR
+     C*
+     C     XSTMSZ        SUB       10            LSTDTL            3 0
+PB2   *****XSTMSZ        SUB       15            LSTHDR            3 0
+PB2  C     XSTMSZ        SUB       25            LSTHDR            3 0
+     C     XSTMSZ        SUB       7             FOOTLN            3 0
+     C*
+      *  CONVERT SCREEN DATE TO USER'S FORMAT :
+      *
+     C                   CLEAR                   PRMDAT
+     C                   MOVE      *MONTH        INMON
+     C                   MOVE      *DAY          INDAY
+     C                   MOVE      *YEAR         INYR
+     C                   CALL      'DATEFMT'
+     C                   PARM                    PRMDAT
+      *
+     C     RTNCD         IFEQ      '00'
+     C                   MOVE      OUTDTE        SDATE
+     C                   ENDIF
+      *
+     C                   ENDSR
+     C/EJECT
+     C     CMPTOT        BEGSR
+     C*****************************************************************
+     C* CMPTOT - COMPANY TOTALS
+     C*****************************************************************
+     C*
+     C                   EXSR      FINTOT
+     C*
+     C                   Z-ADD     *ZERO         PRM1FN
+     C                   Z-ADD     *ZERO         COM1FN
+     C                   Z-ADD     *ZERO         PRMRFN
+     C                   Z-ADD     *ZERO         COMRFN
+     C                   Z-ADD     *ZERO         FDCTOT
+     C*
+     C     XCREPT        IFEQ      'N'
+     C                   CLOSE     COM220P
+     C                   Z-ADD     *ZEROS        PAGE
+m04  C                   MOVEL     CMCO          SVCO
+m04  C                   MOVEL     RPTTYP        SVRTYP            2
+     C                   CALL      'LSPSPLFA'
+     C                   PARM      'COM220P'     FILE             10
+     C                   PARM                    CMCO
+     C                   PARM      'COM220'      PGM              10
+     C                   PARM                    RPTTYP
+PK1  C                   CLOSE     COM220P1
+m04  C                   if        pageS <> 0
+M02  C                   CALL      'LSPSPLFA'
+M02  C                   PARM      'COM220P1'    FILE             10
+m04  C                   PARM                    svco
+M02  C                   PARM      'COM220'      PGM              10
+m04  C                   PARM                    SVRTYP
+     C                   ENDIF
+m04  C                   Z-ADD     *Zeros        PAGES
+m04  C                   ENDIF
+     C*
+     C                   ENDSR
+      /EJECT
+      *****************************************************************
+      * CVTDTL - CONVERT DATE FOR DCDETL RECORD FORMAT
+      *****************************************************************
+     C     CVTDTL        BEGSR
+      *
+     C                   CLEAR                   PRMDAT
+     C                   MOVE      DPROCD        INDAY
+     C                   MOVE      DPROCM        INMON
+     C                   MOVEL     DPROCY        INYR
+     C                   CALL      'DATEFMT'
+     C                   PARM                    PRMDAT
+      *
+     C     RTNCD         IFEQ      '00'
+     C                   MOVE      OUTDTE        NPROCD
+     C                   END
+      *
+     C                   ENDSR
+      /EJECT
+      *****************************************************************
+      * CVTCOM - FORMAT DATES FOR COMDTL RECORD FORMAT
+      *****************************************************************
+     C     CVTCOM        BEGSR
+     C*  CONVERT SCREEN DAT
+     C                   CLEAR                   PRMDAT
+     C                   MOVE      CPDTMO        INMON
+     C                   MOVE      CPDTDA        INDAY
+     C                   MOVE      CPDTYR        INYR
+     C                   CALL      'DATEFMT'
+     C                   PARM                    PRMDAT
+      *
+PB2  ***** RTNCD         IFEQ      '00'
+PB2  *****               MOVE      OUTDTE        NPDDT
+PB2  *****               END
+      *
+     C                   CLEAR                   PRMDAT
+      *
+     C                   MOVE      CISSMO        INMON
+     C                   MOVE      CISSDA        INDAY
+     C                   MOVE      CISSYR        INYR
+     C                   CALL      'DATEFMT'
+     C                   PARM                    PRMDAT
+      *
+PB2   *****RTNCD         IFEQ      '00'
+PB2   *****              MOVE      OUTDTE        NISSDT
+PB2   *****              ENDIF
+      *
+     C                   ENDSR
+      /EJECT
+      *****************************************************************
+      * CLRBAL - CLEARS COMBAL DATA STRUCTURE FOR NEXT AGENT OR CURRENCY
+      *****************************************************************
+     C     CLRBAL        BEGSR
+      *
+     C                   DO        100           DSOCUR
+     C     DSOCUR        OCCUR     COMBAL
+     C                   CLEAR                   COMBAL
+     C                   ENDDO
+      *
+     C                   Z-ADD     *ZEROS        DSOCUR
+      *
+     C                   ENDSR
+      /EJECT
+      *****************************************************************
+      * LODBAL - LOADS COMBAL DATA STRUCTURE FOR AGENT
+      *****************************************************************
+     C     LODBAL        BEGSR
+      *
+     C                   ADD       1             DSOCUR
+     C     DSOCUR        OCCUR     COMBAL
+     C                   MOVEL     CUCRCD        BCRCD
+     C                   ADD       MBAL          BBAL
+     C                   ADD       CMTOT         DNET
+     C                   ADD       MBAL          SBAL
+     C     CUCRCD        IFNE      MDCRCD
+     C                   CLEAR                   LSP300
+     C                   MOVE      '00'          ERTNCD
+     C                   MOVE      CUCRCD        EINCUR
+     C                   MOVE      MDCRCD        EOTCUR
+     C                   MOVE      'TRN'         ERATE1
+     C                   MOVE      'S'           ERATE2
+     C                   MOVE      PRCYY         ECNVYR
+     C                   MOVE      PRCMM         ECNVMM
+     C                   MOVE      PRCDD         ECNVDD
+     C                   Z-ADD     MBAL          EINAMT
+     C                   CALL      'LSP300'
+     C                   PARM                    LSP300
+      *
+     C     ERTNCD        IFEQ      '00'
+     C                   Z-ADD     EOTAMT        DBAL
+     C                   MOVEL     MDCRCD        DCRCD
+     C                   ENDIF
+      *
+     C                   ELSE
+     C                   Z-ADD     MBAL          DBAL
+     C                   MOVEL     CUCRCD        DCRCD
+     C                   ENDIF
+      *
+     C                   ENDSR
+M05   /EJECT
+M05  C     CalcYTDProdCrdBEGSR
+M05   *****************************************************************
+M05   * Calculate and Print the YTD Production Credit                 *
+M05   *****************************************************************
+M06   *                 Calculate for Agent
+M06  C                   If        MAGTNO <> MUSER2
+M05  C                   Clear                   AMB305
+M05  C                   Eval      CO305  = CMCO
+M05  C                   Eval      AGT305 = MAGTNO
+M05  C                   Eval      MM305  = DPRMM
+M05  C                   Eval      DD305  = DPRDD
+M05  C                   Eval      YY305  = DPRYY
+M05  C                   Move      WORK305       DAT305
+M05   *
+M05  C                   Call      'AMB305'
+M05  C                   Parm                    AMB305
+M05   *
+M05   *                  If no error and Million Dollar balance > 0, print line.
+M05  C                   If        RC305 = '  ' and AMT305 > 0
+M05  C                   Eval      MDBAL = AMT305
+M05  C                   Write     MILDOL
+M05  C                   Add       3             LCNT
+M05  C                   Endif
+M06  C                   Endif
+M06   *
+M06   *                 Calculate for MGA
+M06  C                   If        MAGTNO = MUSER2
+M06  C                   Clear                   AMB306
+M06  C                   Eval      CO306  = CMCO
+M06  C                   Eval      AGT306 = MAGTNO
+M06  C                   Eval      MM306  = DPRMM
+M06  C                   Eval      DD306  = DPRDD
+M06  C                   Eval      YY306  = DPRYY
+M06  C                   Move      WORK306       DAT306
+M06   *
+M06  C                   Call      'AMB306'
+M06  C                   Parm                    AMB306
+M06   *
+M06   *                  If no error and Million Dollar balance > 0, print line.
+M06  C                   If        RC306 = '  ' and AMT306 > 0
+M06  C                   Eval      MDBAL = AMT306
+M06  C                   Write     MILDOL
+M06  C                   Add       3             LCNT
+M06  C                   Endif
+M06  C                   Endif
+M06   *
+M05  C                   ENDSR
+     C/EJECT
+      *----------------------------------------------------------------
+      * $XMSG - SEND & RECEIVE A MESSAGE TO THE PROGRAM MESSAGE QUEUE
+      *----------------------------------------------------------------
+     C*
+     C     $XMSG         BEGSR
+     C*
+     C                   MOVE      *BLANKS       CTLMSG           77
+     C*
+     C                   CALL      'LSPMSGID'
+     C                   PARM                    MSGID             7
+     C                   PARM                    CTLMSG
+     C*
+     C                   ENDSR
+     C/EJECT
+     C     INIT          BEGSR
+     C*****************************************************************
+     C* INITIALIZATION ROUTINE                                        *
+     C*****************************************************************
+     C*
+     C                   MOVE      '1'           ON                1
+     C                   MOVE      '0'           OFF               1
+     C*
+     C     *MDY0         TEST(DE)                ProcDt
+     C                   if        not %error
+     C                   Eval      JobDate = %date(ProcDt:*MDY0)
+BMG01C                   Else
+     C                   Eval      JobDate = %date()
+BMG01C                   Endif
+     C*
+     C                   TIME                    TIME              6 0
+     C*
+     C     *DTAARA       DEFINE                  LSPCO
+     C     *DTAARA       DEFINE                  PRCDTA
+     C                   IN        *DTAARA
+bg03  *Bring in the LSPDTA Data area
+bg03 C                   In        Library
+bmg01C     *LOCK         In        RunDate
+BMG01C     *ISO0         test(de)                DateAlpha2
+BMG01C                   If        not %error
+BMG01C                   Eval      Run_Date = %Date(DateAlpha2:*iso0)
+BMG01C                   Else
+BMG01C                   Eval      Run_Date = JobDate - %Days(
+BMG01C                                        %Subdt(JobDate:*D) - 1)
+BMG01C                   Endif
+     C*
+     C     *LIKE         DEFINE    CMCO          SVCO
+     C     *LIKE         DEFINE    MBBAL         MIBAL
+     C     *LIKE         DEFINE    ADVR          ECMS1
+     C     *LIKE         DEFINE    ADVR          ECMSR
+     C     *LIKE         DEFINE    ADVR          WKBAL
+     C     *LIKE         DEFINE    ADVR          TAXAMT
+     C     *LIKE         DEFINE    ADVR          ECM1
+     C     *LIKE         DEFINE    ADVR          ECMR
+     C     *LIKE         DEFINE    DSOCUR        SVOCUR
+     C*
+     C                   MOVE      CMCO          SVCO
+bg03
+     C*  Sent run type to Doc Sci so that the system knows whether
+     C*  to send to the web or to a particular folder on the network.
+ ms1 c                   select
+bg03 C                   when      Job_Name = 'LSPCOMTRLS'
+bg03 C                   Eval      ProgramType = 'TRIAL'
+ ms1 c                   when      ss220 = 'DLY'
+ ms1 c                   eval      Programtype = 'DAILY'
+bg03 C                   Other
+bg03 C                   Eval      ProgramType = *Blanks
+bg05
+bmg01C                   Eval      DateAlpha2 = %char(JobDate:*ISO0)
+bmg01C*RJ02              Out       RunDate
+bg05
+bg03 C                   EndSL
+     C*
+     C                   Z-ADD     *ZEROS        DSOCUR            3 0
+     C                   Z-ADD     0             C                 5 0
+     C                   Z-ADD     0             B                 5 0
+     C                   Z-ADD     0             X                 5 0
+     C                   Z-ADD     0             ENDPOS            5 0
+     C                   Z-ADD     0             STRPOS            5 0
+     C                   Z-ADD     0             ID                5 0
+     C                   Z-ADD     0             OFSPOS            5 0
+     C                   Z-ADD     0             CMTOCR            5 0
+     C                   MOVE      'Y'           DUP205
+     C                   MOVE      'Y'           OPNFLG
+     C                   MOVEL     'D'           RPTTYP            2
+     C*
+     C                   CALL      'GETID'
+     C                   PARM                    USER             10
+     C*
+     C                   EXSR      SYSDAT
+      *
+      * FORMAT 6 DIGIT PROCESS DATE TO 8 DIGITS
+     C                   CLEAR                   PRMDAT
+     C                   MOVE      DPRMM         INMON
+     C                   MOVE      DPRDD         INDAY
+     C                   MOVE      DPRYY         INYR
+     C                   CALL      'DATEFMT'
+     C                   PARM                    PRMDAT
+      *
+     C     RTNCD         IFEQ      '00'
+     C                   MOVE      OUTMON        PRCMM
+     C                   MOVE      OUTDAY        PRCDD
+     C                   MOVE      OUTYR         PRCYY
+     C                   ENDIF
+
+     C*
+bg03 * Find the first of the month
+bg03 C                   Eval      FromDate = JobDate - %Days(
+bg03 C                                        %Subdt(JobDate:*D) - 1)
+
+     C                   ENDSR
+      /EJECT
+     C*----------------------------------------------------------------
+     C*  GET SYSTEM DATE
+     C*----------------------------------------------------------------
+     C     SYSDAT        BEGSR
+      *
+      *  CONVERT SCREEN DATE TO USER'S FORMAT :
+      *
+     C                   CLEAR                   PRMDAT
+     C                   MOVE      *MONTH        INMON
+     C                   MOVE      *DAY          INDAY
+     C                   MOVE      *YEAR         INYR
+     C                   MOVE      '*'           FMTC01
+     C                   CALL      'DATEFMT'
+     C                   PARM                    PRMDAT
+      *
+     C     RTNCD         IFEQ      '00'
+     C                   MOVE      OUTDTE        SDATE
+     C                   ENDIF
+      *
+     C                   ENDSR
+     C*
+DB01 C**************************************************************
+DB01 C*** INSERTED SOURCE FOR DOUBLE BYTE CHARACTER SET CONVERSION *
+DB01 C**************************************************************
+DB01 C*
+DB01 C     IGCSR         BEGSR
+DB01 C                   MOVEL     *BLANKS       IGCP3
+DB01 C                   CALL      'DCU799'
+DB01 C                   PARM                    IGCP1           256
+DB01 C                   PARM                    IGCP2             3 0
+DB01 C                   PARM                    IGCP3           256
+DB01 C                   ENDSR
+bg03 **********************************************************************
+bg03 * GetOutputMethd - Get the Output Method
+bg03 *****************************************************************
+bg03  /Free
+bg03     BegSr GetOutputMethd;
+bg03
+bg04     //If MDSTNO <> *Blanks;
+bg04        If MDSTNO <> *Blanks and
+bg04           %Subst(MDSTNO:1:1) <> 'B' and
+bg04           %Subst(MDSTNO:1:1) <> 'C';
+bg03           OutputKey.COMREF = MDSTNO;
+bg03           EmailAgent = MDSTNO;
+BG03           GroupNumber = MDSTNO;
+bg03        Else;
+bg03           OutputKey.COMREF = MAGTNO;
+bg03           EmailAgent = MAGTNO;
+BG03           GroupNumber = MAGTNO;
+bg03        EndIf;
+bg03
+bg03        OutputKey.COMCO = CMCO;
+bg03        OutputKey.COMREFTP = 'A';
+bg03        OutputKey.COMDOCTP = 'COM';
+bg03
+bg03        Chain %Kds(OutputKey:4) CTL001F;
+bg03        If %Found(CTL001F);
+bg03           OutputMode = COMOUT;
+bg03           EMailAddy = %Trim(COMMAIL1);
+bg03        Else;
+bg03           OutputMode = DefaultOutputMode;
+bg03           CMP205 = CMCO;
+bg03           CT1205 = EmailAgent;
+bg03           TYP205 = MACOR;
+bg03           NFM205 = '9';
+bg03           AFM205 = '*';
+bg03
+bg03  /End-Free
+bg03
+bg03 C                   CALL      'CMS205'
+bg03 C                   PARM                    CMS205
+bg03 C                   PARM                    CLTM
+bg03 C                   PARM                    CLTA
+bg03  /Free
+bg03           If RTN205 = *ZEROS;
+bg03              If CMEMAL <> *Blanks;
+bg03                 EMailAddy  = CMEMAL;
+bg03              Else;
+bg03                 EMailAddy = *Blanks;
+bg03              EndIf;
+bg03           EndIf;
+bg05        EndIf;
+bg03
+bg03           CMP205 = CMCO;
+bg03           CT1205 = GroupNumber;
+bg03           TYP205 = MACOR;
+bg03           NFM205 = '1';
+bg03           AFM205 = '2';
+bg03
+bg03  /End-Free
+bg03
+bg03 C                   CALL      'CMS205'
+bg03 C                   PARM                    CMS205
+bg03 C                   PARM                    CLTM
+bg03 C                   PARM                    CLTA
+bg03  /Free
+bg03           If RTN205 = *Zeros;
+bg05              If OutputMode = DefaultOutputMode;
+bg03              EMailAddy  = CMEMAL;
+bg05              EndIf;
+bg03              GroupName = FNM205;
+bg03              Clear GAddy;
+bg03              X = 1;
+bg03
+bg03              If CYCAD1 <> *Blanks;
+bg03                 GAddy(X) = CYCAD1;
+bg03                 X = X + 1;
+bg03              EndIf;
+bg03
+bg03              If CYCAD2 <> *Blanks;
+bg03                 GAddy(X) = CYCAD2;
+bg03                 X = X + 1;
+bg03              EndIf;
+bg03
+bg03              If CYCAD3 <> *Blanks;
+bg03                 GAddy(X) = CYCAD3;
+bg03                 X = X + 1;
+bg03              EndIf;
+bg03
+bg03              If CYCNRY <> 'US';
+bg03                 BarZip = '00000';
+bg03              Else;
+bg03              EndIf;
+bg03
+bg03              BarZip = CYCZIP;
+bg03
+bg03              // Validate the Zip Code is numeric for US
+bg03              For Y = 1 to %Len(%Trim(BarZip));
+bg03                 Monitor;
+bg03                    TestNumber = %Dec(%SubSt(BarZip:Y:1):1:0);
+bg03                 On-Error;
+bg03                    If Y = 6 and
+bg03                       %SubSt(BarZip:Y:1) = '-';
+bg03                    Else;
+bg03                       BarZip = '00000';
+bg03                       Leave;
+bg03                    EndIf;
+bg03                 EndMon;
+bg03              EndFor;
+bg03
+bg03              GAddy(X) = %Trim(CYCCIT) + ',' +  ' ' +
+bg03                         %Trim(CYCSTA) + ' ' +
+bg03                         %Trim(BarZip);
+bg03           Else;
+bg03              GroupName = *Blanks;
+bg03              Clear EMailAddy;
+bg05              If OutputMode = DefaultOutputMode;
+bg05              EndIf;
+bg03              Clear GAddy;
+bg03           EndIf;
+bg05     //bg03        EndIf;
+bg03     EndSr;
+bg03
+bg03  /End-Free
+bg03 **********************************************************************
+bg03 * GetAgentLevel - Get the Agent Level
+bg03 *****************************************************************
+bg03  /Free
+bg03     BegSr GetAgentLevel;
+bg03
+bg03        If CMCO = 'SLIC';
+bg03
+bg03        src300 = 'COMAGTM';
+bg03        ent300 = 1;
+bg03        rtv300 = Yes;
+bg03        dsp300 = Yes;
+bg03        fmt300 = Yes;
+bg03
+bg03        %Occur(dsuser) = 1;
+bg03
+bg03        Clear dsuser;
+bg03
+bg03        dy1fld = 'CNTNAM';
+bg03
+bg03    // Call DYF300 to retrieve the Dynamic User Fields to determine the
+bg03    //  the proper Agent Level Title
+bg03
+bg03        Callp     GetUserFields(dyf300:dsuser);
+bg03
+bg03        %Occur(dsuser) = 1;
+bg03
+bg03        Else;
+bg03           DY1DSP = CLVLCM;
+bg03        EndIf;
+bg03
+bg03     EndSr;
+bg03  /End-Free
+bg03 **********************************************************************
+bg03 * GetAgentMsg - Get the Agent Messages
+bg03 *****************************************************************
+bg03  /Free
+bg03     BegSr GetAgentMsg;
+bg03        I = 1;
+bg03
+bg03        Chain (CMCO:MAGTNO) COMMSGF;
+bg03        If %Found(COMMSGF);
+bg03           If M_CMMSG1 <> *Blanks;
+bg03              AgtMsg(I) = M_CMMSG1;
+bg03              I = I + 1;
+bg03           EndIf;
+bg03
+bg03           If M_CMMSG2 <> *Blanks;
+bg03              AgtMsg(I) = M_CMMSG2;
+bg03              I = I + 1;
+bg03           EndIf;
+bg03
+bg03           If M_CMMSG3 <> *Blanks;
+bg03              AgtMsg(I) = M_CMMSG3;
+bg03              I = I + 1;
+bg03           EndIf;
+bg03
+bg03           If M_CMMSG4 <> *Blanks;
+bg03              AgtMsg(I) = M_CMMSG4;
+bg03              I = I + 1;
+bg03           EndIf;
+bg03
+bg03           If M_CMMSG5 <> *Blanks;
+bg03              AgtMsg(I) = M_CMMSG5;
+bg03              I = I + 1;
+bg03           EndIf;
+bg03        EndIf;
+bg03
+bg03        If I <= %Elem(AgtMsg);
+bg03
+bg03           Chain (CMCO:'*ALL') COMMSGF;
+bg03           If %Found(COMMSGF);
+bg03              If M_CMMSG1 <> *Blanks and I <= %Elem(AgtMsg);
+bg03                 AgtMsg(I) = M_CMMSG1;
+bg03                 I = I + 1;
+bg03              EndIf;
+bg03
+bg03              If M_CMMSG2 <> *Blanks and I <= %Elem(AgtMsg);
+bg03                 AgtMsg(I) = M_CMMSG2;
+bg03                 I = I + 1;
+bg03              EndIf;
+bg03
+bg03              If M_CMMSG3 <> *Blanks;
+bg03                 AgtMsg(I) = M_CMMSG3;
+bg03                 I = I + 1;
+bg03              EndIf;
+bg03
+bg03              If M_CMMSG4 <> *Blanks;
+bg03                 AgtMsg(I) = M_CMMSG4;
+bg03                 I = I + 1;
+bg03              EndIf;
+bg03
+bg03              If M_CMMSG5 <> *Blanks;
+bg03                 AgtMsg(I) = M_CMMSG5;
+bg03                 I = I + 1;
+bg03              EndIf;
+bg03           EndIf;
+bg03        EndIf;
+bg03
+bg03        If I <= %Elem(AgtMsg);
+bg03
+bg03           Chain ('*ALL':'*ALL') COMMSGF;
+bg03           If %Found(COMMSGF);
+bg03              If M_CMMSG1 <> *Blanks and I <= %Elem(AgtMsg);
+bg03                 AgtMsg(I) = M_CMMSG1;
+bg03                 I = I + 1;
+bg03              EndIf;
+bg03
+bg03              If M_CMMSG2 <> *Blanks and I <= %Elem(AgtMsg);
+bg03                 AgtMsg(I) = M_CMMSG2;
+bg03                 I = I + 1;
+bg03              EndIf;
+bg03
+bg03              If M_CMMSG3 <> *Blanks;
+bg03                 AgtMsg(I) = M_CMMSG3;
+bg03                 I = I + 1;
+bg03              EndIf;
+bg03
+bg03              If M_CMMSG4 <> *Blanks;
+bg03                 AgtMsg(I) = M_CMMSG4;
+bg03                 I = I + 1;
+bg03              EndIf;
+bg03
+bg03              If M_CMMSG5 <> *Blanks;
+bg03                 AgtMsg(I) = M_CMMSG5;
+bg03                 I = I + 1;
+bg03              EndIf;
+bg03           EndIf;
+bg03        EndIf;
+bg03     EndSr;
+bg03  /End-Free
+bg03 **********************************************************************
+bg03 * GetCompanyStat - Get the Output Status for this company
+bg03 *****************************************************************
+bg03  /Free
+bg03     BegSr GetCompanyStat;
+bg03
+bg03        OutputKey.COMCO = CMCO;
+bg03        OutputKey.COMREF   = '*ALL';
+bg03        OutputKey.COMREFTP = 'A';
+bg03        OutputKey.COMDOCTP = 'COM';
+bg03
+bg03        Chain %Kds(OutputKey:4) CTL001F;
+bg03        If %Found(CTL001F);
+bg03           DefaultOutputMode = COMOUT;
+bg03        Else;
+bg03           DefaultOutputMode = Print;
+bg03        EndIf;
+bg03
+bg03     EndSr;
+bg03  /End-Free
+bg03 **********************************************************************
+bg03 * WriteXMLComS  - Write the XML Commissions Start record.
+bg03 *****************************************************************
+bg03  /Free
+bg03      BegSr WriteXMLComS;
+bg03            //Write Document Start
+bg03            data = %trim(StartComData) + CRLF;
+bg03            callp  write(fd: %addr(data)+2: %len(data));
+bg03      EndSr;
+bg03  /End-free
+bg03 *
+bg03 *****************************************************************
+bg03 * WriteXMLComE - Write the XML Commissions End record.
+bg03 *****************************************************************
+bg03  /Free
+bg03      BegSr WriteXMLComE;
+bg03         //End Documents
+bg03         data = %trim(EndComData) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03      EndSr;
+bg03  /End-Free
+bg03  /Eject
+bg03 *
+bg03 *****************************************************************
+bg03 * WriteComPrimary Write the XML Commissions Primary Section.
+bg03 *****************************************************************
+bg03  /Free
+bg03      BegSr WriteComPrim;
+bg03
+bg03         //Start the Commissions Primary Section
+bg03
+bg03         data = %trim(StartComPage) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         data = %trim(StartComPrimary) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         //Company Agent
+bg03         String = %Trim(CMCO) + %Trim(MAGTNO);
+bg03         Callp CheckCharacter(String);
+bg03
+bg03         data = %trim(StartCompAgent) +
+bg03                %trim(String) +
+bg03                %trim(EndCompAgent) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         //Effective Date
+bg03         data = %Trim(StartEffectiveDate) +
+bg03                %Char(%Date():*Iso) +
+bg03                %Trim(EndEffectiveDate) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         //Effective Date
+bg03         data = %Trim(StartMiscString2) +
+bg03                %Char(JobDate:*Iso0) +
+bg05         //    %Char(%Date():*Iso0) +
+bg03                %Trim(EndMiscString2) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+BG03         If     ProgramType <> *Blanks;
+bg03            data = %Trim(StartMiscString1) +
+bg03                   %Trim(ProgramType) +
+bg03                   %Trim(EndMiscString1) + CRLF;
+bg03            callp  write(fd: %addr(data)+2: %len(data));
+bg03         EndIf;
+bg03
+bg03         //State
+bg03         String = %Trim(ST);
+bg03         Callp CheckCharacter(String);
+bg03
+bg03         data = %Trim(StartState) +
+bg03                %Trim(String) +
+bg03                %Trim(EndState) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         //Language
+bg03         data = %Trim(StartLanguage) +
+bg03                'English' +
+bg03                %Trim(EndLanguage) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         //g360 Document Type
+bg03         data = %Trim(StartG360DocType) +
+bg03                'COMMISSIONS' +
+bg03                %Trim(EndG360DocType) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03            //g360 First Name
+bg04         If %Len(%Trim(AgentFName)) > 30;
+bg04            String = %SubSt(%Trim(AgentFName):1:30);
+bg04         Else;
+bg03            String = %Trim(AgentFName);
+bg04         EndIf;
+bg03            Callp CheckCharacter(String);
+bg04     //bg03            AgentFName = %Trim(String);
+bg03
+bg04     //bg03         If %Len(%Trim(AgentFName)) > 30;
+bg03
+bg04     //bg03            data = %Trim(StartG360FirstName) +
+bg04     //bg03                   %Subst(AgentFName:1:30) +
+bg04     //bg03                   %Trim(EndG360FirstName) + CRLF;
+bg04
+bg04     //bg03            callp  write(fd: %addr(data)+2: %len(data));
+bg04     //bg03         Else;
+bg03
+bg03            data = %Trim(StartG360FirstName) +
+bg04     //bg03                   %Trim(AgentFName) +
+bg04                   %Trim(String) +
+bg03                   %Trim(EndG360FirstName) + CRLF;
+bg03            callp  write(fd: %addr(data)+2: %len(data));
+bg04     //bg03         EndIf;
+bg03
+bg04         If %Len(%Trim(AgentLName)) > 30;
+bg04            String = %Subst(%Trim(AgentLName):1:30);
+bg04         Else;
+bg04            String = %Trim(AgentLName);
+bg04         EndIf;
+bg04
+bg03            //g360 Last Name
+bg04     //bg03            String = %Trim(AgentLName);
+bg03            Callp CheckCharacter(String);
+bg04     //bg03            AgentLName = %Trim(String);
+bg03
+bg04     //bg03         If %Len(%Trim(AgentLName)) > 30;
+bg03
+bg04     //bg03            data = %Trim(StartG360LastName) +
+bg04     //bg03                   %Subst(AgentLName:1:30) +
+bg04     //bg03                   %Trim(EndG360LastName) + CRLF;
+bg04     //bg03            callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg04     //bg03         Else;
+bg03
+bg03            data = %Trim(StartG360LastName) +
+bg04     //bg03                   %Trim(AgentLName) +
+bg04                   %Trim(String) +
+bg03                   %Trim(EndG360LastName) + CRLF;
+bg03            callp  write(fd: %addr(data)+2: %len(data));
+bg04     //bg03         EndIf;
+bg03
+bg03         //Document Name
+bg03         data = %Trim(StartDocumentName) +
+bg03                'Commissions_Statement' +
+bg03                %Trim(EndDocumentName) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         //Postnet Barcode
+bg03         If BarZip = *Blanks;
+bg03            BarZip = '00000';
+bg03            String = BarZip;
+bg03         Else;
+bg03            String = %Trim(BarZIP);
+bg03            Callp CheckCharacter(String);
+bg03         EndIf;
+bg03
+bg03         data = %Trim(StartPostnet) +
+bg03                %Trim(String) +
+bg03                %Trim(EndPostNet) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         //Form Number
+bg03         data = %Trim(StartFormNumber) +
+bg03                %Trim(ProgramName) +
+bg03                %Trim(EndFormNumber) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         //Company
+bg03         data = %Trim(StartCompany) +
+bg03                %Trim(CMCO) +
+bg03                %Trim(EndCompany) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         //Agents First Name
+bg03         String = %Trim(AgentFName);
+bg03         Callp CheckCharacter(String);
+bg03         AgentFName = %Trim(String);
+bg03
+bg03         data = %Trim(StartAgtFirstName) +
+bg03                %Trim(AgentFName) +
+bg03                %Trim(EndAgtFirstName) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         //Agents Last Name
+bg03         String = %Trim(AgentLName);
+bg03         Callp CheckCharacter(String);
+bg03         AgentLName = %Trim(String);
+bg03
+bg03         data = %Trim(StartAgtLastName) +
+bg03                %Trim(AgentLName) +
+bg03                %Trim(EndAgtLastName) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         //Agent Number
+bg03         String = %Trim(MAGTNO);
+bg03         Callp CheckCharacter(String);
+bg03
+bg03         data = %Trim(StartAgentNo) +
+bg03                %Trim(String) +
+bg03                %Trim(EndAgentNo) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         //Agent Address1
+bg03         String = %Trim(AD1);
+bg03         Callp CheckCharacter(String);
+bg03
+bg03         data = %Trim(StartAgentAdd1) +
+bg03                %Trim(String) +
+bg03                %Trim(EndAgentAdd1) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         //Agent Address2
+bg03         String = %Trim(AD2);
+bg03         Callp CheckCharacter(String);
+bg03
+bg03         data = %Trim(StartAgentAdd2) +
+bg03                %Trim(String) +
+bg03                %Trim(EndAgentAdd2) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         //Agent Address3
+bg03         String = %Trim(AD3);
+bg03         Callp CheckCharacter(String);
+bg03
+bg03         data = %Trim(StartAgentAdd3) +
+bg03                %Trim(String) +
+bg03                %Trim(EndAgentAdd3) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         //Agent Address4
+bg03         String = %Trim(AD4);
+bg03         Callp CheckCharacter(String);
+bg03
+bg03         data = %Trim(StartAgentAdd4) +
+bg03                %Trim(String) +
+bg03                %Trim(EndAgentAdd4) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         //Agent Level
+bg03         String = %Trim(AgentLevel);
+bg03         Callp CheckCharacter(String);
+bg03
+bg03         data = %Trim(StartAgentLev) +
+bg03                %Trim(String) +
+bg03                %Trim(EndAgentLev) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         //Group Number
+bg03         String = %Trim(GroupNumber);
+bg03         Callp CheckCharacter(String);
+bg03
+bg03         data = %Trim(StartGroupNumber) +
+bg03                %Trim(String) +
+bg03                %Trim(EndGroupNumber) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         //Group Name
+bg03         String = %Trim(GroupName);
+bg03         Callp CheckCharacter(String);
+bg03
+bg03         data = %Trim(StartGroupName) +
+bg03                %Trim(String) +
+bg03                %Trim(EndGroupName) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         //Group Address1
+bg03         String = %Trim(GAddy(1));
+bg03         Callp CheckCharacter(String);
+bg03
+bg03         data = %Trim(StartGroupAddy1) +
+bg03                %Trim(String) +
+bg03                %Trim(EndGroupAddy1) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         //Group Address2
+bg03         String = %Trim(GAddy(2));
+bg03         Callp CheckCharacter(String);
+bg03
+bg03         data = %Trim(StartGroupAddy2) +
+bg03                %Trim(String) +
+bg03                %Trim(EndGroupAddy2) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         //Group Address3
+bg03         String = %Trim(GAddy(3));
+bg03         Callp CheckCharacter(String);
+bg03
+bg03         data = %Trim(StartGroupAddy3) +
+bg03                %Trim(String) +
+bg03                %Trim(EndGroupAddy3) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         //Group Address4
+bg03         String = %Trim(GAddy(4));
+bg03         Callp CheckCharacter(String);
+bg03
+bg03         data = %Trim(StartGroupAddy4) +
+bg03                %Trim(String) +
+bg03                %Trim(EndGroupAddy4) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+BL01         If ProgramType <> 'TRIAL' and ProgramType <> 'DAILY';
+bg03            //Print Indicator
+bg03            String = %Trim(OutputMode);
+bg03            Callp CheckCharacter(String);
+bg03
+bg03            data = %Trim(StartPrintIndicator) +
+bg03                   %Trim(String) +
+bg03                   %Trim(EndPrintIndicator) + CRLF;
+             Else;
+
+bg03            data = %Trim(StartPrintIndicator) +
+bg03                   %Trim(EndPrintIndicator) + CRLF;
+             EndIf;
+
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         //From Period
+bg05         If        Matxcd  = 'W';
+bg05         data = %Trim(StartPeriodFrom) +
+bg05                %Char(Run_Date + %Days(1):*Iso) +
+bg05                %Trim(EndPeriodFrom) + CRLF;
+bg05         Else;
+bg03                //If Daily, From and To dates the same.
+bg05         If        programtype = 'DAILY';
+bg03         data = %Trim(StartPeriodFrom) +
+bg03                %Char(JobDate:*Iso) +
+bg03                %Trim(EndPeriodFrom) + CRLF;
+bg05         Else;
+bg03         data = %Trim(StartPeriodFrom) +
+bg03                %Char(FromDate:*Iso) +
+bg03                %Trim(EndPeriodFrom) + CRLF;
+bg05         EndIf;
+bg05         EndIf;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         //To Period
+bg03         data = %Trim(StartPeriodTo) +
+bg03                %Char(JobDate:*Iso) +
+bg03                %Trim(EndPeriodTo) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         //Message Line 1
+bg03         If AgtMsg(1) <> *BLanks;
+bg03            String = %Trim(AgtMsg(1));
+bg03            Callp CheckCharacter(String);
+bg03
+bg03            data = %Trim(StartMsgLine1) +
+bg03                   %Trim(String) +
+bg03                   %Trim(EndMsgLine1) + CRLF;
+bg03            callp  write(fd: %addr(data)+2: %len(data));
+bg03         EndIf;
+bg03
+bg03         //Message Line 2
+bg03         If AgtMsg(2) <> *BLanks;
+bg03            String = %Trim(AgtMsg(2));
+bg03            Callp CheckCharacter(String);
+bg03
+bg03            data = %Trim(StartMsgLine2) +
+bg03                   %Trim(String) +
+bg03                   %Trim(EndMsgLine2) + CRLF;
+bg03            callp  write(fd: %addr(data)+2: %len(data));
+bg03         EndIf;
+bg03
+bg03         //Message Line 3
+bg03         If AgtMsg(3) <> *BLanks;
+bg03            String = %Trim(AgtMsg(3));
+bg03            Callp CheckCharacter(String);
+bg03
+bg03            data = %Trim(StartMsgLine3) +
+bg03                   %Trim(String) +
+bg03                   %Trim(EndMsgLine3) + CRLF;
+bg03            callp  write(fd: %addr(data)+2: %len(data));
+bg03         EndIf;
+bg03
+bg03         //Message Line 4
+bg03         If AgtMsg(4) <> *BLanks;
+bg03            String = %Trim(AgtMsg(4));
+bg03            Callp CheckCharacter(String);
+bg03
+bg03            data = %Trim(StartMsgLine4) +
+bg03                   %Trim(String) +
+bg03                   %Trim(EndMsgLine4) + CRLF;
+bg03            callp  write(fd: %addr(data)+2: %len(data));
+bg03         EndIf;
+bg03
+bg03         //Message Line 5
+bg03         If AgtMsg(5) <> *BLanks;
+bg03            String = %Trim(AgtMsg(5));
+bg03            Callp CheckCharacter(String);
+bg03
+bg03            data = %Trim(StartMsgLine5) +
+bg03                   %Trim(String) +
+bg03                   %Trim(EndMsgLine5) + CRLF;
+bg03            callp  write(fd: %addr(data)+2: %len(data));
+bg03         EndIf;
+bg03
+bg03         //Premium 1 sub total
+bg03
+bg03         //Commission 1 sub total
+bg03
+bg03         //Advance 1 sub total
+bg03
+bg03         //Premium 1 Total
+bg03
+bg03         //Commission 1 Total
+bg03
+bg03         //Advance 1 Total
+bg03
+bg03         //Renewal Premium Sub Total
+bg03
+bg03         //Renewal Commission Sub Total
+bg03
+bg03         //Renewal Advance Sub Total
+bg03
+bg03         //Renewal Premium Total
+bg03
+bg03         //Renewal Commission Total
+bg03
+bg03         //Renewal Advance Total
+bg03
+bg03         //Email Address
+bg03         String = %Trim(EMailAddy);
+bg03         // BL04 Callp CheckCharacter(String);
+bg03
+bg03         data = %Trim(StartEmailTo) +
+BL04                %trimr(StartCharData) +
+bg03                %Trim(String) +
+BL04                %trimr(EndCharData) +
+bg03                %Trim(EndEmailTo) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         data = StartTblAGAPrt +
+bg03                %Trim(TblAGA) +
+bg03                EndTblAGAPrt + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         data = StartTblBROKPrt +
+bg03                %Trim(TblBROK) +
+bg03                EndTblBROKPrt + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         data = StartTblCANLPrt +
+bg03                %Trim(tblCANL) +
+bg03                EndTblCANLPrt + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         data = StartTblCAWLPrt +
+bg03                %Trim(TblCAWL) +
+bg03                EndTblCAWLPrt + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         data = StartTblCSMPrt +
+bg03                %Trim(TblCSM) +
+bg03                EndTblCSMPrt + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         data = StartTblCUMPrt +
+bg03                %Trim(TblCUM) +
+bg03                EndTblCUMPrt + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         data = StartTblDMGAPrt +
+bg03                %Trim(TblDMGA) +
+bg03                EndTblDMGAPrt + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         data = StartTblDMG3Prt +
+bg03                %Trim(TblDMG3) +
+bg03                EndTblDMG3Prt + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         data = StartTblFMOPrt +
+bg03                %Trim(TblFMO) +
+bg03                EndTblFMOPrt + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         data = StartTblFSDPrt +
+bg03                %Trim(TblFSD) +
+bg03                EndTblFSDPrt + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         data = StartTblGAPrt +
+bg03                %Trim(TblGA) +
+bg03                EndTblGAPrt + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         data = StartTblIMOPrt +
+bg03                %Trim(TblIMO) +
+bg03                EndTblIMOPrt + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         data = StartTblMGAPrt +
+bg03                %Trim(TblMGA) +
+bg03                EndTblMGAPrt + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         data = StartTblPGAPrt +
+bg03                %Trim(TblPGA) +
+bg03                EndTblPGAPrt + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         data = StartTblPPGAPrt +
+bg03                %Trim(TblPPGA) +
+bg03                EndTblPPGAPrt + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         data = StartTblPRECPrt +
+bg03                %Trim(TblPREC) +
+bg03                EndTblPRECPrt + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         data = StartTblSDPrt +
+bg03                %Trim(TblSD) +
+bg03                EndTblSDPrt + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         data = StartTblSGAPrt +
+bg03                %Trim(TblSGA) +
+bg03                EndTblSGAPrt + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         data = StartTblWAPrt +
+bg03                %Trim(TblWA) +
+bg03                EndTblWAPrt + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         //Transaction Table Record Count
+bg03         data = StartTransTblCount +
+bg03                %Trim(RecordCountT) +
+bg03                EndTransTblCount + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         //Producer Table Record Count
+bg03         data = StartProdTableCount +
+bg03                %Trim(RecordCountP) +
+bg03                EndProdTableCount + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         //Company Name
+bg03         String = CompanyName;
+bg03         Callp CheckCharacter(String);
+bg03
+bg03         data = StartCompanyName +
+bg03                %Trim(String) +
+bg03                EndCompanyName + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         //End the Commissions Primary Section
+bg03         data = %trim(EndComPrimary) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03      EndSr;
+bg03  /End-Free
+bg03 *****************************************************************
+bg03 * WriteTransTable Write the XML Transaction Table.
+bg03 *****************************************************************
+bg03  /Free
+bg03      BegSr WriteTransTbl;
+bg03
+bg03         //Start the Transaction Table
+bg03         data = %Trim(StartTransTbl) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         //Company Agent
+bg03         String = %Trim(CMCO) + %Trim(MAGTNO);
+bg03         Callp CheckCharacter(String);
+bg03
+bg03         data = %trim(StartCompAgent) +
+bg03                %trim(String) +
+bg03                %trim(EndCompAgent) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         //Sequence Number
+bg03         data = %Trim(StartSeqNo) +
+bg03                %Trim(%Char(SequenceNo)) +
+bg03                %Trim(EndSeqNo) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         //Transaction Date
+bg03         data = %Trim(StartTransDate) +
+bg03                %Trim(%Char(%Date(NPROCD:*USA):*Iso)) +
+bg03                %Trim(EndTransDate) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         //Transaction Amount
+bg03         data = %Trim(StartTransAmt) +
+bg03                %Trim(%Char(DAMT)) +
+bg03                %Trim(EndTransAmt) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         //Transaction Tax Amount
+bg03         data = %Trim(StartTransTaxAmt) +
+bg03                %Trim(%Char(DAMT)) +
+bg03                %Trim(EndTransTaxAmt) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         //Transaction Total Amount
+bg03         data = %Trim(StartTransTotAmt) +
+bg03                %Trim(TransTotal) +
+bg03                %Trim(EndTransTotAmt) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         //Transaction Total Tax Amount
+bg03         data = %Trim(StartTransTotTax) +
+bg03                %Trim(TransTaxTotal) +
+bg03                %Trim(EndTransTotTax) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         //Transaction Reason
+bg03         String = %Trim(DDESC);
+bg03         Callp CheckCharacter(String);
+bg03
+bg03         data = %Trim(StartTransReason) +
+bg03                %Trim(String) +
+bg03                %Trim(EndTransReason) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         //End the Transaction Table
+bg03         data = %Trim(EndTransTbl) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03      EndSr;
+bg03  /End-Free
+bg03 *****************************************************************
+bg03 * WriteProdTable Write the XML Producer Table.
+bg03 *****************************************************************
+bg03  /Free
+bg03      BegSr WriteProdTable;
+bg03
+bg03         //Start the Producer Table
+bg03         data = %Trim(StartProdTbl) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         //Company Agent
+bg03         String = %Trim(CMCO) + %Trim(MAGTNO);
+bg03         Callp CheckCharacter(String);
+bg03
+bg03         data = %trim(StartCompAgent) +
+bg03                %trim(String) +
+bg03                %trim(EndCompAgent) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         //Sequence Number
+bg03         data = %Trim(StartSeqNo) +
+bg03                %Trim(%Char(SequenceNo)) +
+bg03                %Trim(EndSeqNo) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         //Agent Number
+bg03         data = %Trim(StartAgentNo) +
+bg03                %Trim(CWRAGT) +
+bg03                %Trim(EndAgentNo) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         //Agent First Name
+bg03         String = %Trim(AgentFName);
+bg03         Callp CheckCharacter(String);
+bg03
+bg03         data = %Trim(StartAgtFirstName) +
+bg03                %Trim(String) +
+bg03                %Trim(EndAgtFirstName) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         //Agent Last Name
+bg03         String = %Trim(AgentLName);
+bg03         Callp CheckCharacter(String);
+bg03
+bg03         data = %Trim(StartAgtLastName) +
+bg03                %Trim(String) +
+bg03                %Trim(EndAgtLastName) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         //Policy Number
+bg03         String = %Trim(CPOLNO);
+bg03         Callp CheckCharacter(String);
+bg03
+bg03         data = %Trim(StartPolicyNumber) +
+bg03                %Trim(String) +
+bg03                %Trim(EndPolicyNumber) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         //Insured First Name
+bg03         String = %Trim(InsuredFName);
+bg03         Callp CheckCharacter(String);
+bg03
+bg03         data = %Trim(StartInsFirstName) +
+bg03                %Trim(String) +
+bg03                %Trim(EndInsFirstName) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         //Insured Last Name
+bg03         String = %Trim(InsuredLName);
+bg03         Callp CheckCharacter(String);
+bg03
+bg03         data = %Trim(StartInsLastName) +
+bg03                %Trim(String) +
+bg03                %Trim(EndInsLastName) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         //Plan Code
+bg03         String = %Trim(CPLAN);
+bg03         Callp CheckCharacter(String);
+bg03
+bg03         data = %Trim(StartPlanCode) +
+bg03                %Trim(String) +
+bg03                %Trim(EndPlanCode) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         //Bill Mode
+bg03         String = %Trim(CMODE);
+bg03         Callp CheckCharacter(String);
+bg03
+bg03         data = %Trim(StartBillMode) +
+bg03                %Trim(String) +
+bg03                %Trim(EndBillMode) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         //Insurance Type
+bg03         String = %Trim(CTTYPE);
+bg03         Callp CheckCharacter(String);
+bg03
+bg03         data = %Trim(StartInsType) +
+bg03                %Trim(String) +
+bg03                %Trim(EndInsType) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         //Alternate Insurance Type
+bg03         If CITYPE = 'F';
+bg03            String = 'A';
+bg03         Else;
+bg03            String = %Trim(CITYPE);
+bg03         EndIf;
+bg03
+bg03         Callp CheckCharacter(String);
+bg03
+bg03         data = %Trim(StartAltInsType) +
+bg03                %Trim(String) +
+bg03                %Trim(EndAltInsType) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         //Agent Level
+bg03         String = %Trim(WriteAgtLevel);
+bg03         Callp CheckCharacter(String);
+bg03
+bg03         data = %Trim(StartAgentLev) +
+bg03                %Trim(String) +
+bg03                %Trim(EndAgentLev) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         //Status
+bg03         String = %Trim(CATYPE);
+bg03         Callp CheckCharacter(String);
+bg03
+bg03         data = %Trim(StartStatus) +
+bg03                %Trim(String) +
+bg03                %Trim(EndStatus) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         //Issue Date
+bg03         data = %Trim(StartIssueDate) +
+bg03                %Char(IssueDate:*Iso) +
+bg03                %Trim(EndIssueDate) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         //Paid To Date
+bg03         data = %Trim(StartPaidToDate) +
+bg03                %Char(PaidToDate:*Iso) +
+bg03                %Trim(EndPaidToDate) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         //Duration Year
+bg03         data = %Trim(StartDurationYear) +
+bg03                %Char(CDUR) +
+bg03                %Trim(EndDurationYear) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         //Premium Applied
+bg03         data = %Trim(StartPremApplied) +
+bg03                %trim(%Char(CPRMPD)) +
+bg03                %Trim(EndPremApplied) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         //Split
+bg03         data = %Trim(StartSplit) +
+bg03                %Trim(%Char(MWSPLT)) +
+bg03                %Trim(EndSplit) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         //Commission Percentage Rate
+bg03         data = %Trim(StartComPctRate) +
+bg03                %Trim(%Char(CCMRAT)) +
+bg03                %Trim(EndComPctRate) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         //Commission Amount
+bg03         data = %Trim(StartComAmount) +
+bg03                %Trim(%Char(CAMT)) +
+bg03                %Trim(EndComAmount) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         //Commission Advance Percentage
+bg03         data = %Trim(StartAdvComPct) +
+bg03                %Trim(%Char(AdvancePct)) +
+bg03                %Trim(EndAdvComPct) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         //Commission Advance Amount
+bg03         data = %Trim(StartAdvAmt) +
+bg03                %Trim(%Char(CADVPB)) +
+bg03                %Trim(EndAdvAmt) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+dfb2         //Release Date
+dfb2         data = %Trim(StartReleaseDate) +
+dfb2                %Trim(%Char(ReleaseDate)) +
+dfb2                %Trim(EndReleaseDate) + CRLF;
+dfb2         callp  write(fd: %addr(data)+2: %len(data));
+dfb2
+dfb2
+dfb2         //Held Amount
+dfb2         data = %Trim(StartHeldAmount) +
+dfb2                %Trim(%Char(ReleaseAmount)) +
+dfb2                %Trim(EndHeldAmount) + CRLF;
+dfb2         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         //End the Producer Table
+bg03         data = %Trim(EndProdTbl) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03      EndSr;
+bg03  /End-Free
+bg03 *****************************************************************
+bg03 * WriteStmtEnd Write the XML End Page.
+bg03 *****************************************************************
+bg03  /Free
+bg03      BegSr WriteStmtEnd;
+bg03         data = %trim(EndComPage) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03      EndSr;
+bg03  /End-Free
+bg03 *****************************************************************
+bg03 * WriteTotTable Write the XML Totals Table.
+bg03 *****************************************************************
+bg03  /Free
+bg03      BegSr WriteTotTable;
+bg03
+bg03         data = %Trim(StartTotTbl) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         //Company Agent
+bg03         String = %Trim(CMCO) + %Trim(MAGTNO);
+bg03         Callp CheckCharacter(String);
+bg03
+bg03         data = %trim(StartCompAgent) +
+bg03                %trim(String) +
+bg03                %trim(EndCompAgent) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         //Sequence Number
+bg03         data = %Trim(StartSeqNo) +
+bg03                %Trim(%Char(SequenceNo)) +
+bg03                %Trim(EndSeqNo) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03            //Balance Forward
+bg03            data = %Trim(StartBalanceForward) +
+bg03                   %Trim(%Char(BalanceForward)) +
+bg03                   %Trim(EndBalanceForward) +CRLF;
+bg03            callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         //Commission Detail Total
+bg03         data = %Trim(StartComDtlTot) +
+bg03                %Trim(%Char(CMTOT)) +
+bg03                %Trim(EndComDtlTot) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03
+bg03         If CMTOT + BalanceForward + %Dec(TransTotal:15:2) < *Zero;
+bg03            //Debit Amount
+bg03            data = %Trim(StartDebitAmount) +
+bg03            %Trim(%Char(CMTOT + BalanceForward + %Dec(TransTotal:15:2))) +
+bg03                   %Trim(EndDebitAmount) + CRLF;
+bg03            callp  write(fd: %addr(data)+2: %len(data));
+bg03         Else;
+bg03            //Debit Amount
+bg03            data = %Trim(StartDebitAmount) +
+bg03                   %Trim('.00') +
+bg03                   %Trim(EndDebitAmount) + CRLF;
+bg03            callp  write(fd: %addr(data)+2: %len(data));
+bg03         EndIf;
+bg03
+bg03         //Period Total
+bg03         data = %Trim(StartPeriodTot) +
+bg03                %Trim(%Char(CMTOT + BalanceForward)) +
+bg03                %Trim(EndPeriodTot) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         //Transaction Total
+bg03         data = %Trim(StartTransTot) +
+bg03                %Trim(TransTotal) +
+bg03                %Trim(EndTransTot) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         //Paid Out Amount
+bg03       //bg04  If CMTOT + BalanceForward + %Dec(TransTotal:15:2) >= 50 and
+bg04        If CMTOT + BalanceForward + %Dec(TransTotal:15:2) >= MinCheckAmt and
+bg03            MNOCHK <> 'Y';
+bg03         data = %Trim(StartPaidOutAmount) +
+bg03              %Trim(%Char(CMTOT + BalanceForward + %Dec(TransTotal:15:2))) +
+bg03                %Trim(EndPaidOutAmount) + CRLF;
+bg03         Else;
+bg03         data = %Trim(StartPaidOutAmount) +
+bg03              %Trim('.00') +
+bg03                %Trim(EndPaidOutAmount) + CRLF;
+bg03         EndIf;
+bg03
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         //Account Balance
+bg03      //bg04   If (CMTOT + BalanceForward + %Dec(TransTotal:15:2) < 50 and
+bg03        If (CMTOT + BalanceForward + %Dec(TransTotal:15:2) < MinCheckAmt and
+bg03            CMTOT + BalanceForward + %Dec(TransTotal:15:2) > *Zero) Or
+bg03            (MNOCHK = 'Y' and
+bg03            CMTOT + BalanceForward + %Dec(TransTotal:15:2) > *Zero);
+bg03
+bg03         data = %Trim(StartAcctBal) +
+bg03              %Trim(%Char(CMTOT + BalanceForward + %Dec(TransTotal:15:2))) +
+bg03                %Trim(EndAcctBal) + CRLF;
+bg03         Else;
+bg03         data = %Trim(StartAcctBal) +
+bg03                %Trim('0.00') +
+bg03                %Trim(EndAcctBal) + CRLF;
+bg03         EndIf;
+bg03
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         //Tax Amount
+bg03         data = %Trim(StartTaxAmt) +
+bg03                %Trim(%Char(CMTAX + DCTAX)) +
+bg03                %Trim(EndTaxAmt) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+dfb2         //Forty Day totals
+dfb2         data = %Trim(Start40DayTotal) +
+dfb2                %Trim(%Char(FutureTotal )) +
+dfb2                %Trim(End40DayTotal) + CRLF;
+dfb2         callp  write(fd: %addr(data)+2: %len(data));
+dfb2
+bg03         //Year to Date Income
+bg03         data = %Trim(StartYTDInc) +
+bg03                %Trim(%Char(YTDCommissions)) +
+bg03                %Trim(EndYTDInc) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         //Advance Amount
+bg03         data = %Trim(StartTotAdvance1) +
+bg03                %Trim(%Char(MABAL)) +
+bg03                %Trim(EndTotAdvance1) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03         data = %Trim(EndTotTbl) + CRLF;
+bg03         callp  write(fd: %addr(data)+2: %len(data));
+bg03
+bg03      EndSr;
+bg03  /End-Free
+bg03 *****************************************************************
+bg03  /Eject
+** TABA/TABB
+LE000831
+EE000832
+TE000833
+FE000834
+HE000835
+SE000836
+UE000837
+IE000838
